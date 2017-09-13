@@ -1,0 +1,12 @@
+<!--测试得分排行榜-->
+<view class="wrap" wx:for="{{ lists }}">
+  <view class="l">
+    <image wx:if="{{ index <= 2 }}" src="{{ index == 0 ? '../../images/1.png' : index == 1 ? '../../images/2.png' : index == 2 ? '../../images/3.png' : ''  }}"></image> {{ index <= 2 ? '' : index }}
+  </view>
+  <view class="c">
+    正确{{ item.right }}　刷题{{ item.count }}
+  </view>
+  <view class="r">
+    {{ item.score }}分
+  </view>
+</view>

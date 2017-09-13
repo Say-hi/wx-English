@@ -1,0 +1,8 @@
+<!--作业群-->
+<view class="c-w bb" wx:for="{{ lists }}">
+  <image mode="aspectFill" src="{{ item.src }}"></image>
+  <view class="c-r">
+    <view class="c-t">{{ item.t }} <text>{{ item.people }}人</text></view>
+    <view class="c-c">{{ item.nj }}　群号{{ item.number }}</view>
+  </view>
+</view>

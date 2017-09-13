@@ -1,0 +1,14 @@
+<!--作业详情-->
+<view class="c-w bb">
+  <image mode="aspectFill" src="{{ item.src }}"></image>
+  <view class="c-r">
+    <view class="c-t">{{ item.t }}</view>
+    <view class="c-c">{{ item.type }}　{{ item.day }}　{{ item.time }}</view>
+  </view>
+</view>
+
+<view class="content">{{ item.c }}</view>
+
+<view class="finish bb">
+  <view>完成作业</view>
+</view>

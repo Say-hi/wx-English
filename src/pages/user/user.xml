@@ -1,0 +1,16 @@
+<view class="user-top tac">
+  <image class="br" src="{{ userInfo.avatarUrl }}"></image>
+  <view>{{ userInfo.nickName }}</view>
+  <view>{{ userInfo.province }}·{{ userInfo.city }}</view>
+</view>
+
+<view class="u-o arrow u-o-t">
+  <view>个人中心</view>
+</view>
+
+<view wx:for="{{ operation }}" class="u-o arrow">
+  <view class="u-o-w">
+    <view class="u-o-l">{{ item.c }}</view>
+    <view class="u-o-r">{{ item.t }}</view>
+  </view>
+</view>

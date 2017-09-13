@@ -1,0 +1,73 @@
+{
+//  微商造小程序页面分布
+  "pages": [
+    "pages/suPin/suPin", // 速拼
+    "pages/index/index", // 首页
+    "pages/login/login", // 登陆页面,
+    "pages/testRank/testRank", // 测试得分排行榜
+    "pages/homeWorkDetail/homeWorkDetail", // 作业详情
+    "pages/homeWorkGroup/homeWorkGroup", // 作业群
+    "pages/user/user", // 个人中心
+    "pages/register/register", // 注册页面
+    "pages/userInfo/userInfo", // 个人信息
+    "pages/myCollect/myCollect", // 我的收藏
+    "pages/homeWork/homeWork" // 作业
+    // Dont remove this comment
+  ],
+  // Window configuration
+  // https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#window
+  "window": {
+    // 类型：HexColor；默认值：#000000
+    // 导航栏背景颜色，如"#000000"
+    "navigationBarBackgroundColor": "#fedb03",
+    // 类型：String；默认值：white
+    // 导航栏标题颜色，仅支持 black/white
+    "navigationBarTextStyle": "black",
+    // 类型：String；默认值：无
+    // 导航栏标题文字内容
+    "navigationBarTitleText": "英语小程序",
+    // 类型：HexColor；默认值：#ffffff
+    // 窗口的背景色
+    "backgroundColor": "#fedb03",
+    // 类型：String；默认值：dark
+    // 下拉背景字体、loading 图的样式，仅支持 dark/light
+    "backgroundTextStyle": "light",
+    // 类型：Boolean；默认值：false
+    // 是否开启下拉刷新，详见页面相关事件处理函数。
+    // https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/page.html?t=1476197491005#页面相关事件处理函数
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#ff0000",
+    "borderStyle": "white",
+    "backgroundColor": "#fedb03",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_hl.png"
+      },
+      {
+        "text": "速拼",
+        "pagePath": "pages/suPin/suPin",
+        "iconPath": "images/supin.png",
+        "selectedIconPath": "images/supin_hl.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/user/user",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user_hl.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  // Debug log to console
+  // https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#debug
+  "debug": true
+}

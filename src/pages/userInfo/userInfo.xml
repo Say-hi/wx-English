@@ -1,0 +1,21 @@
+<!--个人中心-->
+<view class="u-o arrow">
+  <view class="u-o-w">
+    <view class="u-o-l">昵称</view>
+    <view class="u-o-r">{{ userInfo.nick_name }}</view>
+  </view>
+</view>
+
+<view class="u-o arrow">
+  <view class="u-o-w">
+    <view class="u-o-l">账号</view>
+    <view class="u-o-r">{{ userInfo.number }}</view>
+  </view>
+</view>
+
+<view class="u-o arrow">
+  <view class="u-o-w">
+    <view class="u-o-l">姓名</view>
+    <view class="u-o-r">{{ userInfo.true_name }}</view>
+  </view>
+</view>
