@@ -1,6 +1,8 @@
 {
 //  微商造小程序页面分布
   "pages": [
+    "pages/listenDetail/listenDetail", // 听一听详情
+    "pages/talkDetail/talkDetail", // 说一说详情
     "pages/readDetail/readDetail", // 读一读详情
     "pages/memoryDetail/memoryDetail", // 背一背详情
     "pages/subjectDetail/subjectDetail", // 科目详情
@@ -18,7 +20,8 @@
     "pages/register/register", // 注册页面
     "pages/userInfo/userInfo", // 个人信息
     "pages/myCollect/myCollect", // 我的收藏
-    "pages/homeWork/homeWork" // 作业,,,
+    "pages/homeWork/homeWork" // 作业,,,,,
+
     // Dont remove this comment
   ],
   // Window configuration

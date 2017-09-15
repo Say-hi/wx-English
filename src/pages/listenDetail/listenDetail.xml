@@ -1,0 +1,18 @@
+<!--听一听详情-->
+<view class="l-top bb">
+  <view class="l-wrap">
+    <view class="l-w-t pr">
+      <image class="pa" mode='aspectFill' src="{{ listen.img }}"></image>
+      <view class="l-t tac">{{ listen.t }}</view>
+      <view class="l-c tac f30">{{ listen.c }}</view>
+    </view>
+    <view class="l-w-c pr bb">
+      <view class="pa l-w-c-t">
+        <view class="bb" style="width: {{ width }}px"></view>
+      </view>
+    </view>
+    <view class="l-w-b bb">
+
+    </view>
+  </view>
+</view>

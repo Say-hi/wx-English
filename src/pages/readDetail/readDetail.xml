@@ -1,2 +1,3 @@
 <!--读一读详情-->
 <import src="../../wxParse/wxParse"></import>
+<template is="wxParse"></template>

@@ -1,0 +1,12 @@
+<!--说一说详情-->
+<!--<import src="../../wxParse/wxParse"></import>-->
+<view class="v-w">
+  <video id="myVideo" class="pr" src="{{ src }}" objectFit="{{ objectFit }}">
+    <cover-image catchtap="videoControl" data-type="last" class="v-c-i pa v-c-i-l" src="../../images/last.png"></cover-image>
+    <cover-image catchtap="videoControl" data-type="next" class="v-c-i pa v-c-i-n" src="../../images/next.png"></cover-image>
+  </video>
+</view>
+<view class="v-b f30 c3 bb" data-time="{{ item.time }}" catchtap="goTime" wx:for="{{ videoContentList }}">
+  <view class="bb">{{ item.en }}</view>
+  <view class="bb">{{ item.cn }}</view>
+</view>
