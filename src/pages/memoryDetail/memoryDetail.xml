@@ -1,0 +1,16 @@
+<!--背一背详情-->
+<import src="../../wxParse/wxParse"></import>
+<template is="wxParse" ></template>
+
+<view class="world f30 c3 {{ mask ? 'gob' : '' }}">
+  <text class="{{ curChoose == index ? 'choose' : '' }}" catchtap="show" data-index="{{ index }}" wx:for="{{ worldList }}">{{ item }}</text>
+</view>
+
+<view hidden="{{ !mask }}" class="mask">
+  <view class="mask-in">
+    <view catchtap="close" class="m-close br">×</view>
+    <textarea class="bb" placeholder="请输入要速拼的内容" value="{{ spInValue }}"></textarea>
+    <view class="spBtn c3">速拼</view>
+    <textarea disabled="true" class="m-c bb" placeholder="显示速拼的内容" value="{{ showContent }}"></textarea>
+  </view>
+</view>

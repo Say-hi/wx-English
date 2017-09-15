@@ -1,0 +1,37 @@
+<!--速拼英语-->
+<view class="s-t bb">
+    <image mode="aspectFill" src="{{ topImg }}"></image>
+</view>
+
+<view class="nav bb">
+    <view class="n-w bb" wx:for="{{ lists }}">
+        <image mode="aspectFill" src="{{ item.img }}"></image>
+        <text>{{ item.t }}</text>
+    </view>
+</view>
+
+<view wx:if="{{ show }}" class="supin bb">
+    <textarea class="textIn bb" placeholder="请输入要速拼的内容"></textarea>
+    <view class="s-nav bb">
+        <view>速拼</view>
+        <view>翻译</view>
+        <view>朗读</view>
+    </view>
+    <view class="s-show bb">
+        <image src="../../images/sp-bg.png"></image>
+        <scroll-view class="s-c bb" scroll-y="true">
+            <view>{{ content }}</view>
+        </scroll-view>
+    </view>
+</view>
+
+<view wx:if="{{ maskShow }}" catchtap="close" class="mask">
+    <view class="maskIn bb">
+        <scroll-view class="s-c bb" scroll-y="true">
+            <view>{{ content }}</view>
+        </scroll-view>
+    </view>
+</view>
+
+<view catchtap="showSp" class="viewTop br">速拼</view>
+<view wx:if="{{ show }}" catchtap="showBig" class="viewTop br iconfont icon-quanping big"></view>

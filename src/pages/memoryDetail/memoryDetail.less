@@ -1,0 +1,64 @@
+page {
+  padding: 0 10rpx;
+}
+
+.world {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #fff;
+  text {
+    margin: 5rpx 9rpx;
+    padding: 11rpx 20rpx;
+    border: 1rpx solid #d7d7d7;
+    border-radius: 10rpx;
+  }
+  .choose {
+    background: #fedb03;
+  }
+}
+
+.gob {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+}
+
+.mask-in {
+  width: 478rpx;
+  min-height: 577rpx;
+  padding: 20rpx;
+  padding-top: 80rpx;
+  position: relative;
+  border-radius: 10rpx;
+  .m-close {
+    line-height: 40rpx;
+    width: 40rpx;
+    background-color: #999;
+    text-align: center;
+    position: absolute;
+    top: 10rpx;
+    right: 10rpx;
+  }
+  textarea, .m-c {
+    width: 100%;
+    height: 177rpx;
+    font-size: 24rpx;
+    padding: 10rpx;
+    background-color: #f1f1f1;
+    border-radius: 10rpx;
+  }
+  .spBtn {
+    margin: 10rpx auto;
+    display: block;
+    width: 60rpx;
+    background-color: #fedb03;
+    font-size: 24rpx;
+    text-align: center;
+    padding: 10rpx 30rpx;
+    border-radius: 10rpx;
+  }
+}

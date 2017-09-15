@@ -1,6 +1,13 @@
 {
 //  微商造小程序页面分布
   "pages": [
+    "pages/readDetail/readDetail", // 读一读详情
+    "pages/memoryDetail/memoryDetail", // 背一背详情
+    "pages/subjectDetail/subjectDetail", // 科目详情
+    "pages/hbDetail/hbDetail", // 节日绘本专题详情
+    "pages/hbListsD/hbListsD", // 节日绘本专题进一步
+    "pages/hbLists/hbLists", // 节日绘本专题
+    "pages/hshs/hshs", // 绘声绘色
     "pages/suPin/suPin", // 速拼
     "pages/index/index", // 首页
     "pages/login/login", // 登陆页面,
@@ -11,7 +18,7 @@
     "pages/register/register", // 注册页面
     "pages/userInfo/userInfo", // 个人信息
     "pages/myCollect/myCollect", // 我的收藏
-    "pages/homeWork/homeWork" // 作业
+    "pages/homeWork/homeWork" // 作业,,,
     // Dont remove this comment
   ],
   // Window configuration

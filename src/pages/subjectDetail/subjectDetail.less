@@ -1,0 +1,75 @@
+
+.s-nav {
+  line-height: 74rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 14rpx solid #eee;
+  position: relative;
+  view {
+    //padding: 0 10rpx;
+    width: 25%;
+    text-align: center;
+    //border-bottom: 4rpx solid #fff;
+  }
+  .choose {
+    //border-bottom: 4rpx solid #fedb03;
+  }
+  .b-line {
+    position: absolute;
+    transition: all 0.5s;
+    bottom: 0;
+    height: 4rpx;
+    width: 25%;
+    border-left: 20rpx solid #fff;
+    border-right: 20rpx solid #fff;
+    //transform: translateX(-50%);
+    background-color: #fedb03;
+  }
+}
+
+
+.memory, .read, .talk, .listen {
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  transition: all 0.5s;
+  line-height: 104rpx;
+  padding: 0 20rpx;
+  > view {
+    border-bottom: 2rpx solid #eee;
+  }
+  .icon-book::before {
+    color: #f00;
+    margin: 0 20rpx;
+  }
+  .icon-langdu::before {
+    color: #00d1a4;
+    font-size: 34rpx;
+    margin: 0 20rpx;
+  }
+  .icon-huatong::before {
+    color: #fea356;
+    margin: 0 20rpx;
+  }
+  .icon-erji::before {
+    color: #00b9fe;
+    font-size: 34rpx;
+    margin: 0 20rpx;
+  }
+  .m-r {
+    float: right;
+    font-size: 40rpx;
+  }
+  .icon-bofang::before {
+    color: #f00;
+  }
+  .icon-suo::before {
+    color: #999;
+  }
+}
+
+.hide {
+  opacity: 0;
+}

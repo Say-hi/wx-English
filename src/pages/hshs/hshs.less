@@ -1,0 +1,217 @@
+.top {
+  width: 100%;
+  display: flex;
+  view {
+    text-align: center;
+    line-height: 90rpx;
+    width: 50%;
+    font-size: 30rpx;
+    color: #333;
+    border-bottom: 1rpx solid #bfbfbf;
+  }
+  .choose {
+    border-bottom: 5rpx solid #fedb03;
+  }
+}
+
+.t-c {
+  width: 100%;
+  background-color: #f6f6f6;
+  padding: 17rpx 20rpx 18rpx 19rpx;
+  .t-c-s {
+    border-radius: 10rpx;
+    background-color: #fedb03;
+    padding: 38rpx 90rpx 11rpx 90rpx;
+    .t-c-s-w {
+      display: flex;
+      align-items: center;
+      //justify-content: space-between;
+      .t-c-s-i  {
+        width: 155rpx;
+        height: 198rpx;
+        padding: 20rpx 0 19rpx 0;
+        background-color: #fff;
+        border-radius: 8rpx;
+        text-align: center;
+        transition: all 0.5s;
+        box-shadow: -2rpx -2rpx 6rpx 2rpx #d7ba03;
+        margin: 0 15rpx;
+        .t-c-s-i-t {
+          line-height: 60rpx;
+        }
+        image {
+          width: 76rpx;
+          height: 99rpx;
+        }
+      }
+      .chooseP {
+        transform: scale(1.1);
+      }
+      .noMore {
+        width: 100%;
+        text-align: center;
+        font-size: 30rpx;
+        color: #333;
+      }
+    }
+    .t-c-b {
+      width: 100%;
+      margin-top: 42rpx;
+      line-height: 43rpx;
+      height: 43rpx;
+      border-radius: 43rpx;
+      background-color: #ffed81;
+      text-align: center;
+      text {
+        margin: 0 30rpx;
+      }
+    }
+  }
+}
+
+swiper {
+  width: 100%;
+  height: 168rpx;
+  //border-bottom: 20rpx solid #eee;
+  swiper-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    .s-i {
+      text-align: center;
+      image {
+        width: 50rpx;
+      }
+      view {
+        font-size: 30rpx;
+        color: #333;
+        margin-bottom: 20rpx;
+      }
+    }
+  }
+}
+
+.card {
+  padding: 0 36rpx;
+  padding-bottom: 30rpx;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f6f6f6;
+  .t-c-s-i  {
+    margin-top: 40rpx;
+    width: 155rpx;
+    height: 198rpx;
+    padding: 20rpx 0 19rpx 0;
+    background-color: #fff;
+    border-radius: 8rpx;
+    text-align: center;
+    transition: all 0.5s;
+    box-shadow: -2rpx -2rpx 6rpx 2rpx #d9dad9;
+    .t-c-s-i-t {
+      line-height: 60rpx;
+      //margin-top: 40rpx;
+    }
+    image {
+      width: 76rpx;
+      height: 99rpx;
+    }
+  }
+}
+
+.search {
+  width: 100%;
+  padding: 10rpx 20rpx;
+  background-color: #f6f6f6;
+  height: 77rpx;
+  position: relative;
+  text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    transform: translate(-120rpx, -50%);
+  }
+  input {
+    height: 100%;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 77rpx;
+    font-size: 24rpx;
+  }
+}
+.onIn {
+  text {
+    left: 0;
+    transform: translate(30rpx, -50%);
+  }
+  input {
+    text-align: left;
+    padding-left: 50rpx;
+  }
+}
+
+.h-w {
+  padding: 20rpx;
+  .h-c {
+    //padding: 20rpx;
+    padding-top: 0;
+    .h-c-t {
+      font-size: 30rpx;
+      color: #333;
+      line-height: 70rpx;
+    }
+    .h-c-c {
+      padding: 30rpx 23rpx;
+      width: 100%;
+      background-color: #fedb03;
+      border-radius: 12rpx;
+      image {
+        width: 208rpx;
+        height: 266rpx;
+        border-radius: 10rpx;
+        margin: 0 7rpx;
+      }
+    }
+  }
+  .h-nav {
+    width: 100%;
+    margin-top: 33rpx;
+    border-radius: 12rpx;
+    padding: 0 10rpx;
+    background-color: #eee;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    .f30 {
+      line-height: 70rpx;
+      .h-l {
+        margin: 0 10rpx;
+      }
+    }
+  }
+  .h-nav-c {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    .bb {
+      margin-top: 20rpx;
+      background-color: #eee;
+      padding: 11rpx 13rpx;
+      width: 345rpx;
+      border-radius: 10rpx;
+      box-shadow: -2rpx -2rpx 8rpx 2rpx #b8b8b8;
+      image {
+        width: 100%;
+        height: 230rpx;
+      }
+    }
+  }
+}
+
+

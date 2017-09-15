@@ -1,0 +1,35 @@
+<!--科目详情-->
+<view class="s-nav">
+  <view wx:for="{{ navList }}" catchtap="chooseNav" data-index="{{ index }}" class="f30 c3 {{ curNav == index ? 'choose' : '' }}">{{ item }}</view>
+  <view style="left: {{ goLeft }}%" class="b-line bb"></view>
+</view>
+
+<view class="pr">
+  <view class="pa memory bb f30 c333 {{ curNav == 3 ? '' : 'hide' }}">
+    <view wx:for="{{ memoryList }}">
+      <text class="iconfont icon-book">{{ item.t }}</text>
+      <text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
+    </view>
+  </view>
+
+  <view class="pa read bb f30 c333 {{ curNav == 2 ? '' : 'hide' }}">
+    <view wx:for="{{ readList }}">
+      <text class="iconfont icon-langdu">{{ item.t }}</text>
+      <!--<text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>-->
+    </view>
+  </view>
+
+  <view class="pa talk bb f30 c333 {{ curNav == 1 ? '' : 'hide' }}">
+    <view wx:for="{{ talkList }}">
+      <text class="iconfont icon-huatong">{{ item.t }}</text>
+      <!--<text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>-->
+    </view>
+  </view>
+
+  <view class="pa listen bb f30 c333 {{ curNav == 0 ? '' : 'hide' }}">
+    <view wx:for="{{ listenList }}">
+      <text class="iconfont icon-erji">{{ item.t }}</text>
+      <!--<text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>-->
+    </view>
+  </view>
+</view>

@@ -1,0 +1,22 @@
+<!--节日绘本详情-->
+<image mode="aspectFill" class="top" src="{{ topImg }}"></image>
+
+<view class="control_button">
+  <!--<text class="time">{{passed_str}}</text>-->
+  <view class="progress_bar">
+    <view class="passed_time" style="width:{{bar_width}}px"></view>
+    <view catchtap="play" bindtouchmove="mytouchmove" bindtouchstart="mytouchstart" bindtouchend="mytouchend" class="point iconfont {{ play ? 'icon-zanting' : 'icon-bofang1' }}"></view>
+  </view>
+  <!--<text class="time">{{time_total_str}}</text>-->
+</view>
+
+<view class="t bb">
+  {{ text }}
+</view>
+
+<view class="bf"></view>
+
+<view class="bo">
+  <view catchtap="collect" class="{{ collect ? 'collect' : '' }} iconfont icon-dianzan f30 c3">{{ collect ? '已收藏' : '收藏' }}</view>
+  <view class="f30 c3">速拼</view>
+</view>

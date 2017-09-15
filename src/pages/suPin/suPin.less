@@ -1,3 +1,145 @@
-.title {
-  font-size: 40rpx;
+page {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.s-t {
+  width: 100%;
+  background-color: #eee;
+  height: 30%;
+  padding: 21rpx 19rpx 23rpx 19rpx;
+  image {
+    width: 100%;
+    height: 100%;
+    //height: 237rpx;
+  }
+}
+
+.nav {
+  width: 100%;
+  height: 70%;
+  padding: 19rpx;
+  display: flex;
+  flex-wrap: wrap;
+  .n-w {
+    //flex: 1;
+    text-align: center;
+    width: 32%;
+    margin: 0 5rpx;
+    height: 40%;
+    image {
+      width: 100%;
+      height: 100%;
+    }
+    text {
+      font-size: 30rpx;
+      color: #333;
+      line-height: 68rpx;
+    }
+  }
+}
+
+.supin {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #fff;
+  .textIn {
+    background-color: #f1f1f1;
+    width: 711rpx;
+    height: 30%;
+    padding: 20rpx;
+    margin: 20rpx auto;
+    border-radius: 10rpx;
+    border: 1rpx solid #dfdfdf;
+  }
+  .s-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 20rpx 100rpx;
+    view {
+      width: 120rpx;
+      line-height: 45rpx;
+      border-radius: 10rpx;
+      background-color: #fedb03;
+      font-size: 24rpx;
+      color: #333;
+      text-align: center;
+    }
+  }
+  .s-show {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    image {
+      width: 100%;
+      height: 100%;
+    }
+    .s-c {
+      width: 100%;
+      height: 60%;
+      //background-color: rgba(0,0,0,0.5);/
+      padding: 0 70rpx;
+      position: absolute;
+      top: 28%;
+      left: 0;
+      font-size: 26rpx;
+      line-height: 1.5em;
+    }
+  }
+}
+
+.viewTop {
+  position: fixed;
+  z-index: 9999;
+  bottom: 200rpx;
+  right: 20rpx;
+  width: 71rpx;
+  line-height: 71rpx;
+  text-align: center;
+  color: #333;
+  font-size: 24rpx;
+  background-color: #fedb03;
+}
+
+.big {
+  bottom: 100rpx;
+}
+.big::before {
+  font-size:  36rpx;
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  background-color: rgba(0,0,0,0.5);
+  .maskIn {
+    //margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10rpx;
+    width: 90%;
+    height: 80%;
+    padding: 50rpx;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .s-c {
+      width: 100%;
+      height: 100%;
+      padding: 20rpx;
+      font-size: 26rpx;
+      line-height: 1.5em;
+      //background-color: rgba(0,0,0,0.5);/
+      //padding: 0 70rpx;
+    }
+  }
 }

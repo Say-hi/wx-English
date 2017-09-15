@@ -1,0 +1,8 @@
+<!--节日绘本专题-->
+<view class="c-w bb" wx:for="{{ lists }}">
+  <image mode="aspectFill" src="{{ item.src }}"></image>
+  <view class="c-r">
+    <view class="c-t">{{ item.t }}</view>
+    <view class="ell">{{ item.c }}</view>
+  </view>
+</view>
