@@ -1,0 +1,46 @@
+.w-video {
+  width: 100%;
+  min-height: 480rpx;
+}
+
+.v-w {
+  padding: 0 20rpx;
+  font-size: 24rpx;
+  color: #666;
+  line-height: 60rpx;
+  border-bottom: 15rpx solid #eee;
+  .v-title {
+    padding: 10rpx;
+    background-color: #fedb03;
+    margin-right: 10rpx;
+  }
+}
+
+.w-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20rpx;
+  justify-content: space-between;
+  .w-l-w {
+    display: flex;
+    flex-direction: column;
+    line-height: 60rpx;
+    image {
+      width: 338rpx;
+      height: 170rpx;
+    }
+    .w-p {
+      top: 38%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70rpx;
+      line-height: 70rpx;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .w-p::before {
+      color: #fff;
+      transform: translateX(10rpx);
+    }
+  }
+}

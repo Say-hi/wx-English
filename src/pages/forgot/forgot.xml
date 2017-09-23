@@ -1,0 +1,12 @@
+<!--忘记密码页面-->
+<input bindinput="inputValue" data-type="name" class="r-i" placeholder-class="plc" placeholder="姓名"/>
+<input bindinput="inputValue" data-type="mobile" class="r-i" type="number" maxlength="11" placeholder-class="plc" placeholder="手机号"/>
+<input bindinput="inputValue" data-type="pwd" type="password" class="r-i" placeholder-class="plc" placeholder="输入新密码"/>
+<input bindinput="inputValue" data-type="pwd2" type="password" class="r-i" placeholder-class="plc" placeholder="确认密码"/>
+<view class="r-i-w pr">
+  <text class="r-n-1 pa">验证码</text>
+  <input bindinput="inputValue" data-type="code" class="r-i r-n" placeholder="输入短信验证码"/>
+  <button class="{{ numberDisabled ? 'grow' : '' }} pa" disabled="{{ numberDisabled }}" catchtap="getNumber">{{ showText }}</button>
+</view>
+<veiw class="nosame">{{ (pwd2.length > 0 && pwd.length > 0 && pwd2 != pwd) ? '* 密码不一致，请重新输入' : '' }}</veiw>
+<view class="c3" catchtap="goNext">下一步</view>

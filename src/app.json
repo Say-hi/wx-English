@@ -1,18 +1,24 @@
 {
-//  微商造小程序页面分布
+//  速拼英语小程序页面分布
   "pages": [
+    "pages/login/login", // 登陆页面
+    "pages/forgot/forgot", // 忘记密码
+    "pages/index/index", // 首页
+    "pages/wikiShow/wikiShow", // 文化百科对应视频详情
+    "pages/wikiDetail/wikiDetail", // 文化百科对应类别详情列表
+    "pages/wiki/wiki", // 文化百科
+    "pages/dictionary/dictionary", // 词典
+    "pages/buy/buy", // 购买
+    "pages/subjectDetail/subjectDetail", // 科目详情
     "pages/listenDetail/listenDetail", // 听一听详情
     "pages/talkDetail/talkDetail", // 说一说详情
     "pages/readDetail/readDetail", // 读一读详情
     "pages/memoryDetail/memoryDetail", // 背一背详情
-    "pages/subjectDetail/subjectDetail", // 科目详情
     "pages/hbDetail/hbDetail", // 节日绘本专题详情
     "pages/hbListsD/hbListsD", // 节日绘本专题进一步
     "pages/hbLists/hbLists", // 节日绘本专题
     "pages/hshs/hshs", // 绘声绘色
     "pages/suPin/suPin", // 速拼
-    "pages/index/index", // 首页
-    "pages/login/login", // 登陆页面,
     "pages/testRank/testRank", // 测试得分排行榜
     "pages/homeWorkDetail/homeWorkDetail", // 作业详情
     "pages/homeWorkGroup/homeWorkGroup", // 作业群
@@ -20,8 +26,7 @@
     "pages/register/register", // 注册页面
     "pages/userInfo/userInfo", // 个人信息
     "pages/myCollect/myCollect", // 我的收藏
-    "pages/homeWork/homeWork" // 作业,,,,,
-
+    "pages/homeWork/homeWork" // 作业,,,,
     // Dont remove this comment
   ],
   // Window configuration

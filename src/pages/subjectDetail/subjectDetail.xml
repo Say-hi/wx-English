@@ -8,28 +8,39 @@
   <view class="pa memory bb f30 c333 {{ curNav == 3 ? '' : 'hide' }}">
     <view wx:for="{{ memoryList }}">
       <text class="iconfont icon-book">{{ item.t }}</text>
-      <text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
+      <text catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.id }}" class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
     </view>
   </view>
 
   <view class="pa read bb f30 c333 {{ curNav == 2 ? '' : 'hide' }}">
     <view wx:for="{{ readList }}">
       <text class="iconfont icon-langdu">{{ item.t }}</text>
-      <!--<text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>-->
+      <text catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.id }}" class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
     </view>
   </view>
 
   <view class="pa talk bb f30 c333 {{ curNav == 1 ? '' : 'hide' }}">
     <view wx:for="{{ talkList }}">
       <text class="iconfont icon-huatong">{{ item.t }}</text>
-      <!--<text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>-->
+      <text catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.id }}" class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
     </view>
   </view>
 
   <view class="pa listen bb f30 c333 {{ curNav == 0 ? '' : 'hide' }}">
     <view wx:for="{{ listenList }}">
       <text class="iconfont icon-erji">{{ item.t }}</text>
-      <!--<text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>-->
+      <text catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.id }}" class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
+    </view>
+  </view>
+</view>
+
+<view hidden="{{ !needBuy }}" class="mask">
+  <view class="mask-in">
+    <view class="m-title f30 c3 tac">提示</view>
+    <view class="m-content c3 tac">该课程需要购买后才能观看</view>
+    <view class="m-btn">
+      <view catchtap="maskClose" class="m-btn-cancel c3 tac">取消</view>
+      <view catchtap="maskConfirm" class="m-btn-confirm tac">立即购买</view>
     </view>
   </view>
 </view>

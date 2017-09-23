@@ -1,0 +1,11 @@
+<!--文化百科-->
+<navigator url="../wikiDetail/wikiDetail?id={{ item.id }}" wx:for="{{ lists }}" class="wiki">
+  <view class="w-t arrow f30 c3">{{ item.title }}</view>
+  <view class="w-list">
+    <view class="w-l-w f30 c3 pr" wx:for="{{ item.list }}" wx:for-item="list">
+      <image src="{{ list.src }}"></image>
+      <view class="pa tac br w-p iconfont icon-bofang1"></view>
+      <text>{{ list.t }}</text>
+    </view>
+  </view>
+</navigator>

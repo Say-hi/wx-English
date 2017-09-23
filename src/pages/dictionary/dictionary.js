@@ -7,13 +7,28 @@ Page({
    * 页面的初始数据
    */
   data: {
-    width: 100,
-    listen: {
-      t: '听一听',
-      c: '听一听内容展示听一听内容展示听一听内容展示',
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+    info: {
+      en: 'ˈdɪkʃənrɪz',
+      us: 'ˈdɪkʃən,ɛriz'
     },
-    lists: ['http://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://im', 'http://im', 'http://im']
+    lists: [
+      {
+        en: 'what fuck a nice day, but i\'m still in work, I watn go out and play with friend',
+        cn: '阿斯利康的发生的减肥拉斯'
+      },
+      {
+        en: 'aksdhfiasdhfoisadhf',
+        cn: '阿斯利康的发生的减肥拉斯'
+      },
+      {
+        en: 'aksdhfiasdhfoisadhf',
+        cn: '阿斯利康的发生的减肥拉斯'
+      },
+      {
+        en: 'aksdhfiasdhfoisadhf',
+        cn: '阿斯利康的发生的减肥拉斯'
+      }
+    ]
   },
 
   /**

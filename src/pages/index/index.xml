@@ -10,62 +10,74 @@
 <view class="iconfont icon-shengyin">{{ notice }}</view>
 
 <view class="nav">
-    <view>
-        <image mode="aspectFill" src="{{ imgUrls[0] }}"></image>
-        <view>速拼英语</view>
+    <view wx:for="{{ navLists }}" catchtap="jumpPage" data-type="{{ item.type }}" data-url="{{ item.url }}">
+        <image mode="aspectFill" src="{{ item.src }}"></image>
+        <view>{{ item.t }}</view>
     </view>
-    <view>
-        <image mode="aspectFill" src="{{ imgUrls[1] }}"></image>
-        <view>绘声绘色</view>
-    </view>
-    <view>
-        <image mode="aspectFill" src="{{ imgUrls[2] }}"></image>
-        <view>智能测试</view>
-    </view>
+    <!--<view catchtap="jumpPage" data-type="navigateTo" data-url="../hshs/hshs">-->
+        <!--<image mode="aspectFill" src="{{ imgUrls[1] }}"></image>-->
+        <!--<view>绘声绘色</view>-->
+    <!--</view>-->
+    <!--<view catchtap="jumpPage" data-type="navigateTo" data-url="">-->
+        <!--<image mode="aspectFill" src="{{ imgUrls[2] }}"></image>-->
+        <!--<view>智能测试</view>-->
+    <!--</view>-->
 </view>
 
 <view class="book bb">
     <view class="b-t">学习反馈</view>
     <view class="b-c bb">
-        <veiw class="b-c-i">
-            <image mode="aspectFill" src="{{ imgUrls[0] }}"></image>
-            <view>错题本</view>
-        </veiw>
-        <veiw class="b-c-i">
-            <image mode="aspectFill" src="{{ imgUrls[1] }}"></image>
-            <view>英语故事听说</view>
-        </veiw>
+        <view class="b-c-i" wx:for="{{ fkLists }}" catchtap="jumpPage" data-type="{{ item.type }}" data-url="{{ item.url }}">
+            <image mode="aspectFill" src="{{ item.src }}"></image>
+            <view>{{ item.t }}</view>
+        </view>
+        <!--<veiw class="b-c-i">-->
+            <!--<image mode="aspectFill" src="{{ imgUrls[0] }}"></image>-->
+            <!--<view>错题本</view>-->
+        <!--</veiw>-->
+        <!--<veiw class="b-c-i">-->
+            <!--<image mode="aspectFill" src="{{ imgUrls[1] }}"></image>-->
+            <!--<view>英语故事听说</view>-->
+        <!--</veiw>-->
     </view>
 </view>
 
 <view class="kt book bb">
     <view class="b-t">速拼微课堂</view>
     <view class="b-c bb">
-        <veiw class="b-c-i">
-            <image src="{{ imgUrls[0] }}"></image>
-            <view>学科英语</view>
-        </veiw>
-        <veiw class="b-c-i">
-            <image src="{{ imgUrls[1] }}"></image>
-            <view>错题精讲</view>
-        </veiw>
-        <veiw class="b-c-i">
-            <image src="{{ imgUrls[2] }}"></image>
-            <view>决胜考场</view>
-        </veiw>
+        <view class="b-c-i" wx:for="{{ ktLists }}" catchtap="jumpPage" data-type="{{ item.type }}" data-url="{{ item.url }}">
+            <image mode="aspectFill" src="{{ item.src }}"></image>
+            <view>{{ item.t }}</view>
+        </view>
+        <!--<veiw class="b-c-i">-->
+            <!--<image src="{{ imgUrls[0] }}"></image>-->
+            <!--<view>学科英语</view>-->
+        <!--</veiw>-->
+        <!--<veiw class="b-c-i">-->
+            <!--<image src="{{ imgUrls[1] }}"></image>-->
+            <!--<view>错题精讲</view>-->
+        <!--</veiw>-->
+        <!--<veiw class="b-c-i">-->
+            <!--<image src="{{ imgUrls[2] }}"></image>-->
+            <!--<view>决胜考场</view>-->
+        <!--</veiw>-->
     </view>
 </view>
 
 <view class="zi book bb">
 <view class="b-t">学习参考资料</view>
 <view class="b-c bb">
-    <veiw class="b-c-i">
-        <image mode="aspectFill" src="{{ imgUrls[0] }}"></image>
-        <view>词典</view>
-    </veiw>
-    <veiw class="b-c-i">
-        <image mode="aspectFill" src="{{ imgUrls[1] }}"></image>
-        <view>文化百科</view>
-    </veiw>
+    <view class="b-c-i" wx:for="{{ zlLists }}" catchtap="jumpPage" data-type="{{ item.type }}" data-url="{{ item.url }}">
+        <image mode="aspectFill" src="{{ item.src }}"></image>
+        <view>{{ item.t }}</view>
+    </view>
+    <!--<veiw class="b-c-i">-->
+        <!--<image mode="aspectFill" src="{{ imgUrls[0] }}"></image>-->
+        <!--<view>词典</view>-->
+    <!--</veiw>-->
+    <!--<veiw class="b-c-i">-->
+        <!--<image mode="aspectFill" src="{{ imgUrls[1] }}"></image>-->
+        <!--<view>文化百科</view>-->
+    <!--</veiw>-->
 </view>
 </view>

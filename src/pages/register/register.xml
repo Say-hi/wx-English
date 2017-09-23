@@ -1,27 +1,30 @@
 <!--注册页面-->
-<input class="r-i" placeholder-class="plc" placeholder="姓名"/>
+<input bindinput="inputValue" data-type="name" class="r-i" placeholder-class="plc" placeholder="姓名"/>
 <view class="r-i-w pr arrow">
   <view class="r-i r-d">层次</view>
-  <picker class="s-slider pa" data-type="a1" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+  <picker class="s-slider pa" data-type="a1" bindchange="bindPickerChange" value="{{level}}" range="{{array}}">
     <view class="picker">
-      {{array[index]}}
+      {{array[level]}}
     </view>
   </picker>
 </view>
-<input class="r-i" type="number" maxlength="11" placeholder-class="plc" placeholder="手机号"/>
+<input bindinput="inputValue" data-type="mobile" class="r-i" type="number" maxlength="11" placeholder-class="plc" placeholder="手机号"/>
 <view class="r-i-w pr arrow">
   <!--<input class="r-i r-d" disabled="true" value="培训机构"/>-->
   <view class="r-i r-d">培训机构</view>
-  <picker class="s-slider pa" data-type="a2" bindchange="bindPickerChange" value="{{index2}}" range="{{array2}}">
+  <picker class="s-slider pa" data-type="a2" bindchange="bindPickerChange" value="{{organization}}" range="{{array2}}">
   <view class="picker">
-    {{array2[index2]}}
+    {{array2[organization]}}
   </view>
 </picker>
 </view>
 <view class="r-i-w pr">
   <text class="r-n-1 pa">验证码</text>
-  <input class="r-i r-n" placeholder="输入短信验证码"/>
+  <input bindinput="inputValue" data-type="code" class="r-i r-n" placeholder="输入短信验证码"/>
   <button class="{{ numberDisabled ? 'grow' : '' }} pa" disabled="{{ numberDisabled }}" catchtap="getNumber">{{ showText }}</button>
 </view>
-<view class="c3">下一步</view>
-<navigator open-type="redirect" url="../login/login" class="r-l">已有账号，快速登录</navigator>
+<input bindinput="inputValue" data-type="pwd" type="password" class="r-i" placeholder-class="plc" placeholder="输入密码"/>
+<input bindinput="inputValue" data-type="pwd2" type="password" class="r-i" placeholder-class="plc" placeholder="确认密码"/>
+<veiw class="nosame">{{ (pwd2.length > 0 && pwd.length > 0 && pwd2 != pwd) ? '* 密码不一致，请重新输入' : '' }}</veiw>
+<view class="c3" catchtap="goNext">注　册</view>
+<navigator open-type="navigateBack" url="../login/login" class="r-l">已有账号，快速登录</navigator>

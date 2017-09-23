@@ -1,0 +1,15 @@
+<!--文化百科对应类别详情列表-->
+<!--<navigator url="../wikiDetail/wikiDetail?id={{ item.id }}" wx:for="{{ lists }}" class="wiki">-->
+  <!--<view class="w-t arrow f30 c3">{{ item.title }}</view>-->
+<!--<view class="ww">-->
+<view class="w-list bb">
+  <navigator url="../wikiShow/wikiShow?id={{ item.id }}" class="w-l-w f30 c3 pr bb" wx:for="{{ lists }}" wx:for-item="list">
+    <!--<view class="pr">-->
+    <image src="{{ list.src }}"></image>
+    <view class="pa tac br w-p iconfont icon-bofang1"></view>
+    <!--</view>-->
+    <text class="w-l-w-b ell">{{ list.t }}</text>
+  </navigator>
+</view>
+<!--</view>-->
+<!--</navigator>-->

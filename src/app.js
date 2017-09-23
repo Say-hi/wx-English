@@ -267,6 +267,36 @@ App({
     }
     this.wxrequest(gmc)
   },
+  // 输入内容
+  inputValue (e, that) {
+    let value = e.detail.value
+    let type = e.currentTarget.dataset.type
+    if (type === 'loginInput') {
+      that.setData({
+        loginInput: value // 登录输入
+      })
+    } else if (type === 'pwd') {
+      that.setData({
+        pwd: value // 密码输入
+      })
+    } else if (type === 'pwd2') {
+      that.setData({
+        pwd2: value // 密码输入2
+      })
+    } else if (type === 'name') {
+      that.setData({
+        name: value // 姓名
+      })
+    } else if (type === 'mobile') {
+      that.setData({
+        mobile: value // 手机号码
+      })
+    } else if (type === 'code') {
+      that.setData({
+        code: value // 验证码
+      })
+    }
+  },
   /**
    * 生命周期函数--监听小程序初始化
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）

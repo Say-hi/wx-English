@@ -7,13 +7,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    width: 100,
-    listen: {
-      t: '听一听',
-      c: '听一听内容展示听一听内容展示听一听内容展示',
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+    money: 651,
+    user: {
+      name: '掌声那',
+      mobile: 188559534165
     },
-    lists: ['http://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://im', 'http://im', 'http://im']
+    order: {
+      number: 521654654,
+      time: '2017-12-25',
+      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      title: 'study english',
+      price: 200
+    }
   },
 
   /**

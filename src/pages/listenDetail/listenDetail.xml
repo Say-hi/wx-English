@@ -11,8 +11,14 @@
         <view class="bb" style="width: {{ width }}px"></view>
       </view>
     </view>
-    <view class="l-w-b bb">
-
+    <view class="l-w-b bb pr">
+        <image catchtap="playControl" data-type="last" class="pa pl" src="../../images/p-l.png"></image>
+        <image catchtap="playControl" data-type="pause" class="pa pc" src="../../images/p-c.png"></image>
+        <image catchtap="playControl" data-type="next" class="pa pr" src="../../images/p-r.png"></image>
     </view>
   </view>
+</view>
+<view class=" bb l-b">
+  <view class="f30 c3 iconfont icon-icon_lilunlianxi_normal">练习</view>
+  <view class="l-b-t" wx:for="{{ lists }}">{{ index + 1 }}、{{ item }}</view>
 </view>

@@ -34,6 +34,7 @@
   left: 0;
   top: 0;
   opacity: 1;
+  z-index: 10;
   transition: all 0.5s;
   line-height: 104rpx;
   padding: 0 20rpx;
@@ -72,4 +73,31 @@
 
 .hide {
   opacity: 0;
+  z-index: 1;
+}
+
+.mask {
+  .mask-in {
+    padding: 20rpx;
+  }
+  .m-title {
+    line-height: 50rpx;
+  }
+  .m-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    view {
+      margin-top: 20rpx;
+      line-height: 60rpx;
+      border-radius: 10rpx;
+      background-color: #eee;
+      min-width: 140rpx;
+      font-size: 24rpx;
+    }
+    .m-btn-confirm {
+      background-color: #f00;
+      color: #fff;
+    }
+  }
 }

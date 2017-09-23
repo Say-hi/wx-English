@@ -7,13 +7,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    width: 100,
-    listen: {
-      t: '听一听',
-      c: '听一听内容展示听一听内容展示听一听内容展示',
-      img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-    },
-    lists: ['http://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://imhttp://im', 'http://im', 'http://im']
+    lists: [
+      {
+        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        t: '乌鸦喝水乌鸦喝水乌鸦喝水乌鸦喝水乌鸦喝水乌鸦喝水乌鸦喝水'
+      },
+      {
+        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        t: '乌鸦喝水'
+      },
+      {
+        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        t: '乌鸦喝水'
+      },
+      {
+        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        t: '乌鸦喝水乌鸦喝水乌鸦喝水乌鸦喝水乌鸦喝水乌鸦喝水乌鸦喝水乌鸦喝水乌鸦喝水'
+      }
+    ]
   },
 
   /**

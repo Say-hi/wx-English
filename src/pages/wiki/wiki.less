@@ -1,0 +1,39 @@
+.wiki {
+  padding: 20rpx;
+  border-bottom: 20rpx solid #eee;
+  .w-t {
+    line-height: 80rpx;
+  }
+  .arrow::after {
+    width: 20rpx;
+    height: 20rpx;
+    right: 20rpx;
+  }
+  .w-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .w-l-w {
+      display: flex;
+      flex-direction: column;
+      line-height: 60rpx;
+      image {
+        width: 338rpx;
+        height: 170rpx;
+      }
+      .w-p {
+        top: 38%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70rpx;
+        line-height: 70rpx;
+        background-color: rgba(0,0,0,0.5);
+      }
+      .w-p::before {
+        color: #fff;
+        transform: translateX(10rpx);
+      }
+    }
+  }
+}

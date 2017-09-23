@@ -59,6 +59,50 @@
       border-bottom-left-radius: @radius;
       border-bottom-right-radius: @radius;
       background-image: linear-gradient(#fbfbf7, #d6d4cb);
+      image {
+        width: 60rpx;
+        height: 60rpx;
+      }
+      image:nth-child(2) {
+        width: 80rpx;
+        height: 80rpx;
+      }
+      image {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .pl {
+        transform: translate(-250%, -50%);
+      }
+      .pc {
+        transform: translate(-50%, -50%);
+      }
+      .pr {
+        transform: translate(150%, -50%);
+      }
     }
   }
 }
+
+.l-b {
+  line-height: 87rpx;
+  padding-left: 20rpx;
+  border-top: 14rpx solid #eee;
+  .icon-icon_lilunlianxi_normal {
+    border-bottom: 2rpx solid #eee;
+    margin-bottom: 20rpx;
+  }
+  .icon-icon_lilunlianxi_normal::before {
+    color: #f00;
+    margin-right: 13rpx;
+  }
+  .l-b-t {
+    min-height: 87rpx;
+    display: flex;
+    align-items: center;
+    line-height: 40rpx;
+    word-break: break-all;
+  }
+}
+

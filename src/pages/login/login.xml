@@ -6,18 +6,18 @@
 <view class="login">
   <view class="pr">
     <text class="pa iconfont icon-xingmingyonghumingnicheng"></text>
-    <input class="bb" type="text" placeholder-style="color: #d6d6d6;" placeholder="手机号码/用户名"/>
+    <input bindinput="inputValue" data-type="loginInput" value="{{ loginInput }}" class="bb" type="text" placeholder-style="color: #d6d6d6;" placeholder="手机号码/用户名"/>
   </view>
   <view class="pr">
     <text class="pa iconfont icon-mima-copy"></text>
-    <input class="bb" type="password" placeholder-style="color: #d6d6d6;" placeholder="密码"/>
+    <input bindinput="inputValue" data-type="pwd" value="{{ pwd }}" class="bb" type="password" placeholder-style="color: #d6d6d6;" placeholder="密码"/>
   </view>
   <view class="pr pr-b">
-    <navigator open-type="redirect" url="../register/register">注册</navigator>
-    <view>忘记密码</view>
+    <navigator open-type="navigate" url="../register/register">注册</navigator>
+    <navigator open-type="navigate" url="../forgot/forgot">忘记密码</navigator>
   </view>
-  <view class="pr pr-l">
+  <view catchtap="login" data-type="user" class="pr pr-l">
     登录
   </view>
-  <view class="pr pr-t">试用通道</view>
+  <view catchtap="login" data-type="tourist" class="pr pr-t">试用通道</view>
 </view>

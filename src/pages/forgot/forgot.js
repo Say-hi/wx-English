@@ -9,22 +9,7 @@ Page({
   data: {
     array: ['小学', '初中', '高中', '大学'],
     array2: ['xxx机构1', 'xxx机构2', 'xxx机构3', 'xxx机构4'],
-    level: 0,
-    organization: 0,
     showText: '获取验证码'
-  },
-  // 获取机构
-  getOrg () {
-    let that = this
-    app.wxrequest({
-      url: useUrl.login,
-      success (res) {
-        wx.hideLoading()
-        that.setData({
-          array2: res.data.data
-        })
-      }
-    })
   },
   // 用户输入
   inputValue (e) {
@@ -38,7 +23,7 @@ Page({
     })
     let time = 60
     let that = this
-    let timer = setInterval(function () {
+    let timer = setInterval( () => {
       if (time <= 0) {
         clearInterval(timer)
         that.setData({
@@ -51,38 +36,31 @@ Page({
         showText: --time + 's'
       })
     }, 1000)
-    // 请求手机验证码
-    app.wxrequest({
-      url: useUrl.login,
-      complete () {
-        wx.hideLoading()
-      }
-    })
     // todo
   },
   // picker 选择切换
   bindPickerChange (e) {
-    // console.log('picker发送选择改变，携带值为', e.detail.value)
+    console.log('picker发送选择改变，携带值为', e.detail.value)
     if (e.currentTarget.dataset.type === 'a1') {
       this.setData({
-        level: e.detail.value
+        index: e.detail.value
       })
     } else {
       this.setData({
-        organization: e.detail.value
+        index2: e.detail.value
       })
     }
   },
-  // 注册下一步
+  // 下一步
   goNext () {
-    let { name, mobile, code, pwd, pwd2, level, organization} = this.data
+    let { name, mobile, pwd, pwd2, code } = this.data
     if (pwd !== pwd2) {
       return wx.showToast({
         image: '../../images/jiong.png',
         title: '两次输入的密码不一致'
       })
     }
-    if (!name && !mobile && !code && !pwd) {
+    if ((!name || name.length == 0 ) && (!mobile  || mobile.length != 11) && (!pwd || pwd.length == 0) && !code || (code.length == 0) ) {
       return wx.showToast({
         image: '../../images/jiong.png',
         title: '请补全信息'
@@ -93,23 +71,14 @@ Page({
       data: {
         name,
         mobile,
-        code,
         pwd,
-        level,
-        organization
+        code
       },
       success (res) {
         wx.hideLoading()
-        if (res.data.code === 200) {
-          wx.showModal({
-            title: '注册成功',
-            content: '恭喜您注册成功',
-            showCancel: false,
-            success () {
-              wx.navigateBack({
-                delta: 1
-              })
-            }
+        if(res.data.code === 200) {
+          wx.navigateBack({
+            delta: 1
           })
         } else {
           wx.showToast({
@@ -124,7 +93,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad () {
-    this.getOrg()
     // TODO: onLoad
   },
 

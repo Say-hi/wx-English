@@ -18,58 +18,95 @@ Page({
       },
       {
         t: '背一背2',
-        status: 0,
+        status: 1,
         id: 123
       },
       {
         t: '背一背3',
-        status: 0,
+        status: 1,
         id: 123
       }
     ],
     readList: [
       {
         t: '读一读1',
-        id: 123
+        id: 123,
+        status: 0
       },
       {
         t: '读一读2',
-        id: 123
+        id: 123,
+        status: 0
       },
       {
         t: '读一读3',
-        id: 123
+        id: 123,
+        status: 0
       }
     ],
     talkList: [
       {
         t: '说一说1',
-        id: 123
+        id: 123,
+        status: 0
       },
       {
         t: '说一说2',
-        id: 123
+        id: 123,
+        status: 1
       },
       {
         t: '说一说3',
-        id: 123
+        id: 123,
+        status: 0
       }
     ],
     listenList: [
       {
         t: '听一听1',
-        id: 123
+        id: 123,
+        status: 1
       },
       {
         t: '听一听2',
-        id: 123
+        id: 123,
+        status: 0
       },
       {
         t: '听一听3',
-        id: 123
+        id: 123,
+        status: 0
       }
     ]
   },
+  // 跳转详情
+  goDetail (e) {
+    console.log(e.currentTarget.dataset.status)
+    if (e.currentTarget.dataset.status * 1 === 0) {
+      // console.log(1)
+      // 购买弹窗
+      this.setData({
+        needBuy: true
+      })
+    } else {
+      // todo 跳转对应详情
+      let u = this.data.curNav * 1 === 0 ? '../listenDetail/listenDetail' : this.data.curNav * 1 === 1 ? '../talkDetail/talkDetail' : this.data.curNav * 1 === 2 ? '../readDetail/readDetail' : this.data.curNav * 1 === 3 ? '../memoryDetail/memoryDetail' : ''
+      wx.redirectTo({
+        url: `${u}?id=${e.currentTarget.dataset.id}`
+      })
+    }
+  },
+  // 关闭弹窗
+  maskClose () {
+    this.setData({
+      needBuy: false
+    })
+  },
+  // 弹窗确认购买
+  maskConfirm () {
+
+  },
+  // 选择顶部tab栏
   chooseNav (e) {
     if (e.currentTarget.dataset.index * 1 === this.data.curNav) return
     this.setData({
