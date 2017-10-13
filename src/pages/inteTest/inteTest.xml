@@ -1,0 +1,11 @@
+<!--智能测试页面-->
+<view wx:for="{{ lists }}" class="wiki">
+  <view class="w-t f30 c3">{{ item.title }}</view>
+  <view class="w-list">
+    <view class="w-l-w f30 c3 pr" style="width: {{ item.width }}rpx; height: {{ item.height }}rpx;" wx:for="{{ item.list }}" wx:for-item="list">
+      <image catchtap="goNext" data-id="{{ list.id }}" mode="aspectFill" src="{{ list.src }}"></image>
+      <!--<view class="pa tac br w-p iconfont icon-bofang1"></view>-->
+      <!--<text>{{ list.t }}</text>-->
+    </view>
+  </view>
+</view>

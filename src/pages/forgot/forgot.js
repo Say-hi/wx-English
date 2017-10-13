@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    array: ['小学', '初中', '高中', '大学'],
-    array2: ['xxx机构1', 'xxx机构2', 'xxx机构3', 'xxx机构4'],
+    // array: ['小学', '初中', '高中', '大学'],
+    // array2: ['xxx机构1', 'xxx机构2', 'xxx机构3', 'xxx机构4'],
     showText: '获取验证码'
   },
   // 用户输入
@@ -18,12 +18,17 @@ Page({
   },
   // 获取验证码
   getNumber () {
+    if (app.checkMobile(this.data.mobile)) {
+      return wx.showToast({
+        title: '请输入正确的11位手机号码'
+      })
+    }
     this.setData({
       numberDisabled: true
     })
     let time = 60
     let that = this
-    let timer = setInterval( () => {
+    let timer = setInterval(function () {
       if (time <= 0) {
         clearInterval(timer)
         that.setData({
@@ -36,23 +41,39 @@ Page({
         showText: --time + 's'
       })
     }, 1000)
-    // todo
+    // 请求手机验证码
+    app.wxrequest({
+      url: useUrl.sendMobileCode,
+      data: {
+        mobile: that.data.mobile
+      },
+      complete (res) {
+        wx.hideLoading()
+        if (res.data.code === 400) {
+          return app.setToast(that, {content: res.data.message})
+        } else {
+          app.setToast(that, {title: '短信状态', content: '短信发送成功，请注意查收！'})
+        }
+      }
+    })
   },
+
   // picker 选择切换
-  bindPickerChange (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    if (e.currentTarget.dataset.type === 'a1') {
-      this.setData({
-        index: e.detail.value
-      })
-    } else {
-      this.setData({
-        index2: e.detail.value
-      })
-    }
-  },
+  // bindPickerChange (e) {
+  //   console.log('picker发送选择改变，携带值为', e.detail.value)
+  //   if (e.currentTarget.dataset.type === 'a1') {
+  //     this.setData({
+  //       index: e.detail.value
+  //     })
+  //   } else {
+  //     this.setData({
+  //       index2: e.detail.value
+  //     })
+  //   }
+  // },
   // 下一步
   goNext () {
+    let that = this
     let { name, mobile, pwd, pwd2, code } = this.data
     if (pwd !== pwd2) {
       return wx.showToast({
@@ -60,31 +81,34 @@ Page({
         title: '两次输入的密码不一致'
       })
     }
-    if ((!name || name.length == 0 ) && (!mobile  || mobile.length != 11) && (!pwd || pwd.length == 0) && !code || (code.length == 0) ) {
+    if ((!name || name.length === 0) && (!pwd || pwd.length === 0) && (!code || (code.length === 0))) {
       return wx.showToast({
         image: '../../images/jiong.png',
         title: '请补全信息'
       })
     }
     app.wxrequest({
-      url: useUrl.login,
+      url: useUrl.findUserPassword,
       data: {
-        name,
         mobile,
-        pwd,
-        code
+        password: pwd,
+        mobile_code: code
       },
       success (res) {
         wx.hideLoading()
-        if(res.data.code === 200) {
-          wx.navigateBack({
-            delta: 1
+        if (res.data.code === 200) {
+          wx.showModal({
+            title: '密码找回',
+            content: '您的新密码已经生效',
+            showCancel: false,
+            success () {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
           })
         } else {
-          wx.showToast({
-            image: '../../images/jiong.png',
-            title: res.data.message
-          })
+          app.setToast(that, {content: res.data.message})
         }
       }
     })

@@ -1,6 +1,6 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
-
+const app = getApp()
+// const useUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
@@ -30,7 +30,14 @@ Page({
       }
     ]
   },
+  // 用户输入
+  inputValue (e) {
+    app.inputValue(e, this)
+  },
+  // 翻译
+  getTran () {
 
+  },
   /**
    * 生命周期函数--监听页面加载
    */

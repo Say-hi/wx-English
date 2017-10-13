@@ -1,0 +1,25 @@
+<view class="answer-top f30 c3 bb">
+  <view class="at iconfont icon-datiqia">答题卡</view>
+  <view class="at iconfont icon-jishibiao">{{ times }}</view>
+  <view class="at iconfont icon-cuotiben">错题本</view>
+</view>
+<view class="f30 c3 a-title">
+  <text>连线匹配题</text>
+  <text><text class="red">{{ current }}</text>/{{ all }}</text>
+</view>
+<swiper bindchange="currentChange">
+  <swiper-item wx:for="{{ lists }}">
+    <view class="s-wrap">
+      <view class="left">
+        <text wx:for="{{ item.left }}" wx:for-item="left">{{ left }}</text>
+      </view>
+      <view class="right">
+        <text wx:for="{{ item.right }}" wx:for-item="right">{{ right }}</text>
+      </view>
+    </view>
+    <view class="s-wrap">
+      <view wx:for="{{ item.left }}" class="lineInput" wx:for-index="inputIndex">{{ inputIndex + 1 }}.<input data-index="{{ inputIndex }}" /></view>
+    </view>
+  </swiper-item>
+</swiper>
+<!--<button catchtap="startJS">开始计时</button>-->

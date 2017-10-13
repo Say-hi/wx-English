@@ -9,40 +9,41 @@
     <view class="t-c-s bb">
       <view class="t-c-s-w bb">
         <view catchtap="chooseNavP" data-index="{{ index }}" class="t-c-s-i bb {{ curNavP == index ? 'chooseP' : '' }}" wx:for="{{ showLists }}">
-          <view class="t-c-s-i-t">{{ item.t }}</view>
-          <image mode="aspectFill" src="{{ item.src }}"></image>
+          <view class="t-c-s-i-t">{{ item.word }}</view>
+          <image lazy-load="true" mode="aspectFill" src="{{ item.image }}"></image>
         </view>
         <view class="noMore" wx:if="{{ showLists.length == 0 }}">请添加词卡</view>
       </view>
       <!--用户操作-->
       <view class="t-c-b">
         <text catchtap="delShowItem" class="iconfont icon-shanchu-copy"></text>
-        <text class="iconfont icon-bofang"></text>
+        <text catchtap="playAudio" class="iconfont icon-bofang"></text>
       </view>
     </view>
   </view>
 
   <swiper class="bb" indicator-dots="true" indicator-color="#bfbfbf" indicator-active-color="#fedb03">
     <swiper-item class="bb">
-      <view class="s-i bb" wx:for="{{ navListOne }}">
-        <image mode="widthFix" src="{{ item.src }}"></image>
-        <view>{{ item.t }}</view>
+      <view class="s-i bb" catchtap="changeInfo" data-id="{{ item.cat_id }}" wx:for="{{ navListOne }}">
+        <image mode="aspectFill" src="{{ item.cat_icon }}"></image>
+        <view>{{ item.cat_name }}</view>
       </view>
     </swiper-item>
-    <swiper-item class="bb">
-      <view class="s-i bb" wx:for="{{ navListTwo }}">
-        <image mode="widthFix" src="{{ item.src }}"></image>
-        <view>{{ item.t }}</view>
+    <swiper-item wx:if="{{ navListTwo.length > 0 }}" class="bb">
+      <view catchtap="changeInfo" data-id="{{ item.cat_id }}" class="s-i bb" wx:for="{{ navListTwo }}">
+        <image mode="aspectFill" src="{{ item.cat_icon }}"></image>
+        <view>{{ item.cat_name }}</view>
       </view>
     </swiper-item>
   </swiper>
 
   <view class="card bb">
     <view catchtap="addToShow" data-index="{{ index }}" class="t-c-s-i bb" wx:for="{{ cardLists }}">
-      <view class="t-c-s-i-t">{{ item.t }}</view>
-      <image mode="aspectFill" src="{{ item.src }}"></image>
+      <view class="t-c-s-i-t">{{ item.word }}</view>
+      <image lazy-load="true" mode="aspectFill" src="{{ item.image }}"></image>
     </view>
   </view>
+  <view class="tac">--- {{ more ? '上拉加载更多' : '没有更多内容了' }} ---</view>
 </view>
 
 <view wx:else>
@@ -55,26 +56,24 @@
     <view class="h-c">
       <text class="h-c-t">一周绘本推荐</text>
       <view class="h-c-c bb">
-        <image wx:for="{{ recommend }}" src="{{ item }}"></image>
+        <image lazy-load="true" catchtap="goHBdetail" data-title="{{ item.title }}" data-id="{{ item.id }}" wx:for="{{ recommend }}" src="{{ item.image }}"></image>
       </view>
     </view>
 
     <view class="h-nav bb">
-      <view class="f30 tac c3" wx:for="{{ navList }}">
-        <text>{{ item }}</text>
-        <text wx:if="{{ !(index ==  (navList.length - 1))}}" class="h-l">|</text>
+      <view catchtap="hbChoose" data-index="{{ index }}" class="f30 tac c3 {{ hbCurrent == index ? 'choose' : '' }}" wx:for="{{ navList }}">
+        {{ item }}
       </view>
-      <!--<view class="f30 tac c3" wx:for="{{ navList2 }}">-->
-        <!--<text>{{ item }}</text>-->
-        <!--<text wx:if="{{ !(index ==  (navList.length - 1))}}" class="h-l">|</text>-->
-      <!--</view>-->
     </view>
 
     <view class="h-nav-c bb">
-      <view class="bb tac f30 c3" wx:for="{{ bottomLists }}">
-        <image mode="aspectFill" src="{{ item.src }}"></image>
-        <view>{{ item.t }}</view>
+      <view catchtap="goHBListDetail" data-title="{{ item.cat_name }}" data-id="{{ item.cat_id }}" class="bb tac f30 c3" wx:for="{{ bottomLists }}">
+        <image lazy-load="true" mode="aspectFill" src="{{ item.cat_icon }}"></image>
+        <view class="ell">{{ item.cat_name }}</view>
       </view>
     </view>
   </view>
 </view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

@@ -1,0 +1,15 @@
+<!--错题本-->
+<view class="wrap" wx:for="{{ wrongList }}">
+  <!--问题-->
+  <view class="w-p">{{ item.problem }}</view>
+  <!--选项-->
+  <view class="w-c" wx:for-index="cIndex" wx:for-item="cItem" wx:for="{{ item.choose }}">
+    <view class="w-c-l br {{ cItem.s ? 'circleChoose' : '' }}">{{ arrLabel[cIndex] }}</view>
+    <view class="w-c-r">{{ cItem.t }}</view>
+  </view>
+  <veiw class="w-b">
+    <view class="w-b-c">错题</view>
+    <view class="w-b-c">{{ item.level }}</view>
+    <view class="w-b-t">{{ item.time }}</view>
+  </veiw>
+</view>

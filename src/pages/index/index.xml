@@ -2,16 +2,18 @@
 <swiper indicator-active-color="#fedb03" indicator-color="#ffffff"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{imgUrls}}">
         <swiper-item>
-            <image mode="aspectFill" src="{{item}}" class="slideImage" />
+            <image lazy-load="true" mode="aspectFill" src="{{item}}" class="slideImage" />
         </swiper-item>
     </block>
 </swiper>
 
-<view class="iconfont icon-shengyin">{{ notice }}</view>
+<view class="pr iconfont icon-shengyin">
+    <view class="pa {{ curNotice == index ? 'show' : 'hide' }}" wx:for="{{ notice }}">{{ item.content }}</view>
+</view>
 
 <view class="nav">
-    <view wx:for="{{ navLists }}" catchtap="jumpPage" data-type="{{ item.type }}" data-url="{{ item.url }}">
-        <image mode="aspectFill" src="{{ item.src }}"></image>
+    <view wx:for="{{ navLists }}" catchtap="jumpPage" data-t="{{ item.t }}" data-type="{{ item.type }}" data-url="{{ item.url }}">
+        <image lazy-load="true" mode="aspectFill" src="{{ item.src }}"></image>
         <view>{{ item.t }}</view>
     </view>
     <!--<view catchtap="jumpPage" data-type="navigateTo" data-url="../hshs/hshs">-->
@@ -28,7 +30,7 @@
     <view class="b-t">学习反馈</view>
     <view class="b-c bb">
         <view class="b-c-i" wx:for="{{ fkLists }}" catchtap="jumpPage" data-type="{{ item.type }}" data-url="{{ item.url }}">
-            <image mode="aspectFill" src="{{ item.src }}"></image>
+            <image lazy-load="true" mode="aspectFill" src="{{ item.src }}"></image>
             <view>{{ item.t }}</view>
         </view>
         <!--<veiw class="b-c-i">-->
@@ -45,8 +47,8 @@
 <view class="kt book bb">
     <view class="b-t">速拼微课堂</view>
     <view class="b-c bb">
-        <view class="b-c-i" wx:for="{{ ktLists }}" catchtap="jumpPage" data-type="{{ item.type }}" data-url="{{ item.url }}">
-            <image mode="aspectFill" src="{{ item.src }}"></image>
+        <view class="b-c-i" wx:for="{{ ktLists }}" data-t="{{ item.t }}" catchtap="jumpPage" data-type="{{ item.type }}" data-url="{{ item.url }}">
+            <image lazy-load="true" mode="aspectFill" src="{{ item.src }}"></image>
             <view>{{ item.t }}</view>
         </view>
         <!--<veiw class="b-c-i">-->
@@ -68,7 +70,7 @@
 <view class="b-t">学习参考资料</view>
 <view class="b-c bb">
     <view class="b-c-i" wx:for="{{ zlLists }}" catchtap="jumpPage" data-type="{{ item.type }}" data-url="{{ item.url }}">
-        <image mode="aspectFill" src="{{ item.src }}"></image>
+        <image lazy-load="true" mode="aspectFill" src="{{ item.src }}"></image>
         <view>{{ item.t }}</view>
     </view>
     <!--<veiw class="b-c-i">-->

@@ -1,0 +1,79 @@
+// 获取全局应用程序实例对象
+// const app = getApp()
+
+// 创建页面实例对象
+Page({
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    lists: [
+      {
+        t: '听力选择题',
+        star: 3,
+        // width: 25,
+        finish: 12,
+        all: 20,
+        id: 123
+      },
+      {
+        t: '完形天空题',
+        star: 1,
+        // width: 25,
+        finish: 1,
+        all: 20,
+        id: 42133
+      },
+      {
+        t: '完形天空题',
+        star: 1,
+        // width: 25,
+        finish: 20,
+        all: 20,
+        id: 56
+      }
+    ]
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad () {
+    // TODO: onLoad
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady () {
+    // TODO: onReady
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow () {
+    // TODO: onShow
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide () {
+    // TODO: onHide
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload () {
+    // TODO: onUnload
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh () {
+    // TODO: onPullDownRefresh
+  }
+})

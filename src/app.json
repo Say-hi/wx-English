@@ -1,32 +1,54 @@
 {
 //  速拼英语小程序页面分布
   "pages": [
-    "pages/login/login", // 登陆页面
-    "pages/forgot/forgot", // 忘记密码
-    "pages/index/index", // 首页
-    "pages/wikiShow/wikiShow", // 文化百科对应视频详情
-    "pages/wikiDetail/wikiDetail", // 文化百科对应类别详情列表
-    "pages/wiki/wiki", // 文化百科
-    "pages/dictionary/dictionary", // 词典
-    "pages/buy/buy", // 购买
-    "pages/subjectDetail/subjectDetail", // 科目详情
-    "pages/listenDetail/listenDetail", // 听一听详情
-    "pages/talkDetail/talkDetail", // 说一说详情
-    "pages/readDetail/readDetail", // 读一读详情
-    "pages/memoryDetail/memoryDetail", // 背一背详情
-    "pages/hbDetail/hbDetail", // 节日绘本专题详情
-    "pages/hbListsD/hbListsD", // 节日绘本专题进一步
-    "pages/hbLists/hbLists", // 节日绘本专题
-    "pages/hshs/hshs", // 绘声绘色
-    "pages/suPin/suPin", // 速拼
-    "pages/testRank/testRank", // 测试得分排行榜
-    "pages/homeWorkDetail/homeWorkDetail", // 作业详情
-    "pages/homeWorkGroup/homeWorkGroup", // 作业群
-    "pages/user/user", // 个人中心
-    "pages/register/register", // 注册页面
+    "pages/login/login", // 登陆页面 ---
+    "pages/subjectDetail/subjectDetail", // 科目详情 ---
+    "pages/subjectDetailList/subjectDetailList", // 科目详情列表 ---
+    "pages/hbDetail/hbDetail", // 节日绘本专题详情 ---
+    "pages/hshs/hshs", // 绘声绘色 ---
+    "pages/hbListsD/hbListsD", // 节日绘本专题进一步 ---
+    "pages/hbLists/hbLists", // 节日绘本专题 ---
+    "pages/register/register", // 注册页面 ---
+    "pages/template/template", // 模板
+    "pages/syntheticalTest/syntheticalTest", // 综合试卷测试
+    "pages/synthetical/synthetical", // 综合试卷
+    "pages/worldCard/worldCard", // 单词卡
+    "pages/examination/examination", // 考试交卷
+    "pages/report/report", // 练习报告
+    "pages/practice/practice", // 练习报告
+    "pages/homeWork/homeWork", // 作业
+    "pages/myCollect/myCollect", // 我的收藏 ---
     "pages/userInfo/userInfo", // 个人信息
-    "pages/myCollect/myCollect", // 我的收藏
-    "pages/homeWork/homeWork" // 作业,,,,
+    "pages/user/user", // 个人中心
+    "pages/homeWorkGroup/homeWorkGroup", // 作业群
+    "pages/homeWorkDetail/homeWorkDetail", // 作业详情
+    "pages/testRank/testRank", // 测试得分排行榜
+    "pages/suPin/suPin", // 速拼 ---
+    "pages/listenDetail/listenDetail", // 听一听详情 ---
+    "pages/memoryDetail/memoryDetail", // 背一背详情 ---
+    "pages/readDetail/readDetail", // 读一读详情 ---
+    "pages/talkDetail/talkDetail", // 说一说详情 ---
+    "pages/buy/buy", // 购买
+    "pages/dictionary/dictionary", // 词典
+    "pages/wiki/wiki", // 文化百科 ---
+    "pages/wikiDetail/wikiDetail", // 文化百科对应类别详情列表 ---
+    "pages/wikiShow/wikiShow", // 文化百科对应视频详情 ---
+    "pages/forgot/forgot", // 忘记密码 ---
+    "pages/inteTest/inteTest", // 智能测试
+    "pages/testDetail/testDetail", // 智能测试词卡
+    "pages/testPractice/testPractice", // 智能测试练习
+    "pages/answerCorrector/answerCorrector", // 短文改错
+    "pages/answerPicture/answerPicture", // 看图答题
+    "pages/answerMatch/answerMatch", // 连线匹配
+    "pages/answerListen/answerListen", // 听力选择
+    "pages/answerRational/answerRational", // 语法填空
+    "pages/answerWrite/answerWrite", // 听写题
+    "pages/answerCloze/answerCloze", // 完形填空
+    "pages/answerReading/answerReading", // 阅读理解
+    "pages/answerTranslate/answerTranslate", // 中英互译
+    "pages/wrong/wrong", // 错题本
+    "pages/answer75/answer75", // 阅读理解7选5
+    "pages/index/index" // 首页,
     // Dont remove this comment
   ],
   // Window configuration

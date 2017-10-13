@@ -1,0 +1,16 @@
+<view class="answer-top f30 c3 bb">
+  <view class="at iconfont icon-datiqia">答题卡</view>
+  <view class="at iconfont icon-jishibiao">{{ times }}</view>
+  <view class="at iconfont icon-cuotiben">错题本</view>
+</view>
+<view class="f30 c3 a-title">
+  <text>看图写词</text>
+  <text><text class="red">{{ current }}</text>/{{ all }}</text>
+</view>
+<swiper bindchange="currentChange">
+  <swiper-item wx:for="{{ lists }}">
+    <image mode="widthFix" lazy-load="true" src="{{ item }}"></image>
+    _ _ _ _ _ _
+  </swiper-item>
+<button catchtap="startJS">开始计时</button>
+</swiper>

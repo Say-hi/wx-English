@@ -1,0 +1,9 @@
+<view class="answer-top f30 c3 bb">
+  <view class="at iconfont icon-datiqia">答题卡</view>
+  <view class="at iconfont icon-jishibiao">{{ time }}</view>
+  <view class="at iconfont icon-cuotiben">错题本</view>
+</view>
+<view class="f30 c3 a-title">
+  <text>短文改错</text>
+  <text><text class="red">{{ current }}</text>/{{ all }}</text>
+</view>

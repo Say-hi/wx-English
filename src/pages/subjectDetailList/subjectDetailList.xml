@@ -1,0 +1,10 @@
+<view class="memory bb f30 c333 ">
+  <view wx:for="{{ memoryList }}" data-id="{{ item.id }}" catchtap="goDetail">
+    <text class="iconfont {{ listArr[show] }}">{{ item.name }}</text>
+    <text class="m-r iconfont icon-bofang"></text>
+  </view>
+</view>
+<view class="tac">--- {{ more ? '上拉加载更多' : '没有更多内容了' }} ---</view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

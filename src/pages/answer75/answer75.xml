@@ -1,0 +1,25 @@
+<view class="wrap" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
+  <view class="answer-top f30 c3 bb">
+    <view class="at iconfont icon-datiqia">答题卡</view>
+    <view class="at iconfont icon-jishibiao">{{ time }}</view>
+    <view class="at iconfont icon-cuotiben">错题本</view>
+  </view>
+
+  <view class="f30 c3 a-title bb">
+    <text>阅读理解七选五</text>
+    <text><text class="red">{{ showIndex + 1 }}</text>/{{ all }}</text>
+  </view>
+
+  <view class="swiper">
+    <view class="s-text">{{ list[showIndex].text }}</view>
+    <view data-index="{{ index }}" catchtap="chooseCircle" class="c_choose" wx:for="{{ list[showIndex].arr }}">
+      <view class="circle br {{ choose[showIndex][index] ? 'chooseCircle' : '' }}">{{ arrLabel[index] }}</view>
+      <view>{{ item }}</view>
+    </view>
+    <!--<view wx:for="{{ list[showIndex].arr }}" wx:for-item="question" wx:for-index="qIndex">-->
+    <!--<view data-index="{{ aIndex }}" data-outindex="{{ qIndex }}" catchtap="chooseCircle" class="c_choose" wx:for="{{ question.arr }}" wx:for-item="aItem" wx:for-index="aIndex">-->
+    <!--<view class="circle br {{ choose[qIndex] == aIndex ? 'chooseCircle' : '' }}">{{ arrLabel[aIndex] }}</view><view>{{ aItem }}</view>-->
+    <!--</view>-->
+    <!--</view>-->
+  </view>
+</view>

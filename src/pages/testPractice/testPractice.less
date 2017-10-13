@@ -1,0 +1,53 @@
+.wrap {
+  margin-left: 20rpx;
+  border-bottom: 1rpx solid #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 139rpx;
+  padding: 20rpx 0;
+}
+
+.icon-jiahao::before {
+  color: #fedb03;
+  margin-right: 12rpx;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  .star {
+    display: flex;
+    margin-left: 40rpx;
+    text {
+      margin: 0 5rpx;
+    }
+    .y::before {
+      color: #fedb03 !important;
+    }
+    .g::before {
+      color: #eee !important;
+    }
+  }
+  .line {
+    width: 200rpx;
+    background-color: #eee;
+    height: 10rpx;
+    margin: 0 10rpx;
+    .line-f {
+      height: 100%;
+      background-color: #fedb03;
+    }
+  }
+  .c-t {
+    color: #999;
+  }
+  .icon-kaishizuoti {
+    flex: 1;
+    text-align: right;
+    padding-right: 40rpx;
+    color: #f00;
+    font-size: 40rpx;
+    font-weight: 700;
+  }
+}

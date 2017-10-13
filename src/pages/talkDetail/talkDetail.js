@@ -1,6 +1,8 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
+const app = getApp()
+const useUrl = require('../../utils/service')
 let videoContext = wx.createVideoContext('myVideo')
+// const wxParse = require('../../wxParse/wxParse')
 // let seek = -1
 // 创建页面实例对象
 Page({
@@ -8,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    src: 'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400',
+    src: '',
     objectFit: 'fill',
     videoContentList: [
       {
@@ -32,10 +34,35 @@ Page({
     // console.log(videoContext)
     videoContext.seek(e.currentTarget.dataset.time)
   },
+  // 获取数据
+  getList (id) {
+    let that = this
+    app.wxrequest({
+      url: useUrl.subjectenglishDetailByShuo,
+      data: {
+        session_key: app.gs(),
+        id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          app.WP('article', 'html', res.data.data.content, that, 5)
+          // app.data.wxParse.wxParse('article', 'html', res.data.data.content, that, 5)
+          that.setData({
+            info: res.data.data,
+            src: res.data.data.video_url
+          })
+        } else {
+          app.setToast(that, res.data.message)
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
+    this.getList(params.id)
     // TODO: onLoad
   },
 

@@ -1,0 +1,10 @@
+<!--综合-->
+<view class="top"></view>
+<view class="wrap pr" wx:for="{{ syntheticalList }}">
+  <view class="iconfont icon-shuben br"></view>
+  <view class="center">
+    <view class="f30 c3 c-t">{{ item.title }}</view>
+    <view class="c-b">{{ item.content }}</view>
+  </view>
+  <view class="right f30 pa">{{ item.right }}</view>
+</view>

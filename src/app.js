@@ -2,6 +2,7 @@
 // const Promise = require('./utils/bluebird')
 /*eslint-disable*/
 const useUrl = require('./utils/service')
+const wxParse = require('./wxParse/wxParse')
 // const Moment = require('./utils/moment')
 // Moment.locale('en', {
 //   relativeTime : {
@@ -23,7 +24,12 @@ const useUrl = require('./utils/service')
 // moment.locale('zh-cn')
 App({
   data: {
+    suPin: true,
     name: '英语小程序'
+  },
+  // 富文本解析
+  WP (title, type, data, that, image) {
+    wxParse.wxParse(title, type, data, that, image)
   },
   // 解析时间
   // moment (time) {
@@ -238,6 +244,7 @@ App({
     } else {
       let obj = {
         success (res) {
+          console.log(res)
           wx.setStorageSync('userInfo', res.userInfo)
           if (cb) {
             cb()
@@ -295,7 +302,40 @@ App({
       that.setData({
         code: value // 验证码
       })
+    } else if (type === 'translate') {
+      that.setData({
+        transText: value // 翻译
+      })
     }
+  },
+  // 跳转绘本详情
+  goHBdetail (e) {
+    wx.navigateTo({
+      url: `../hbDetail/hbDetail?id=${e.currentTarget.dataset.id}&title=${e.currentTarget.dataset.title}`
+    })
+  },
+  // 手机号码验证
+  checkMobile (mobile) {
+    if (!(/^1[3|4|5|7|8][0-9]\d{8}$/.test(mobile))) {
+      return true
+    }
+  },
+  // 信息弹窗
+  setToast (that, toast, time) {
+    let defaultToast = {
+      image: '../../images/jiong.png',
+      show: true
+    }
+    Object.assign(defaultToast, toast)
+    that.setData({
+      toast: defaultToast
+    })
+    setTimeout(() => {
+      defaultToast.show = false
+      that.setData({
+        toast: defaultToast
+      })
+    }, (time || 1500))
   },
   /**
    * 生命周期函数--监听小程序初始化

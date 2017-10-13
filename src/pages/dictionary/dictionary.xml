@@ -1,8 +1,8 @@
 <!--词典页面-->
 <view class="d-top">
   <view class="d-t-s">
-    <input class="f30 c3" placeholder="输入要查询的内容"/>
-    <view class="f30 c3 d-t-s-b">翻译</view>
+    <input data-type="translate" class="f30 c3" placeholder="输入要查询的内容"/>
+    <view catchtap="getTran" class="f30 c3 d-t-s-b">翻译</view>
   </view>
   <view class="d-t-b f30 c3">
     <view class="d-voice">

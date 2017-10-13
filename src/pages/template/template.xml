@@ -1,0 +1,35 @@
+<!--消息提示弹框-->
+<template name="showToast">
+    <view class="mask-t">
+        <view class="mask-toast">
+            <view wx:if="{{ title }}" class="tac mask-title">{{ title }}</view>
+            <image wx:if="{{ image }}" mode="aspectFill" class="mask-image" src="{{ image }}"></image>
+            <view class="mask-content">{{ content }}</view>
+        </view>
+    </view>
+</template>
+<!--题目模板文件-->
+<template is="answerTop" data="{{ tempData }}"></template>
+<!--阅读理解7选5-->
+<template name="answerTop">
+    <view class="wrap" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
+        <view class="answer-top f30 c3 bb">
+            <view class="at iconfont icon-datiqia">答题卡</view>
+            <view class="at iconfont icon-jishibiao">{{ time }}</view> <!--时间-->
+            <view class="at iconfont icon-cuotiben">错题本</view>
+        </view>
+
+        <view class="f30 c3 a-title bb">
+            <text>阅读理解七选五</text>
+            <text><text class="red">{{ showIndex + 1 }}</text>/{{ all }}</text><!--当前题目-->
+        </view>
+
+        <view class="swiper">
+            <view class="s-text">{{ list[showIndex].text }}</view>
+            <view data-index="{{ index }}" catchtap="chooseCircle" class="c_choose" wx:for="{{ list[showIndex].arr }}">
+                <view class="circle br {{ choose[showIndex][index] ? 'chooseCircle' : '' }}">{{ arrLabel[index] }}</view>
+                <view>{{ item }}</view>
+            </view>
+        </view>
+    </view>
+</template>

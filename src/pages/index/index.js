@@ -1,6 +1,6 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
-// const serviceUrl = require('../../utils/service')
+const app = getApp()
+const useUrl = require('../../utils/service')
 
 // 创建页面实例对象
 Page({
@@ -17,7 +17,8 @@ Page({
     autoplay: false,
     interval: 5000,
     duration: 1000,
-    notice: '更新公告：学霸是怎么练成的？',
+    notice: '',
+    curNotice: 0,
     navLists: [
       {
         src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
@@ -55,8 +56,8 @@ Page({
     ktLists: [
       {
         src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        type: 'navigateTo',
-        url: '',
+        type: 'switchTab',
+        url: '../suPin/suPin',
         t: '学科英语'
       },
       {
@@ -87,8 +88,41 @@ Page({
       }
     ]
   },
+  // 获取首页公告
+  getGonggaoLists () {
+    let that = this
+    app.wxrequest({
+      url: useUrl.getGonggaoLists,
+      data: {
+        session_key: app.gs()
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            notice: res.data.data
+          })
+          let i = 1
+          setInterval(() => {
+            if (i >= res.data.data.length) i = 0
+            that.setData({
+              curNotice: i
+            })
+            i++
+          }, 5000)
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
+      }
+    })
+  },
   // 页面跳转
   jumpPage (e) {
+    if (e.currentTarget.dataset.t === '速拼英语') {
+      app.data.suPin = true
+    } else if (e.currentTarget.dataset.t === '学科英语') {
+      app.data.suPin = false
+    }
     if (e.currentTarget.dataset.type === 'switchTab') {
       wx.switchTab({
         url: e.currentTarget.dataset.url
@@ -111,6 +145,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad () {
+    this.getGonggaoLists()
     // TODO: onLoad
   },
 

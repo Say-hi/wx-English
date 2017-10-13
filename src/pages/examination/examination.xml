@@ -1,0 +1,11 @@
+<!--考试交卷-->
+<view class="top-b"></view>
+<view class="title bb f30 c3">
+  {{ title }}
+</view>
+
+<view class="circleWrap">
+  <view class="circle br f30 c3 {{ item ? 'finish ': ''}}" data-index="{{ index }}" wx:for="{{ finishArr }}">{{ index }}</view>
+</view>
+
+<view class="hand-paper f30 c3">交卷并查看结果</view>

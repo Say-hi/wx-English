@@ -1,6 +1,6 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
-
+const app = getApp()
+const useUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
@@ -55,11 +55,29 @@ Page({
       }
     ]
   },
-
+  // 获取文化百科首页数据
+  getIndexInfo () {
+    let that = this
+    app.wxrequest({
+      url: useUrl.encyclopediaIndex,
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          // console.log(res)
+          that.setData({
+            lists: res.data.data
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
+    this.getIndexInfo()
     // TODO: onLoad
   },
 

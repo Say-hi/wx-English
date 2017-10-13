@@ -3,18 +3,18 @@
   <view class="l-wrap">
     <view class="l-w-t pr">
       <image class="pa" mode='aspectFill' src="{{ listen.img }}"></image>
-      <view class="l-t tac">{{ listen.t }}</view>
-      <view class="l-c tac f30">{{ listen.c }}</view>
+      <view class="l-t tac">{{ info.name }}</view>
+      <!--<view class="l-c tac f30">{{ listen.c }}</view>-->
     </view>
     <view class="l-w-c pr bb">
       <view class="pa l-w-c-t">
-        <view class="bb" style="width: {{ width }}px"></view>
+        <view class="bb" style="width: {{ bar_width }}rpx"></view>
       </view>
     </view>
     <view class="l-w-b bb pr">
-        <image catchtap="playControl" data-type="last" class="pa pl" src="../../images/p-l.png"></image>
-        <image catchtap="playControl" data-type="pause" class="pa pc" src="../../images/p-c.png"></image>
-        <image catchtap="playControl" data-type="next" class="pa pr" src="../../images/p-r.png"></image>
+        <!--<image catchtap="playControl" data-type="last" class="pa pl" src="../../images/p-l.png"></image>-->
+        <image catchtap="play" data-type="pause" class="pa pc" src="{{ !play ? '../../images/p-c.png' : '../../images/p-c-f.png' }}"></image>
+        <!--<image catchtap="playControl" data-type="next" class="pa pr" src="../../images/p-r.png"></image>-->
     </view>
   </view>
 </view>
@@ -22,3 +22,7 @@
   <view class="f30 c3 iconfont icon-icon_lilunlianxi_normal">练习</view>
   <view class="l-b-t" wx:for="{{ lists }}">{{ index + 1 }}、{{ item }}</view>
 </view>
+<!--<audio src="{{ info.audio_url }}"></audio>-->
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

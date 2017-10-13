@@ -1,41 +1,43 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
-
+const app = getApp()
+const useUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    info: {
-      videoSrc: 'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400',
-      title: '弟子规',
-      content: '弟子规弟子规弟子规弟子规弟子规弟子规弟子规弟子规弟子规弟子规弟子规弟子规弟子规弟子规弟子规弟子规弟子规',
-      list: [
-        {
-          src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          t: '乌鸦喝水'
-        },
-        {
-          src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          t: '乌鸦喝水'
-        },
-        {
-          src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          t: '乌鸦喝水'
-        },
-        {
-          src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          t: '乌鸦喝水'
-        }
-      ]
-    }
+    info: {}
   },
-
+  // 获取信息
+  getInfo (id) {
+    let that = this
+    app.wxrequest({
+      url: useUrl.encyclopediaDetail,
+      data: {
+        id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            info: res.data.data
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
+      }
+    })
+  },
+  // 重新获取数据
+  getReload (e) {
+    this.getInfo(e.currentTarget.dataset.id)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
+    this.getInfo(params.id)
     // TODO: onLoad
   },
 

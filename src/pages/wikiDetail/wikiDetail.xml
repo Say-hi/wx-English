@@ -3,13 +3,17 @@
   <!--<view class="w-t arrow f30 c3">{{ item.title }}</view>-->
 <!--<view class="ww">-->
 <view class="w-list bb">
-  <navigator url="../wikiShow/wikiShow?id={{ item.id }}" class="w-l-w f30 c3 pr bb" wx:for="{{ lists }}" wx:for-item="list">
+  <navigator url="../wikiShow/wikiShow?id={{ list.id }}" class="w-l-w f30 c3 pr bb" wx:for="{{ lists }}" wx:for-item="list">
     <!--<view class="pr">-->
-    <image src="{{ list.src }}"></image>
+    <image src="{{ list.image }}"></image>
     <view class="pa tac br w-p iconfont icon-bofang1"></view>
     <!--</view>-->
-    <text class="w-l-w-b ell">{{ list.t }}</text>
+    <text class="w-l-w-b ell">{{ list.name }}</text>
   </navigator>
 </view>
+<view class="tac">--- {{ more ? '上拉加载更多' : '没有更多内容了' }} ---</view>
 <!--</view>-->
 <!--</navigator>-->
+<!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

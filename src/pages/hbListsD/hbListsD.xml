@@ -1,10 +1,14 @@
 <!--节日绘本专题-->
 <image class="top" mode="aspectFill" src="{{ topImg }}"></image>
 
-<view class="c-w bb" wx:for="{{ lists }}">
-  <image mode="aspectFill" src="{{ item.src }}"></image>
+<view class="c-w bb" catchtap="goHBdetail" data-title="{{ item.title }}" data-id="{{ item.id }}" wx:for="{{ lists }}">
+  <image lazy-load="true" mode="aspectFill" src="{{ item.image }}"></image>
   <view class="c-r">
-    <view class="c-t">{{ item.t }}</view>
-    <view class="ell">{{ item.c }}</view>
+    <view class="c-t">{{ item.title }}</view>
+    <view class="ell">{{ item.jianjie }}</view>
   </view>
 </view>
+<!--<view class="tac">-&#45;&#45; {{ more ? '上拉加载更多' : '没有更多内容了' }} -&#45;&#45;</view>-->
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

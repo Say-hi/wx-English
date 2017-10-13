@@ -1,0 +1,43 @@
+<!--练习报告-->
+<view class="wrap" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
+  <view class="f30 c3 a-title bb {{ wrong ? 'a-wrong' : 'a-right' }}">
+    <text>{{ title }}</text>
+    <text><text class="red">{{ showIndex + 1 }}</text>/{{ all }}</text>
+  </view>
+
+  <view class="swiper">
+    <view class="s-text">{{ list[showIndex].text }}</view>
+    <!--todo 模板-->
+    <view wx:for="{{ list[showIndex].questionList }}" wx:for-item="question" wx:for-index="qIndex">
+      {{ qIndex + 1 }}.{{ question.q }}
+      <view data-index="{{ aIndex }}" data-outindex="{{ qIndex }}" class="c_choose" wx:for="{{ question.arr }}" wx:for-item="aItem" wx:for-index="aIndex">
+        <view class="circle br {{ userChoose == aIndex ? 'chooseCircle' : '' }} {{ rightChoose == aIndex ? '' : '' }}">{{ arrLabel[aIndex] }}</view><view>{{ aItem }}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="tips">
+    正确答案是<text class="t-right">{{ arrLabel[rightChoose] }}</text>, 你的答案是<text class="t-user">{{ arrLabel[userChoose] }}</text>. 回答<text>{{ rightChoose == userChoose ? '正确' : '错误' }}</text>，作答用时{{ userTime }}秒。
+  </view>
+  <view class="tips">
+    本题共被作答{{ count }}次，正确率为{{ accuracy }}%，易错项为{{ easyWrong }}。
+  </view>
+  <view class="tips">
+    <view class="t-t">翻译</view>
+    {{ translateText }}
+  </view>
+  <view class="tips">
+    <view class="t-t">解析</view>
+    {{ analysisText }}
+  </view>
+  <view class="tips">
+    <view class="t-t t-t-special">考点</view>
+    <view class="t-t-wrap">
+      <text class="testItems f30 c3" wx:for="{{ testItems }}" wx:for-item="tItem">{{ tItem }}</text>
+    </view>
+  </view>
+  <view class="tips">
+    <view class="t-t">来源</view>
+    {{ from }}
+  </view>
+</view>

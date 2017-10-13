@@ -1,0 +1,30 @@
+<view class="answer-top f30 c3 bb">
+  <view class="at iconfont icon-datiqia">答题卡</view>
+  <view class="at iconfont icon-jishibiao">{{ time }}</view>
+  <view class="at iconfont icon-cuotiben">错题本</view>
+</view>
+
+<view class="f30 c3 a-title bb">
+<text>短文改错</text>
+<text><text class="red">{{ current }}</text>/{{ all }}</text>
+</view>
+
+<swiper bindchange="currentChange">
+<swiper-item class="bb" wx:for="{{ list }}">
+  <!--<audio src="{{ item.src }}"></audio>-->
+  <view class="control_wrap bb pr">
+    <view class="control_button" id="video_control">
+      <!--<text class="time">{{passed_str}}</text>-->
+      <view class="progress_bar">
+        <view class="passed_time" style="width:{{bar_width}}px"></view>
+        <!--<view catchtap="play" catchtouchmove="mytouchmove" catchtouchstart="mytouchstart" catchtouchend="mytouchend" class="point iconfont {{ play ? 'icon-zanting' : 'icon-bofang1' }}"></view>-->
+        <view catchtouchmove="mytouchmove" catchtouchstart="mytouchstart" catchtouchend="mytouchend" class="point iconfont {{ play ? 'icon-zanting' : 'icon-bofang1' }}"></view>
+      </view>
+      <text class="time-str pa">{{ passed_str }}/{{ time_total_str }}</text>
+      <!--<text class="time">{{time_total_str}}</text>-->
+    </view>
+  </view>
+  <view class="s-text pr">{{ item.text }}</view>
+
+</swiper-item>
+</swiper>

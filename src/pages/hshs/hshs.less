@@ -83,6 +83,7 @@ swiper {
       text-align: center;
       image {
         width: 50rpx;
+        height: 50rpx;
       }
       view {
         font-size: 30rpx;
@@ -181,7 +182,7 @@ swiper {
     width: 100%;
     margin-top: 33rpx;
     border-radius: 12rpx;
-    padding: 0 10rpx;
+    padding: 0 30rpx;
     background-color: #eee;
     display: flex;
     flex-wrap: wrap;
@@ -189,9 +190,14 @@ swiper {
     justify-content: space-around;
     .f30 {
       line-height: 70rpx;
-      .h-l {
-        margin: 0 10rpx;
-      }
+      flex: 1;
+      text-align: center;
+      transition: all 0.5s;
+      border-bottom: 6rpx solid #eee;
+    }
+    .choose {
+      border-bottom: 6rpx solid #fedb03;
+      color: #2b2f41;
     }
   }
   .h-nav-c {

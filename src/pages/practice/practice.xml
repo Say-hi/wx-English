@@ -1,0 +1,22 @@
+<!--practice.wxml-->
+<view class="container">
+  <view class='top'>
+    <text>练习类型：{{'专项智能练习（单项填空）'}}</text>
+    <text>交卷时间{{'2017.08.04 09：47'}}</text>
+  </view>
+  
+  <view class='percent'>
+      <view class='arc'>{{percent}}<text>%</text></view>
+      <canvas style="width: 100%; height: 390rpx;" canvas-id="firstCanvas"></canvas>
+  </view>
+  <view class='content'>
+      <text class='title'>填空题</text>
+      <view class='cons'>
+          <text class='con' wx:for="{{items}}">{{item.num}}</text>
+      </view>
+  </view>
+  <view class='btns'>
+      <text class='btn'>错题解析</text>
+      <text class='btn'>全部解析</text>
+  </view>
+</view>

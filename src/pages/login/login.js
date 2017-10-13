@@ -10,38 +10,36 @@ Page({
   },
   // 用户输入
   inputValue (e) {
-    // let that = this
     app.inputValue(e, this)
   },
   // 用户登录
   login (e) {
+    let that = this
     let login = {
       url: useUrl.login,
       success (res) {
         wx.hideLoading()
         if (res.data.code === 200) {
-          wx.setStorageSync('loginInfo',{ loginInput, pwd })
+          wx.setStorageSync('loginInfo', { loginInput, pwd })
           wx.setStorageSync('session_key', res.data.data.session_key)
           wx.switchTab({
             url: '../index/index'
           })
         } else {
-          wx.showToast({
-            image: '../../images/jiong.png',
-            title: res.data.message
-          })
+          app.setToast(that, {content: res.data.message})
         }
       }
     }
     let { loginInput, pwd } = this.data
     if (e.currentTarget.dataset.type === 'tourist') {
-      login.data = {
-        type: 'tourist'
-      }
+      wx.removeStorageSync('session_key')
+      return wx.switchTab({
+        url: '../index/index'
+      })
     } else {
       login.data = {
-        loginInput,
-        pwd,
+        mobile: loginInput,
+        password: pwd,
         type: 'user'
       }
     }

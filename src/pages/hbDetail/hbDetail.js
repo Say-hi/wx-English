@@ -1,6 +1,39 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
 /*eslint-disable*/
+const app = getApp()
+const useUrl = require('../../utils/service')
+const backgroundAudioManager = wx.getBackgroundAudioManager()
+// const currentThis = getCurrnetPages()[getCurrnetPages().length - 1]
+backgroundAudioManager.onTimeUpdate(() => {
+  let time = {
+    total: '',
+    passed: ''
+  }
+  time.total = backgroundAudioManager.duration
+  time.passed = backgroundAudioManager.currentTime
+  let barWidth = windowWidth * (time.passed) / time.total
+  getCurrentPages()[getCurrentPages().length - 1].timeUp(time, barWidth)
+})
+// 自然结束播放
+backgroundAudioManager.onEnded(() => {
+  let that = getCurrentPages()[getCurrentPages().length - 1]
+  that.data.time.passed = 0
+  that.setData({
+    bar_width: 0,
+    time: that.data.time,
+    play: false
+  })
+})
+// 人为结束播放
+backgroundAudioManager.onStop(() => {
+  let that = getCurrentPages()[getCurrentPages().length - 1]
+  that.data.time.passed = 0
+  that.setData({
+    bar_width: 0,
+    time: that.data.time,
+    play: false
+  })
+})
 // 创建页面实例对象
 let windowWidth = 375
 wx.getSystemInfo({
@@ -14,12 +47,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    topImg: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-    text: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpghttp://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpghttp://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpghttp://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpghttp://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpghttp://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpghttp://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpghttp://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpghttp://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-    passed_str: '00:00',
+    topImg: '',
+    text: '',
     bar_width: 0,
     time_total_str: '',
-    play: true,
+    play: false,
     collect: false,
     time: {
       passed: 0,
@@ -55,9 +87,9 @@ Page({
     } else if(time.passed > time.total){
       time.passed = time.total
     }
-    console.log("pageX:"+e.touches[0].pageX)
-    console.log("move:"+touches.move)
-    console.log('time', time)
+    // console.log("pageX:"+e.touches[0].pageX)
+    // console.log("move:"+touches.move)
+    // console.log('time', time)
     // console.log("passed time:"+time.passed)
     this.setData({
       touches: touches,
@@ -65,21 +97,148 @@ Page({
       bar_width: windowWidth * (time.passed) / time.total,
       // passed_str:this.getTimeStr(time.passed),
     })
-
-    //console.log(e.touches[0])
   },
   mytouchend (){
+    let that = this
+    wx.seekBackgroundAudio({
+      position: that.data.time.passed
+    })
     // this.audiopassed()
   },
+  // 播放状态控制
   play () {
     this.setData({
       play: !this.data.play
+    })
+    // 暂停播放
+    if (!this.data.play) {
+      wx.pauseBackgroundAudio()
+    } else {
+      this.playMusic(this.data.info.yuyin_url, this.data.info.title, this.data.time.passed || 1)
+    }
+  },
+  // 播放音乐
+  playMusic (url, title, seek) {
+    let that = this
+    wx.playBackgroundAudio({
+      dataUrl: url,
+      title,
+      success () {
+        that.setData({
+          play: true
+        })
+        // 暂停后恢复
+        if (seek !== undefined) {
+          wx.seekBackgroundAudio({
+            position: seek
+          })
+        }
+        wx.getBackgroundAudioPlayerState({
+          success (res) {
+            that.data.time.total = res.duration
+            that.setData({
+              time: that.data.time
+            })
+          }
+        })
+      }
+    })
+  },
+  // 获取绘本内容
+  getInfo (id, title) {
+    let that = this
+    app.wxrequest({
+      url: useUrl.huibenDetail,
+      data: {
+        session_key: app.gs(),
+        id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            info: res.data.data,
+            collect: res.data.data.is_college
+          })
+          that.playMusic(res.data.data.yuyin_url, title)
+          // wx.playBackgroundAudio({
+          //   dataUrl: res.data.data.yuyin_url,
+          //   title,
+          //   success () {
+          //     that.setData({
+          //       play: true
+          //     })
+          //     wx.getBackgroundAudioPlayerState({
+          //       success (res) {
+          //         that.data.time.total = res.duration
+          //         that.setData({
+          //           time: that.data.time
+          //         })
+          //       }
+          //     })
+          //   }
+          // })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
+      }
+    })
+  },
+  // 收藏、取消绘本
+  userCollect () {
+    let that = this
+    if (!app.gs()) {
+      app.setToast(that, {title: '收藏', content: '尚未登陆小程序，请登录后使用'})
+      setTimeout(() => {
+        wx.reLaunch({
+          url: '../login/login'
+        })
+      }, 1500)
+    }
+    app.wxrequest({
+      url: useUrl.userCollegeHandle,
+      data: {
+        session_key: app.gs(),
+        college_id: that.data.id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            collect: !that.data.collect
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
+      }
+    })
+  },
+  // 时间变动
+  timeUp (time, barWidth) {
+    this.setData({
+      time,
+      bar_width: barWidth
+    })
+  },
+  // goSuPin跳转速拼
+  goSuPin () {
+    wx.switchTab({
+      url: '../suPin/suPin'
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
+    // params.id = 1
+    // params.title = 'Test'
+    wx.setNavigationBarTitle({
+      title: `${params.title}详情`
+    })
+    this.setData({
+      id: params.id
+    })
+    this.getInfo(params.id, params.title)
     // TODO: onLoad
   },
 
@@ -109,6 +268,7 @@ Page({
    */
   onUnload () {
     // TODO: onUnload
+    wx.stopBackgroundAudio()
   },
 
   /**

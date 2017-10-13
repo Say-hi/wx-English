@@ -1,0 +1,14 @@
+<!--智能测试练习-->
+<navigator url="{{ item.id }}" class="wrap bb f30 c3" wx:for="{{ lists }}">
+    <view class="iconfont icon-jiahao">{{ item.t }}</view>
+    <view class="content">
+        <view class="star">
+            <text wx:for="01234" wx:for-item="starItem" wx:for-index="starIndex" class="iconfont icon-wujiaoxing {{ item.star > starIndex ? 'y' : 'g' }}"></text>
+        </view>
+        <veiw class="line">
+            <view class="line-f" style=" width: {{ (item.finish / item.all) * 100 }}%"></view>
+        </veiw>
+        <view class="c-t">{{ item.finish }}/{{ item.all }}</view>
+        <view class="iconfont icon-test"></view>
+    </view>
+</navigator>

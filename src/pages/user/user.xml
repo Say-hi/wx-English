@@ -14,3 +14,6 @@
     <view class="u-o-r">{{ item.t }}</view>
   </view>
 </navigator>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

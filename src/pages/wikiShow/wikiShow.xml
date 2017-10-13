@@ -1,13 +1,17 @@
 <!--文化百科对应视频详情-->
-<video objectFit="cover" class="w-video" src="{{ info.videoSrc }}"></video>
+<video objectFit="cover" class="w-video" src="{{ info.info.video_url }}"></video>
 <view class="v-w">
-  <text class="v-title f30 c3">{{ info.title }}</text><text>{{ info.content }}</text>
+  <text class="v-title f30 c3">{{ info.info.name }}</text><text>{{ info.info.content }}</text>
 </view>
 
 <view class="w-list">
-  <view class="w-l-w f30 c3 pr" wx:for="{{ info.list }}" wx:for-item="list">
-    <image src="{{ list.src }}"></image>
+  <view catchtap="getReload" data-id="{{ item.id }}" class="w-l-w f30 c3 pr" wx:for="{{ info.lists }}" wx:for-item="list">
+    <image src="{{ list.image }}"></image>
     <view class="pa tac br w-p iconfont icon-bofang1"></view>
-    <text>{{ list.t }}</text>
+    <text>{{ list.name }}</text>
   </view>
 </view>
+<view wx:if="{{ info.lists.length == 0 }}" class="tac">--- 暂无推荐内容 ---</view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

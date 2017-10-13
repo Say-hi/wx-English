@@ -7,22 +7,49 @@ Page({
    * 页面的初始数据
    */
   data: {
-    array: ['小学', '初中', '高中', '大学'],
-    array2: ['xxx机构1', 'xxx机构2', 'xxx机构3', 'xxx机构4'],
+    toast: {
+      title: '错误信息',
+      image: '../../images/jiong.png',
+      content: '错误信息展示',
+      show: false
+    },
+    array: [],
+    array2: [],
     level: 0,
     organization: 0,
     showText: '获取验证码'
   },
   // 获取机构
-  getOrg () {
+  getMechanismLists () {
     let that = this
     app.wxrequest({
-      url: useUrl.login,
+      url: useUrl.getMechanismLists,
       success (res) {
         wx.hideLoading()
-        that.setData({
-          array2: res.data.data
-        })
+        if (res.data.code === 200) {
+          that.setData({
+            array2: res.data.data
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
+      }
+    })
+  },
+  // 获取年级
+  getGradeLists () {
+    let that = this
+    app.wxrequest({
+      url: useUrl.getGradeLists,
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            array: res.data.data
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
       }
     })
   },
@@ -33,6 +60,11 @@ Page({
   },
   // 获取验证码
   getNumber () {
+    if (app.checkMobile(this.data.mobile)) {
+      return wx.showToast({
+        title: '请输入正确的11位手机号码'
+      })
+    }
     this.setData({
       numberDisabled: true
     })
@@ -53,12 +85,19 @@ Page({
     }, 1000)
     // 请求手机验证码
     app.wxrequest({
-      url: useUrl.login,
-      complete () {
+      url: useUrl.sendMobileCode,
+      data: {
+        mobile: that.data.mobile
+      },
+      complete (res) {
         wx.hideLoading()
+        if (res.data.code === 400) {
+          return app.setToast(that, {content: res.data.message})
+        } else {
+          app.setToast(that, {title: '短信状态', content: '短信发送成功，请注意查收！'})
+        }
       }
     })
-    // todo
   },
   // picker 选择切换
   bindPickerChange (e) {
@@ -75,7 +114,8 @@ Page({
   },
   // 注册下一步
   goNext () {
-    let { name, mobile, code, pwd, pwd2, level, organization} = this.data
+    let that = this
+    let {name, mobile, code, pwd, pwd2, level, organization} = this.data
     if (pwd !== pwd2) {
       return wx.showToast({
         image: '../../images/jiong.png',
@@ -89,18 +129,22 @@ Page({
       })
     }
     app.wxrequest({
-      url: useUrl.login,
+      url: useUrl.register,
       data: {
-        name,
+        account_name: name,
         mobile,
-        code,
-        pwd,
-        level,
-        organization
+        mobile_code: code,
+        password: pwd,
+        grade: that.data.array[level].id,
+        mechanism: that.data.array2[organization].id,
+        code: wx.getStorageSync('code'),
+        iv: wx.getStorageSync('userInfo').iv,
+        encryptedData: wx.getStorageSync('userInfo').encryptedData
       },
       success (res) {
         wx.hideLoading()
         if (res.data.code === 200) {
+          wx.setStorageSync('session_key', res.data.data.session_key)
           wx.showModal({
             title: '注册成功',
             content: '恭喜您注册成功',
@@ -112,19 +156,47 @@ Page({
             }
           })
         } else {
-          wx.showToast({
-            image: '../../images/jiong.png',
-            title: res.data.message
-          })
+          app.setToast(that, {content: res.data.message})
         }
       }
     })
+  },
+  // 获取授权信息
+  get (e) {
+    if (e.detail.iv) {
+      this.setData({
+        needLogin: false
+      })
+    }
+    wx.setStorageSync('userInfo', e.detail)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
-    this.getOrg()
+    let that = this
+    wx.login({
+      success (res) {
+        wx.setStorageSync('code', res.code)
+        wx.getUserInfo({
+          withCredentials: true,
+          lang: 'zh_CN',
+          success (res) {
+            wx.setStorageSync('userInfo', res.userInfo)
+          },
+          fail () {
+            that.setData({
+              needLogin: true
+            })
+            wx.showToast({
+              title: '请允许获取您的微信资料'
+            })
+          }
+        })
+      }
+    })
+    this.getMechanismLists()
+    this.getGradeLists()
     // TODO: onLoad
   },
 

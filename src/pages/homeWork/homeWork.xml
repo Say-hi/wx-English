@@ -1,8 +1,8 @@
 <!--作业-->
-<naivgator url="../homeWorkDetail/homeWorkDetail?id={{ item.id }}" class="c-w bb" wx:for="{{ lists }}">
+<navigator url="../homeWorkDetail/homeWorkDetail?id={{ item.id }}" class="c-w bb" wx:for="{{ lists }}">
   <image mode="aspectFill" src="{{ item.src }}"></image>
   <view class="c-r">
     <view class="c-t">{{ item.t }}</view>
     <view class="c-c">{{ item.type }}　{{ item.day }}　{{ item.time }}</view>
   </view>
-</naivgator>
+</navigator>

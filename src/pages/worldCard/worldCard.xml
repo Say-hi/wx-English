@@ -1,0 +1,9 @@
+<!--单词卡-->
+<view class="card bb" wx:for="{{ cardList }}" wx:for-item="item" wx:for-index="index">
+  <view class="world f30 c3">{{ item.world }}</view>
+  <view class="explain f30 c3" wx:for-item="eItem" wx:for="{{ item.explain }}">
+    {{ eItem }}
+  </view>
+</view>
+
+<view class="next f30 c3">下一组</view>

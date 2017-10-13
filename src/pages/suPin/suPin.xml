@@ -1,26 +1,30 @@
 <!--速拼英语-->
 <view class="s-t bb">
-    <image mode="aspectFill" src="{{ topImg }}"></image>
+    <image lazy-load="true" mode="aspectFill" src="{{ topImg }}"></image>
 </view>
 
 <view class="nav bb">
-    <view class="n-w bb" wx:for="{{ lists }}">
-        <image mode="aspectFill" src="{{ item.img }}"></image>
-        <text>{{ item.t }}</text>
+    <view catchtap="goDetail" data-title="{{ item.name }}" data-id="{{ item.id }}" class="n-w bb" wx:for="{{ lists.lists }}">
+        <image lazy-load="true" mode="aspectFill" src="{{ item.image }}"></image>
+        <text>{{ item.name }}</text>
     </view>
 </view>
 
 <view wx:if="{{ show }}" class="supin bb">
-    <textarea class="textIn bb" placeholder="请输入要速拼的内容"></textarea>
+    <textarea bindinput="inputValue" data-type="translate" class="textIn bb" placeholder="请输入要速拼的内容"></textarea>
     <view class="s-nav bb">
-        <view>速拼</view>
-        <view>翻译</view>
-        <view>朗读</view>
+        <view catchtap="translate" data-type="suPin">速拼</view>
+        <view catchtap="translate" data-type="translate">翻译</view>
+        <view catchtap="translate" data-type="read">朗读</view>
     </view>
     <view class="s-show bb">
-        <image src="../../images/sp-bg.png"></image>
+        <image lazy-load="true" src="../../images/sp-bg.png"></image>
         <scroll-view class="s-c bb" scroll-y="true">
-            <view>{{ content }}</view>
+            <view wx:for="{{ info }}">
+                <text class="aaaSuperEnglishNew">{{ item.supin_word }}　</text><text class="aaaSuperEnglishNew">[{{ item.supin_yinbiao }}]</text>
+            </view>
+            <view class="word">{{ eu }}</view>
+            <view class="word">{{ cn }}</view>
         </scroll-view>
     </view>
 </view>
@@ -28,10 +32,17 @@
 <view wx:if="{{ maskShow }}" catchtap="close" class="mask">
     <view class="maskIn bb">
         <scroll-view class="s-c bb" scroll-y="true">
-            <view>{{ content }}</view>
+            <view wx:for="{{ info }}">
+                <text class="aaaSuperEnglishNew">{{ item.supin_word }}　</text><text class="aaaSuperEnglishNew">[{{ item.supin_yinbiao }}]</text>
+            </view>
+            <view class="word">{{ eu }}</view>
+            <view class="word">{{ cn }}</view>
         </scroll-view>
     </view>
 </view>
 
 <view catchtap="showSp" class="viewTop br">速拼</view>
 <view wx:if="{{ show }}" catchtap="showBig" class="viewTop br iconfont icon-quanping big"></view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

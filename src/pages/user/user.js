@@ -1,6 +1,6 @@
 // 获取全局应用程序实例对象
 const app = getApp()
-
+// const useUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
@@ -17,22 +17,28 @@ Page({
         t: 'xx培训机构'
       },
       {
-        c: '作业'
+        c: '作业',
+        url: '../homeWork/homeWork'
       },
       {
-        c: '作业群'
+        c: '作业群',
+        url: '../homeWorkGroup/homeWorkGroup'
       },
       {
-        c: '我的收藏'
+        c: '我的收藏',
+        url: '../myCollect/myCollect'
       },
       {
-        c: '测试得分排行榜'
+        c: '测试得分排行榜',
+        url: '../testRank/testRank'
       }
     ]
   },
 // 获取用户信息
   getUserInfo () {
+    // console.log(app.gu())
     if (app.gu()) {
+      // console.log(app.gu())
       this.setData({
         userInfo: app.gu()
       })
@@ -44,6 +50,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad () {
+    if (!app.gs()) {
+      app.setToast(this, {title: '未登录', content: '您尚未登陆，请登录后查看'})
+      setTimeout(() => {
+        wx.reLaunch({
+          url: '../login/login'
+        })
+      }, 1500)
+      return
+    }
     this.getUserInfo()
     // TODO: onLoad
   },
