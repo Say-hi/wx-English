@@ -1,25 +1,33 @@
 <!--词典页面-->
 <view class="d-top">
   <view class="d-t-s">
-    <input data-type="translate" class="f30 c3" placeholder="输入要查询的内容"/>
+    <input bindinput="inputValue" data-type="translate" class="f30 c3" placeholder="输入要查询的内容"/>
     <view catchtap="getTran" class="f30 c3 d-t-s-b">翻译</view>
   </view>
-  <view class="d-t-b f30 c3">
-    <view class="d-voice">
-      英[{{ info.en }}]<text catchtap="playVoice" class="iconfont icon-shengyin"></text>
+  <view wx:if="{{ info }}" class="d-t-b f30 c3">
+    <view class="audio-wrap">
+      <view class="d-voice" catchtap="playVoice" data-type="0">
+        英[{{ info.ps[0] }}]<text  class="iconfont icon-shengyin"></text>
+      </view>
+      <view class="d-voice" catchtap="playVoice" data-type="1">
+        美[{{ info.ps[1] }}]<text  class="iconfont icon-shengyin"></text>
+      </view>
     </view>
-    <view class="d-voice">
-      美[{{ info.us }}]<text catchtap="playVoice" class="iconfont icon-shengyin"></text>
-    </view>
+    <view class="d-t-b-w" wx:for="{{ info.pos }}">{{ info.pos[index] }}　{{ info.acceptation[index] }}</view>
   </view>
 </view>
 
-<view class="d-bottom">
+<view class="d-bottom" wx:if="{{ info }}">
   <text class="f30 c3">权威例句</text>
   <view class="d-b-c">
-    <view class="d-b-c-i" wx:for="{{ lists }}">
-      {{ index + 1 }}. <text>{{ item.en }}</text>
-      <view>{{ item.cn }}</view>
+    <view class="d-b-c-i" wx:for="{{ info.sent }}">
+      {{ index + 1 }}.{{ item.orig }}
+      <view>{{ item.trans }}</view>
     </view>
   </view>
 </view>
+<audio src="{{ src }}" id="myAudio"></audio>
+<audio src="{{ src }}" id="myAudio2"></audio>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

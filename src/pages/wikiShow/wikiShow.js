@@ -23,6 +23,9 @@ Page({
           that.setData({
             info: res.data.data
           })
+          wx.setNavigationBarTitle({
+            title: res.data.data.info.name
+          })
         } else {
           app.setToast(that, {content: res.data.message})
         }

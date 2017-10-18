@@ -34,6 +34,12 @@ let serviceUrl = {
   baiduTransapiByEnToZh: baseDomain + '/api/supin/baiduTransapiByEnToZh',
   userCollegeHandle: baseDomain + '/api/vivid/userCollegeHandle',
   userCollegeLists: baseDomain + '/api/user/userCollegeLists',
-  getGonggaoLists: baseDomain + '/api/index/getGonggaoLists'
+  getGonggaoLists: baseDomain + '/api/index/getGonggaoLists',
+  cidian: baseDomain + '/api/supin/cidian',
+  userCenter: baseDomain + '/api/user/userCenter',
+  intelligentNianjiLists: baseDomain + '/api/intelligent/intelligentNianjiLists',
+  intelligentBanbenLists: baseDomain + '/api/intelligent/intelligentBanbenLists',
+  intelligentBanbenCikaLists: baseDomain + '/api/intelligent/intelligentBanbenCikaLists',
+  intelligentNianjiCikaWordLists: baseDomain + '/api/intelligent/intelligentNianjiCikaWordLists'
 }
 module.exports = serviceUrl

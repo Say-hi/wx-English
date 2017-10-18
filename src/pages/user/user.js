@@ -1,6 +1,6 @@
 // 获取全局应用程序实例对象
 const app = getApp()
-// const useUrl = require('../../utils/service')
+const useUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
@@ -10,11 +10,11 @@ Page({
     operation: [
       {
         c: '年级',
-        t: '一年级'
+        t: ''
       },
       {
         c: '所属机构',
-        t: 'xx培训机构'
+        t: ''
       },
       {
         c: '作业',
@@ -35,16 +35,39 @@ Page({
     ]
   },
 // 获取用户信息
-  getUserInfo () {
-    // console.log(app.gu())
-    if (app.gu()) {
-      // console.log(app.gu())
-      this.setData({
-        userInfo: app.gu()
-      })
-    } else {
-      app.gu(this.getUserInfo)
-    }
+//   getUserInfo () {
+//     // console.log(app.gu())
+//     if (app.gu()) {
+//       // console.log(app.gu())
+//       this.setData({
+//         userInfo: app.gu()
+//       })
+//     } else {
+//       app.gu(this.getUserInfo)
+//     }
+  // },
+  // 获取用户信息
+  getUser () {
+    let that = this
+    app.wxrequest({
+      url: useUrl.userCenter,
+      data: {
+        session_key: app.gs()
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.data.operation[0].t = res.data.data.grade_name
+          that.data.operation[1].t = res.data.data.mechanism_name
+          that.setData({
+            userInfo: res.data.data,
+            operation: that.data.operation
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -59,7 +82,7 @@ Page({
       }, 1500)
       return
     }
-    this.getUserInfo()
+    this.getUser()
     // TODO: onLoad
   },
 

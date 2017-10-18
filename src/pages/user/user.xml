@@ -1,6 +1,6 @@
 <view class="user-top tac">
-  <image class="br" src="{{ userInfo.avatarUrl }}"></image>
-  <view>{{ userInfo.nickName }}</view>
+  <image class="br" src="{{ userInfo.avatar }}"></image>
+  <view>{{ userInfo.wechat_nicename }}</view>
   <view>{{ userInfo.province }}·{{ userInfo.city }}</view>
 </view>
 

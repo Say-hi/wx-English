@@ -3,6 +3,62 @@
 /*eslint-disable*/
 const useUrl = require('./utils/service')
 const wxParse = require('./wxParse/wxParse')
+// const backgroundAudioManager = wx.getBackgroundAudioManager()
+// let windowWidth = 375
+// wx.getSystemInfo({
+//   success (res) {
+//     windowWidth = res.windowWidth - (( 2 * (res.windowWidth * 0.03)).toFixed(2))
+//   }
+// })
+// // const currentThis = getCurrnetPages()[getCurrnetPages().length - 1]
+// backgroundAudioManager.onTimeUpdate(() => {
+//   let that = getCurrentPages()[getCurrentPages().length - 1]
+//   let time = {
+//     total: '',
+//     passed: ''
+//   }
+//   time.total = backgroundAudioManager.duration
+//   time.passed = backgroundAudioManager.currentTime
+//   let barWidth = windowWidth * (time.passed) / time.total
+//   if (!that.timeUp) return
+//   getCurrentPages()[getCurrentPages().length - 1].timeUp(time, barWidth)
+// })
+// // 自然结束播放
+// backgroundAudioManager.onEnded(() => {
+//   let that = getCurrentPages()[getCurrentPages().length - 1]
+//   if (that.data.time) {
+//     that.data.time.passed = 0
+//     that.setData({
+//       bar_width: 0,
+//       time: that.data.time,
+//       play: false
+//     })
+//   }
+//   if (that.data.showLists) {
+//     if (that.data.curNavP >= that.data.showLists.length) return
+//     if (that.curNavP * 1 === -1) {
+//       that.playMusic(that.data.showLists[++that.data.curNavP].mp3, '单词连读')
+//     }
+//   }
+// })
+// // 人为结束播放
+// backgroundAudioManager.onStop(() => {
+//   let that = getCurrentPages()[getCurrentPages().length - 1]
+//   if (that.data.time) {
+//     that.data.time.passed = 0
+//     that.setData({
+//       bar_width: 0,
+//       time: that.data.time,
+//       play: false
+//     })
+//   }
+//   if (that.data.showLists) {
+//     if (that.data.curNavP >= that.data.showLists.length) return
+//     if (that.curNavP * 1 === -1) {
+//       that.playMusic(that.data.showLists[++that.data.curNavP].mp3, '单词连读')
+//     }
+//   }
+// })
 // const Moment = require('./utils/moment')
 // Moment.locale('en', {
 //   relativeTime : {
@@ -342,6 +398,26 @@ App({
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch () {
+    console.log(`
+  ┏┛┻━━━┛┻┓
+  ┃｜｜｜｜｜｜｜┃
+  ┃　　　━　　　┃
+  ┃　┳┛　┗┳　┃
+  ┃　　　　　　　┃
+  ┃　　　┻　　　┃
+  ┃　　　　　　　┃
+  ┗━┓　　　┏━┛
+  　　┃　史　┃
+  　　┃　诗　┃
+  　　┃　之　┃
+  　　┃　宠　┃
+  　　┃　　　┗━━━━━━┓
+  　　┃　　　神兽坐镇　　　┣━━┓
+  　　┃　　　永不宕机　　　┃
+  　　┗┓┓┏━┳┓┏━━━┛
+  　　　┃┫┫　┃┫┫
+  　　　┗┻┛　┗┻┛
+`)
     // console.log(' ========== Application is launched ========== ')
     // this.wxlogin()
   },

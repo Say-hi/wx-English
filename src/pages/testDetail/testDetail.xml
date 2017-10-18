@@ -1,8 +1,11 @@
 <view class="card bb">
-  <view catchtap="addToShow" data-index="{{ index }}" class="t-c-s-i bb" wx:for="{{ cardLists }}">
-    <view class="t-c-s-i-t">{{ item.t }}</view>
-    <image mode="aspectFill" src="{{ item.src }}"></image>
+  <view class="t-c-s-i bb" wx:for="{{ cardLists }}">
+    <view class="t-c-s-i-t">{{ item.word }}</view>
+    <image lazy-load="true" mode="aspectFill" src="{{ item.image }}"></image>
   </view>
 </view>
 
 <view class="tac f30 c3 btn-b" catchtap="getNext">下一组</view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

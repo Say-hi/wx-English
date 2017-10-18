@@ -3,7 +3,7 @@
   <!--<view class="w-t arrow f30 c3">{{ item.title }}</view>-->
 <!--<view class="ww">-->
 <view class="w-list bb">
-  <navigator url="../wikiShow/wikiShow?id={{ list.id }}" class="w-l-w f30 c3 pr bb" wx:for="{{ lists }}" wx:for-item="list">
+  <navigator url="../wikiShow/wikiShow?id={{ list.id }}&title={{ list.name }}" class="w-l-w f30 c3 pr bb" wx:for="{{ lists }}" wx:for-item="list">
     <!--<view class="pr">-->
     <image src="{{ list.image }}"></image>
     <view class="pa tac br w-p iconfont icon-bofang1"></view>

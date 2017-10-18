@@ -11,6 +11,7 @@
       border-radius: 8rpx;
       padding-left: 20rpx;
       margin-right: 10rpx;
+      margin-right: 10rpx;
       flex: 1;
     }
     .d-t-s-b {
@@ -23,6 +24,7 @@
     margin-top: 20rpx;
     border: 1rpx solid #eee;
     display: flex;
+    flex-direction: column;
     min-height: 200rpx;
     background-color: #f9f8e4;
     border-radius: 8rpx;
@@ -32,6 +34,17 @@
     }
     .icon-shengyin::before {
       color: #999;
+      font-size: 40rpx;
+    }
+    .audio-wrap {
+      display: flex;
+      align-items: center;
+      .d-voice:nth-child(1) {
+        margin-right: 5rpx;
+      }
+    }
+    .d-t-b-w {
+      word-break: break-all;
     }
   }
 }

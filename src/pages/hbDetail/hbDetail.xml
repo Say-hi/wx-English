@@ -14,11 +14,14 @@
   {{ info.content }}
 </view>
 
+<view class="t bb aaaSuperEnglishNew">
+{{ show ? ZH : str }}
+</view>
 <view class="bf"></view>
 
 <view class="bo">
   <view catchtap="userCollect" data-id="{{ info.id }}" class="{{ collect ? 'collect' : '' }} iconfont icon-dianzan f30 c3">{{ collect ? '已收藏' : '收藏' }}</view>
-  <view catchtap="goSuPin" class="f30 c3">速拼</view>
+  <view catchtap="showZh" class="f30 c3">中文解释</view>
 </view>
 
  <!--<audio id="myAudio" src="{{ info.yuyin_url }}"></audio>-->

@@ -35,7 +35,7 @@ Page({
       {
         src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
         type: 'navigateTo',
-        url: '',
+        url: '../inteTest/inteTest',
         t: '智能测试'
       }
     ],

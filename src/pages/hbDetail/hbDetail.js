@@ -155,9 +155,17 @@ Page({
       },
       success (res) {
         wx.hideLoading()
+        let str = ''
         if (res.data.code === 200) {
+          if (res.data.data.supin) {
+
+            for (let v of res.data.data.supin) {
+              str += v.supin_word + ' '
+            }
+          }
           that.setData({
             info: res.data.data,
+            str,
             collect: res.data.data.is_college
           })
           that.playMusic(res.data.data.yuyin_url, title)
@@ -224,6 +232,34 @@ Page({
   goSuPin () {
     wx.switchTab({
       url: '../suPin/suPin'
+    })
+  },
+  // 显示中文
+  showZh () {
+    let that = this
+    if (!this.data.show) {
+      if (!this.data.ZH) {
+        app.wxrequest({
+          url: useUrl.baiduTransapiByEnToZh,
+          data: {
+            session_key: app.gs(),
+            words: that.data.info.content
+          },
+          success (res) {
+            wx.hideLoading()
+            if (res.data.code === 200) {
+              that.setData({
+                ZH: res.data.data.trans_words
+              })
+            } else {
+              app.setToast(that, {content: res.data.message})
+            }
+          }
+        })
+      }
+    }
+    this.setData({
+      show: !this.data.show
     })
   },
   /**

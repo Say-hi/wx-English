@@ -1,6 +1,24 @@
 // 获取全局应用程序实例对象
 const app = getApp()
 const useUrl = require('../../utils/service')
+// const backgroundAudioManager = wx.getBackgroundAudioManager()
+let i = 0
+// // 自然结束播放
+// backgroundAudioManager.onEnded(() => {
+//   let that = getCurrentPages()[getCurrentPages().length - 1]
+//   if (i >= that.data.showLists.length - 1) return
+//   if (that.curNavP * 1 === -1) {
+//     that.playMusic(that.data.showLists[i++].mp3, '单词连读')
+//   }
+// })
+// // 人为结束播放
+// backgroundAudioManager.onStop(() => {
+//   let that = getCurrentPages()[getCurrentPages().length - 1]
+//   if (i >= that.data.showLists.length) return
+//   if (that.curNavP * 1 === -1) {
+//     that.playMusic(that.data.showLists[i++].mp3, '单词连读')
+//   }
+// })
 // 创建页面实例对象
 Page({
   /**
@@ -9,7 +27,7 @@ Page({
   data: {
     hbCurrent: 0,
     curNav: 1,
-    curNavP: 0,
+    curNavP: -1,
     page: 1,
     cikaid: '',
     showLists: [
@@ -166,9 +184,19 @@ Page({
   },
   // 播放音乐
   playMusic (url, title) {
+    let that = this
     wx.playBackgroundAudio({
       dataUrl: url,
       title
+    })
+    wx.onBackgroundAudioStop(() => {
+      if (title === '单词连读') {
+        if (i >= that.data.showLists.length) {
+          i = 0
+          return
+        }
+        that.playMusic(that.data.showLists[i++].mp3, '单词连读')
+      }
     })
   },
   // 绘本分类选择
@@ -195,9 +223,12 @@ Page({
           //   showLists: this.data.showLists.splice(0, 3)
           // })
           that.data.cardLists[e.currentTarget.dataset.index]['mp3'] = res.data.data.mp3_url
+          that.data.showLists.reverse()
           that.data.showLists.unshift(that.data.cardLists[e.currentTarget.dataset.index])
+          that.data.showLists = that.data.showLists.splice(0, 4)
+          that.data.showLists.reverse()
           that.setData({
-            showLists: that.data.showLists.splice(0, 3)
+            showLists: that.data.showLists
           })
         } else {
           app.setToast(that, {content: res.data.message})
@@ -207,6 +238,12 @@ Page({
   },
   // 播放语音
   playAudio () {
+    if (this.data.showLists.length * 1 === 0) {
+      return app.setToast(this, {content: '尚未添加词卡'})
+    }
+    if (this.data.curNavP * 1 === -1) {
+      return this.playMusic(this.data.showLists[i++].mp3, '单词连读')
+    }
     if (this.data.showLists.length * 1 === 0 || !this.data.showLists[this.data.curNavP].mp3) return
     this.playMusic(this.data.showLists[this.data.curNavP].mp3, '单词朗读')
   },
@@ -235,6 +272,9 @@ Page({
     this.data.page = 1
     this.data.cardLists = []
     this.data.cikaid = e.currentTarget.dataset.id
+    // this.setData({
+    //   more: true
+    // })
     this.changeInfos(e, 1)
   },
   changeInfos (e, page) {
@@ -284,6 +324,11 @@ Page({
   },
   // 选择项目
   chooseNavP (e) {
+    if (this.data.curNavP === e.currentTarget.dataset.index) {
+      return this.setData({
+        curNavP: -1
+      })
+    }
     this.setData({
       curNavP: e.currentTarget.dataset.index
     })
@@ -350,6 +395,22 @@ Page({
       })
     }
   },
+  // 加载更多
+  getMore () {
+    if (this.data.more) {
+      let that = this
+      let e = {
+        currentTarget: {
+          dataset: {
+            id: that.data.cikaid
+          }
+        }
+      }
+      // e['currentTarget']['dataset']['id'] = this.data.cikaid
+      // console.log(e)
+      this.changeInfos(e, ++this.data.page)
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -387,19 +448,7 @@ Page({
     // TODO: onUnload
   },
   onReachBottom () {
-    if (this.data.more) {
-      let that = this
-      let e = {
-        currentTarget: {
-          dataset: {
-            id: that.data.cikaid
-          }
-        }
-      }
-      // e['currentTarget']['dataset']['id'] = this.data.cikaid
-      console.log(e)
-      this.changeInfos(e, ++this.data.page)
-    }
+   this.getMore()
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作

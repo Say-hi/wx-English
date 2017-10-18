@@ -2,6 +2,9 @@
 //  速拼英语小程序页面分布
   "pages": [
     "pages/login/login", // 登陆页面 ---
+    "pages/inteTest/inteTest", // 智能测试 ---
+    "pages/testDetail/testDetail", // 智能测试词卡 版本 ---
+    "pages/worldCard/worldCard", // 单词卡 年级 ---
     "pages/subjectDetail/subjectDetail", // 科目详情 ---
     "pages/subjectDetailList/subjectDetailList", // 科目详情列表 ---
     "pages/hbDetail/hbDetail", // 节日绘本专题详情 ---
@@ -12,7 +15,6 @@
     "pages/template/template", // 模板
     "pages/syntheticalTest/syntheticalTest", // 综合试卷测试
     "pages/synthetical/synthetical", // 综合试卷
-    "pages/worldCard/worldCard", // 单词卡
     "pages/examination/examination", // 考试交卷
     "pages/report/report", // 练习报告
     "pages/practice/practice", // 练习报告
@@ -34,8 +36,6 @@
     "pages/wikiDetail/wikiDetail", // 文化百科对应类别详情列表 ---
     "pages/wikiShow/wikiShow", // 文化百科对应视频详情 ---
     "pages/forgot/forgot", // 忘记密码 ---
-    "pages/inteTest/inteTest", // 智能测试
-    "pages/testDetail/testDetail", // 智能测试词卡
     "pages/testPractice/testPractice", // 智能测试练习
     "pages/answerCorrector/answerCorrector", // 短文改错
     "pages/answerPicture/answerPicture", // 看图答题
