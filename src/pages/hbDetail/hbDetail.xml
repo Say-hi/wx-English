@@ -1,5 +1,7 @@
 <!--节日绘本详情-->
-<image mode="aspectFill" class="top" src="{{ info.image }}"></image>
+<scroll-view scroll-x="true" class="top sp">
+  <image class="topImg" lazy-load="true" bindload="imgLoad" style="width: {{width}}px" src="{{ info.image }}"></image>
+</scroll-view>
 
 <view class="control_button">
   <!--<text class="time">{{passed_str}}</text>-->

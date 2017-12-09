@@ -1,7 +1,7 @@
 <view class="user-top tac">
-  <image class="br" src="{{ userInfo.avatar }}"></image>
-  <view>{{ userInfo.wechat_nicename }}</view>
-  <view>{{ userInfo.province }}·{{ userInfo.city }}</view>
+  <image class="br" src="{{ userInfo.userInfo.avatarUrl }}"></image>
+  <view>{{ userInfo.userInfo.nickName }}</view>
+  <view>{{ userInfo.userInfo.province }}·{{ userInfo.userInfo.city }}</view>
 </view>
 
 <navigator url="../userInfo/userInfo" class="u-o arrow u-o-t">

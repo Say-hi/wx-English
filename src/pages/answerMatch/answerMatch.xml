@@ -1,25 +1,33 @@
 <view class="answer-top f30 c3 bb">
-  <view class="at iconfont icon-datiqia">答题卡</view>
-  <view class="at iconfont icon-jishibiao">{{ times }}</view>
-  <view class="at iconfont icon-cuotiben">错题本</view>
+  <view wx:if="{{ !from }}" catchtap="goCTB" class="at iconfont icon-datiqia">答题卡</view>
+  <view class="at iconfont icon-jishibiao">{{ nextTime }}</view>
+  <view catchtap="goWrong" class="at iconfont icon-cuotiben">错题本</view>
 </view>
 <view class="f30 c3 a-title">
   <text>连线匹配题</text>
-  <text><text class="red">{{ current }}</text>/{{ all }}</text>
+  <text wx:if="{{ !from }}"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
 </view>
-<swiper bindchange="currentChange">
-  <swiper-item wx:for="{{ lists }}">
+<!--<swiper bindchange="currentChange">-->
+  <view class="timu" wx:for="{{ info.questions_lists }}">
     <view class="s-wrap">
       <view class="left">
-        <text wx:for="{{ item.left }}" wx:for-item="left">{{ left }}</text>
+        <text wx:for="{{ item.left }}" wx:for-item="left">{{ left.option }}</text>
       </view>
       <view class="right">
-        <text wx:for="{{ item.right }}" wx:for-item="right">{{ right }}</text>
+        <text wx:for="{{ item.right }}" wx:for-item="right">{{ right.option }}</text>
       </view>
     </view>
     <view class="s-wrap">
-      <view wx:for="{{ item.left }}" class="lineInput" wx:for-index="inputIndex">{{ inputIndex + 1 }}.<input data-index="{{ inputIndex }}" /></view>
+      <view wx:for="{{ item.left }}" class="lineInput" wx:for-index="inputIndex">{{ inputIndex + 1 }}. <picker data-index="{{ inputIndex }}" bindchange="bindPickerChange" value="{{chooseIndex[inputIndex] || 0}}" range="{{array}}">
+        <view>{{ array[(chooseIndex[inputIndex]) || 0]}}</view>
+      </picker>
+      </view>
     </view>
-  </swiper-item>
-</swiper>
+  </view>
+<!--</swiper>-->
 <!--<button catchtap="startJS">开始计时</button>-->
+<view class="zw"></view>
+<view catchtap="upAnswer" class="go">提交答案</view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

@@ -2,6 +2,15 @@
 //  速拼英语小程序页面分布
   "pages": [
     "pages/login/login", // 登陆页面 ---
+    "pages/wrong/wrong", // 错题本
+    "pages/synthetical/synthetical", // 综合试卷
+    "pages/syntheticalTest/syntheticalTest", // 综合试卷测试
+    "pages/report/report", // 练习报告 -- 错题展示
+    "pages/practice/practice", // 练习报告 -- 查看结果
+    "pages/index/index", // 首页,, ---
+    "pages/examination/examination", // 考试交卷--答题卡 ---
+    "pages/testPractice/testPractice", // 智能测试练习 -- 难易度下测试题分类
+    "pages/ktVideo/ktVideo", // 视屏展示页面
     "pages/inteTest/inteTest", // 智能测试 ---
     "pages/testDetail/testDetail", // 智能测试词卡 版本 ---
     "pages/worldCard/worldCard", // 单词卡 年级 ---
@@ -13,11 +22,6 @@
     "pages/hbLists/hbLists", // 节日绘本专题 ---
     "pages/register/register", // 注册页面 ---
     "pages/template/template", // 模板
-    "pages/syntheticalTest/syntheticalTest", // 综合试卷测试
-    "pages/synthetical/synthetical", // 综合试卷
-    "pages/examination/examination", // 考试交卷
-    "pages/report/report", // 练习报告
-    "pages/practice/practice", // 练习报告
     "pages/homeWork/homeWork", // 作业
     "pages/myCollect/myCollect", // 我的收藏 ---
     "pages/userInfo/userInfo", // 个人信息
@@ -31,12 +35,11 @@
     "pages/readDetail/readDetail", // 读一读详情 ---
     "pages/talkDetail/talkDetail", // 说一说详情 ---
     "pages/buy/buy", // 购买
-    "pages/dictionary/dictionary", // 词典
+    "pages/dictionary/dictionary", // 词典 ---
     "pages/wiki/wiki", // 文化百科 ---
     "pages/wikiDetail/wikiDetail", // 文化百科对应类别详情列表 ---
     "pages/wikiShow/wikiShow", // 文化百科对应视频详情 ---
     "pages/forgot/forgot", // 忘记密码 ---
-    "pages/testPractice/testPractice", // 智能测试练习
     "pages/answerCorrector/answerCorrector", // 短文改错
     "pages/answerPicture/answerPicture", // 看图答题
     "pages/answerMatch/answerMatch", // 连线匹配
@@ -46,9 +49,9 @@
     "pages/answerCloze/answerCloze", // 完形填空
     "pages/answerReading/answerReading", // 阅读理解
     "pages/answerTranslate/answerTranslate", // 中英互译
-    "pages/wrong/wrong", // 错题本
-    "pages/answer75/answer75", // 阅读理解7选5
-    "pages/index/index" // 首页,
+    "pages/answer75/answer75" // 阅读理解7选5
+
+
     // Dont remove this comment
   ],
   // Window configuration

@@ -1,22 +1,30 @@
-<view class="wrap" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
+<import src="../../wxParse/wxParse"></import>
+<view class="wrap">
   <view class="answer-top f30 c3 bb">
-    <view class="at iconfont icon-datiqia">答题卡</view>
-    <view class="at iconfont icon-jishibiao">{{ time }}</view>
-    <view class="at iconfont icon-cuotiben">错题本</view>
+    <view wx:if="{{ !from }}" catchtap="goCTB" class="at iconfont icon-datiqia">答题卡</view>
+    <view class="at iconfont icon-jishibiao">{{ nextTime }}</view>
+    <view catchtap="goWrong" class="at iconfont icon-cuotiben">错题本</view>
   </view>
 
   <view class="f30 c3 a-title bb">
     <text>阅读理解</text>
-    <text><text class="red">{{ showIndex + 1 }}</text>/{{ all }}</text>
+    <text wx:if="{{ !from }}"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
   </view>
 
   <view class="swiper">
-    <view class="s-text">{{ list[showIndex].text }}</view>
-    <view wx:for="{{ list[showIndex].questionList }}" wx:for-item="question" wx:for-index="qIndex">
-      {{ qIndex + 1 }}.{{ question.q }}
-      <view data-index="{{ aIndex }}" data-showindex="{{ showIndex }}" data-outindex="{{ qIndex }}" catchtap="chooseCircle" class="c_choose" wx:for="{{ question.arr }}" wx:for-item="aItem" wx:for-index="aIndex">
-        <view class="circle br {{ choose[showIndex][qIndex] == aIndex ? 'chooseCircle' : '' }}">{{ arrLabel[aIndex] }}</view><view>{{ aItem }}</view>
+    <template is="wxParse" data="{{ wxParseData: timu.nodes }}"></template>
+    <view wx:for="{{ info.questions_lists }}" wx:for-item="question" wx:for-index="qIndex">
+      {{ qIndex + 1 }}.{{ question.test_timu }}
+      <view data-index="{{ aIndex }}" data-oindex="{{ qIndex }}" data-showindex="{{ showIndex }}" catchtap="chooseCircle" class="c_choose" wx:for="{{ question.options }}" wx:for-item="aItem" wx:for-index="aIndex">
+        <view class="circle br {{ chooseIndex[qIndex] == aIndex ? 'chooseCircle' : '' }}">{{ arrLabel[aIndex] }}</view><view class="flex1">{{ aItem.option }}</view>
       </view>
     </view>
   </view>
 </view>
+
+<view class="zw"></view>
+<view catchtap="upAnswer" class="go">提交答案</view>
+
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

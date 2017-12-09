@@ -5,7 +5,7 @@
 <view class="w-list bb">
   <navigator url="../wikiShow/wikiShow?id={{ list.id }}&title={{ list.name }}" class="w-l-w f30 c3 pr bb" wx:for="{{ lists }}" wx:for-item="list">
     <!--<view class="pr">-->
-    <image src="{{ list.image }}"></image>
+    <image mode="aspectFill" src="{{ list.image }}"></image>
     <view class="pa tac br w-p iconfont icon-bofang1"></view>
     <!--</view>-->
     <text class="w-l-w-b ell">{{ list.name }}</text>

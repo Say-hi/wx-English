@@ -1,10 +1,14 @@
 <!--综合-->
 <view class="top"></view>
-<view class="wrap pr" wx:for="{{ syntheticalList }}">
+<view catchtap="goNext"  data-title="{{ item.cat_name }}" data-id="{{ item.id }}" data-timu="{{ item.timu_id }}" data-type="{{ item.type_id }}" class="wrap pr" wx:for="{{ syntheticalList }}">
   <view class="iconfont icon-shuben br"></view>
   <view class="center">
     <view class="f30 c3 c-t">{{ item.title }}</view>
-    <view class="c-b">{{ item.content }}</view>
+    <view class="c-b">{{ item.describe }}</view>
   </view>
-  <view class="right f30 pa">{{ item.right }}</view>
+  <view class="right f30 pa">{{ item.cat_name }}</view>
+  <view catchtap="goResult" data-id="{{ item.id }}" data-title="{{ item.cat_name }}" wx:if="{{ item.is_userd == 1 }}" class="right finish f30 pa">已完成</view>
 </view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

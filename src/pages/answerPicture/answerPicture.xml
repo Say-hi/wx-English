@@ -1,16 +1,23 @@
 <view class="answer-top f30 c3 bb">
-  <view class="at iconfont icon-datiqia">答题卡</view>
-  <view class="at iconfont icon-jishibiao">{{ times }}</view>
-  <view class="at iconfont icon-cuotiben">错题本</view>
+  <view wx:if="{{ !from }}" catchtap="goCTB" class="at iconfont icon-datiqia">答题卡</view>
+  <view class="at iconfont icon-jishibiao">{{ nextTime }}</view>
+  <view catchtap="goWrong" class="at iconfont icon-cuotiben">错题本</view>
 </view>
 <view class="f30 c3 a-title">
   <text>看图写词</text>
-  <text><text class="red">{{ current }}</text>/{{ all }}</text>
+  <text wx:if="{{ !from }}"><text class="red">{{ current }}</text>/{{ all }}</text>
 </view>
-<swiper bindchange="currentChange">
-  <swiper-item wx:for="{{ lists }}">
-    <image mode="widthFix" lazy-load="true" src="{{ item }}"></image>
-    _ _ _ _ _ _
-  </swiper-item>
-<button catchtap="startJS">开始计时</button>
-</swiper>
+<!--<swiper bindchange="currentChange">-->
+  <view class="timu" wx:for="{{ info.questions_lists }}">
+    <image mode="aspectFill" lazy-load="true" src="{{ item.test_timu }}"></image>
+    <view class="timu-b">
+      <input class="bd1" bindinput="inputValue" data-index="{{ index }}" />
+    </view>
+  </view>
+<!--<button catchtap="startJS">开始计时</button>-->
+<!--</swiper>-->
+<view class="zw"></view>
+<view catchtap="upAnswer" class="go">提交答案</view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

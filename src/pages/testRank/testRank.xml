@@ -1,12 +1,16 @@
 <!--测试得分排行榜-->
-<view class="wrap" wx:for="{{ lists }}">
+<view catchtap="goDetail" data-id="{{ item.testpaper_id }}" class="wrap" wx:for="{{ lists }}">
   <view class="l">
     <image wx:if="{{ index <= 2 }}" src="{{ index == 0 ? '../../images/1.png' : index == 1 ? '../../images/2.png' : index == 2 ? '../../images/3.png' : ''  }}"></image> {{ index <= 2 ? '' : index }}
   </view>
   <view class="c">
-    正确{{ item.right }}　刷题{{ item.count }}
+    正确{{ item.success_smalltimu_num }}　刷题{{ item.total_smalltimu_num }}
   </view>
   <view class="r">
     {{ item.score }}分
   </view>
 </view>
+<view class="tac">--- {{ more ? '上拉加载更多' : '没有更多内容了' }} ---</view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

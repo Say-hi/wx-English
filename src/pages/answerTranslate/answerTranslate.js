@@ -1,13 +1,15 @@
+const app = getApp()
+// const useUrl = require('../../utils/service')
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    arrLabel: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
-    time: '5:00',
+    arrLabel: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+    nextTime: '5:00',
     current: 1,
     all: 20,
-    choose: [],
+    chooseIndex: [],
     showIndex: 0,
     list: [
       {
@@ -83,27 +85,54 @@ Page({
     })
   },
   // 选择答案
+  // 选择答案
   chooseCircle (e) {
-    let index = e.currentTarget.dataset.index
-    let i = 0
-    if (!this.data.choose[this.data.showIndex]) {
-      this.data.choose[this.data.showIndex] = []
-    }
-    this.data.choose[this.data.showIndex][index] = !this.data.choose[this.data.showIndex][index]
-    for (let v of this.data.choose[this.data.showIndex]) {
-      if (v) i++
-    }
-    if (i > 5) {
-      this.data.choose[this.data.showIndex][index] = !this.data.choose[this.data.showIndex][index]
-    }
+    this.data.chooseIndex[e.currentTarget.dataset.timu] = e.currentTarget.dataset.index
     this.setData({
-      choose: this.data.choose
+      chooseIndex: this.data.chooseIndex
+    })
+  },
+  // 获取题目
+  getTi (catId, typeId, id) {
+    app.getTi(catId, typeId, id, this)
+  },
+  // 提交答案
+  upAnswer () {
+    app.upAnswer(this)
+  },
+  // 返回错题本
+  goCTB () {
+    wx.redirectTo({
+      url: '../examination/examination'
+    })
+  },
+  // 设置倒计时
+  setTime () {
+    app.settime(this)
+  },
+  // 去错题本
+  goWrong () {
+    app.clearTimer()
+    wx.redirectTo({
+      url: '../wrong/wrong'
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
+    if (params.from === 'zj') {
+      this.setData({
+        from: 'zj'
+      })
+      return app.getZjT(this, params.id, params.timu_id)
+    }
+    let {catId, typeId} = wx.getStorageSync('testId')
+    this.setData({
+      catId,
+      typeId
+    })
+    this.getTi(catId, typeId, params.id)
     // TODO: onLoad
   },
 
@@ -135,6 +164,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload () {
+    app.clearTimer()
     // TODO: onUnload
   },
 

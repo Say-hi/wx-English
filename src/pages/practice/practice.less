@@ -19,8 +19,9 @@
 .percent {
   background-color: #fff;
   canvas {
-    background-color: #fff100;
-    transform: rotateZ(90deg);
+    //margin: 0 auto;
+    //background-color: #fff100;
+    //transform: rotateZ(90deg);
   }
 }
 .percent .arc {
@@ -63,21 +64,26 @@
   background-color: #29c8a0;
   border-radius: 50%;
 }
+.error {
+  background-color: #f00 !important;
+}
 .btns {
   border-top: 1px solid #e7e7e7;
   position: fixed;
   bottom: 0rpx;
   left: 0rpx;
+  width: 100%;
   background-color: #fff;
   padding: 16rpx 25rpx;
+  box-sizing: border-box;
 }
 .btn {
   display: inline-block;
   background-color: #fedb03;
   height: 88rpx;
+  width: 100%;
   line-height: 88rpx;
   text-align: center;
-  width: 340rpx;
   font-size: 30rpx;
   color: #333;
   margin: 0 5rpx;

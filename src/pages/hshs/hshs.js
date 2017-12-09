@@ -448,7 +448,7 @@ Page({
     // TODO: onUnload
   },
   onReachBottom () {
-   this.getMore()
+    this.getMore()
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作

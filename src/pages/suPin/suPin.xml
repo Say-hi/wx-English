@@ -1,6 +1,6 @@
 <!--速拼英语-->
 <view class="s-t bb">
-    <image lazy-load="true" mode="aspectFill" src="{{ topImg }}"></image>
+    <image lazy-load="true" mode="aspectFill" src="{{ lists.common.banner_image || 'http://supin.lanzhangxiu.cn/data/upload/admin/20171027/59f2eb023d05a.jpg' }}"></image>
 </view>
 
 <view class="nav bb">
@@ -11,7 +11,7 @@
 </view>
 
 <view wx:if="{{ show }}" class="supin bb">
-    <textarea bindinput="inputValue" data-type="translate" class="textIn bb" placeholder="请输入要速拼的内容"></textarea>
+    <textarea wx:if="{{ !maskShow}}" maxlength="-1" bindinput="inputValue" data-type="translate" class="textIn bb" placeholder="请输入要速拼的内容"></textarea>
     <view class="s-nav bb">
         <view catchtap="translate" data-type="suPin">速拼</view>
         <view catchtap="translate" data-type="translate">翻译</view>
@@ -20,9 +20,10 @@
     <view class="s-show bb">
         <image lazy-load="true" src="../../images/sp-bg.png"></image>
         <scroll-view class="s-c bb" scroll-y="true">
-            <view wx:for="{{ info }}">
-                <text class="aaaSuperEnglishNew">{{ item.supin_word }}　</text><text class="aaaSuperEnglishNew">[{{ item.supin_yinbiao }}]</text>
-            </view>
+            <!--<view>-->
+                <!--<text wx:for="{{ info }}" class="aaaSuperEnglishNew">{{ item.supin_word }}　</text><text class="aaaSuperEnglishNew">[{{ item.supin_yinbiao }}]</text>-->
+                <text class="aaaSuperEnglishNew">{{ info.supin_str }}　</text>
+            <!--</view>-->
             <view class="word">{{ eu }}</view>
             <view class="word">{{ cn }}</view>
         </scroll-view>
@@ -32,9 +33,10 @@
 <view wx:if="{{ maskShow }}" catchtap="close" class="mask">
     <view class="maskIn bb">
         <scroll-view class="s-c bb" scroll-y="true">
-            <view wx:for="{{ info }}">
-                <text class="aaaSuperEnglishNew">{{ item.supin_word }}　</text><text class="aaaSuperEnglishNew">[{{ item.supin_yinbiao }}]</text>
-            </view>
+            <text class="aaaSuperEnglishNew">{{ info.supin_str }}　</text>
+            <!--<view wx:for="{{ info }}">-->
+                <!--<text class="aaaSuperEnglishNew">{{ item.supin_word }}　</text><text class="aaaSuperEnglishNew">[{{ item.supin_yinbiao }}]</text>-->
+            <!--</view>-->
             <view class="word">{{ eu }}</view>
             <view class="word">{{ cn }}</view>
         </scroll-view>

@@ -14,7 +14,7 @@ Page({
   getList (id) {
     let that = this
     app.wxrequest({
-      url: useUrl.subjectenglishDetailByBei,
+      url: useUrl.subjectenglishDetailByDu,
       data: {
         session_key: app.gs(),
         id

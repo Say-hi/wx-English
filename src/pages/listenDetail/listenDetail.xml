@@ -1,3 +1,4 @@
+<import src="../../wxParse/wxParse"></import>
 <!--听一听详情-->
 <view class="l-top bb">
   <view class="l-wrap">
@@ -20,7 +21,8 @@
 </view>
 <view class=" bb l-b">
   <view class="f30 c3 iconfont icon-icon_lilunlianxi_normal">练习</view>
-  <view class="l-b-t" wx:for="{{ lists }}">{{ index + 1 }}、{{ item }}</view>
+  <template is="wxParse" data="{{ wxParseData: lists.nodes }}"></template>
+  <!--<view class="l-b-t" wx:for="{{ lists }}">{{ index + 1 }}、{{ item }}</view>-->
 </view>
 <!--<audio src="{{ info.audio_url }}"></audio>-->
         <!--错误弹窗-->

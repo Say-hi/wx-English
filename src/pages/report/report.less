@@ -37,6 +37,9 @@ page {
 .a-wrong {
   background-color: #f7e3e3;
 }
+.a-right {
+  background-color: #E3F8EC;
+}
 
 .swiper {
   //min-height: 600rpx;
@@ -60,15 +63,27 @@ page {
       border: 2rpx solid #aaa;
       margin-right: 20rpx;
     }
+    .chooseCircleWrong {
+      color: #fff;
+      border: 2rpx solid #ff5a5a;
+      background-color: #ff5a5a;
+    }
     .chooseCircleRight {
       color: #fff;
       border: 2rpx solid #2bc8a0;
       background-color: #2bc8a0;
     }
-    .chooseCircleWrong {
-      color: #fff;
-      border: 2rpx solid #ff5a5a;
-      background-color: #ff5a5a;
+  }
+  .s-wrap {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    .left, .right {
+      display: flex;
+      flex-direction: column;
+      line-height: 70rpx;
+      word-break: break-all;
+      max-width: 50%;
     }
   }
 }
@@ -76,6 +91,12 @@ page {
 .control_wrap {
   width: 100%;
   padding-right: 150rpx;
+}
+
+.wimg {
+  width: 235rpx;
+  height: 200rpx;
+  margin-left: 20rpx;
 }
 
 .control_button {
@@ -129,7 +150,7 @@ page {
 }
 
 .tips {
-  padding: 0 20rpx;
+  //padding: 0 20rpx;
   word-break: break-all;
   font-size: 30rpx;
   line-height: 40rpx;
@@ -162,6 +183,19 @@ page {
   }
 }
 
+.tinli {
+  font-size: 26rpx;
+  line-height: 40rpx;
+}
+.tinli::before {
+  font-size: 40rpx;
+  color: #fedb03;
+  margin-right: 20rpx;
+}
+view{
+  word-break: break-all;
+  //overflow:auto;
+}
 
 
 

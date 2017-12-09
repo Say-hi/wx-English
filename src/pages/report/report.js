@@ -1,5 +1,6 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
+const app = getApp()
+const useUrl = require('../../utils/service')
 /*eslint-disable*/
 // 创建页面实例对象
 Page({
@@ -8,53 +9,37 @@ Page({
    */
   data: {
     arrLabel: ['A', 'B', 'C', 'D', 'E', 'F'],
+    timuArr: [
+      '',
+      '听力选择题',
+      '中英互译题',
+      '连线匹配题',
+      '听写题',
+      '看图写词',
+      '完形填空',
+      '阅读理解',
+      '语法填空',
+      '阅读理解七选五'
+    ],
     // time: '5:00',
-    current: 1,
-    all: 20,
+    userDo: 0,
+    all: 0,
+    play: false,
     userChoose: 1,
     rightChoose: 1,
     count: 2341234,
     accuracy: 80,
     easyWrong: 'C',
-    from: '2016年海南高考题',
+    from: '',
     userTime: 2,
     choose: [],
     showIndex: 0,
     title: '填空题',
     wrong: true,
-    list: [
-      {
-        src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
-        text: 'askdfhasdhfkjsadhfasdfojasdfjsadlfjsdlajfasdljflsadkjf',
-        questionList: [
-          {
-            q: 'asdfasdfasd',
-            arr: ['asdfasdf', 'asdfsadfas', 'asdfasdfas']
-          },
-          {
-            q: 'asdfasdfasd',
-            arr: ['asdfasdf', 'asdfsadfas', 'asdfasdfas']
-          }
-        ]
-      },
-      {
-        src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
-        text: '123412341234123412342134',
-        questionList: [
-          {
-            q: '789078907890',
-            arr: ['cvbncvn', 'gsdfg', '4764']
-          },
-          {
-            q: '0-=\9-907857',
-            arr: ['asdfasdf', 'asdfsadfas', 'asdfasdfas']
-          }
-        ]
-      }
-    ],
-    translateText: 'asdfasdfsadfsadfsda',
-    analysisText: 'asdfasdfsadfsdafsd',
-    testItems: ['asdf', 'asdfsadfasdfsda', 'asdf', 'asdf', 'asdf', 'asdfsadfasdfsda']
+    list: [],
+    translateText: '',
+    analysisText: '',
+    testItems: []
   },
 // 切换题目
 //   mytouchstart (e){
@@ -114,10 +99,202 @@ Page({
 //       choose: this.data.choose
 //     })
 //   },
+  // 获取题目详情
+  getTimu (id, catId, typeId) {
+    let that = this
+    if (that.data.from === 'zj') {
+      app.wxrequest({
+        url: useUrl.intelligentTestpeparReportByDetail,
+        data: {
+          session_key: app.gs(),
+          id,
+          timu_id: catId
+        },
+        success (res) {
+          console.log('typeId', typeId)
+          wx.hideLoading()
+          if (res.data.code === 200) {
+            if (typeId * 1 === 6 || typeId * 1 === 7 || typeId * 1 === 9) {
+              // if (that.data.from) {
+              //   app.WP('timu', 'html', res.data.data.exercise_problems, that, 5)
+              // } else {
+              //
+              // }
+              app.WP('timu', 'html', res.data.data.exercise_problems, that, 5)
+              res.data.data.exercise_problems = ''
+            }
+            that.setData({
+              info: res.data.data
+            })
+            if (typeId * 1 === 3) {
+              that.setData({
+                rightAnswerM: JSON.stringify(res.data.data.questions_lists[0].right_answer).replace(/[\{\}\"]/g, ''),
+                userAnswerM: JSON.stringify(res.data.data.questions_lists[0].user_answer).replace(/[\{\}\"]/g, '')
+              })
+              console.log(that.data.rightAnswerM)
+            }
+            app.WP('analysis', 'html', res.data.data.analysis, that, 5)
+          } else {
+            app.setToast(that, {content: res.data.message})
+          }
+        }
+      })
+    } else {
+      app.wxrequest({
+        url: useUrl.intelligentTestReportByDetail,
+        data: {
+          session_key: app.gs(),
+          cat_id: catId,
+          type_id: typeId,
+          answer_id: id
+        },
+        success (res) {
+          wx.hideLoading()
+          if (res.data.code === 200) {
+            if (typeId * 1 === 6 || typeId * 1 === 7 || typeId === 9) {
+              app.WP('timu', 'html', res.data.data.exercise_problems, that, 5)
+              res.data.data.exercise_problems = ''
+            }
+            that.setData({
+              info: res.data.data
+            })
+            if (typeId * 1 === 3) {
+              that.setData({
+                rightAnswerM: JSON.stringify(res.data.data.questions_lists[0].right_answer).replace(/[\{\}\"]/g, ''),
+                userAnswerM: JSON.stringify(res.data.data.questions_lists[0].user_answer).replace(/[\{\}\"]/g, '')
+              })
+              console.log(that.data.rightAnswerM)
+            }
+            app.WP('analysis', 'html', res.data.data.analysis, that, 5)
+          } else {
+            app.setToast(that, {content: res.data.message})
+          }
+        }
+      })
+    }
+  },
+  // 错题本
+  getCtbTimu (id, typeId) {
+    let that = this
+    // if (that.data.from === 'zj') {
+      app.wxrequest({
+        url: useUrl.wrongQuestionDetail,
+        data: {
+          session_key: app.gs(),
+          id
+        },
+        success (res) {
+          // console.log('typeId', typeId)
+          wx.hideLoading()
+          if (res.data.code === 200) {
+            if (typeId * 1 === 6 || typeId * 1 === 7 || typeId * 1 === 9) {
+              // if (that.data.from) {
+              //   app.WP('timu', 'html', res.data.data.exercise_problems, that, 5)
+              // } else {
+              //
+              // }
+              app.WP('timu', 'html', res.data.data.exercise_problems, that, 5)
+              res.data.data.exercise_problems = ''
+            }
+            that.setData({
+              info: res.data.data,
+              wrong: 1
+          })
+            if (typeId * 1 === 3) {
+              that.setData({
+                rightAnswerM: JSON.stringify(res.data.data.questions_lists[0].right_answer).replace(/[\{\}\"]/g, ''),
+                userAnswerM: JSON.stringify(res.data.data.questions_lists[0].user_answer).replace(/[\{\}\"]/g, '')
+              })
+              console.log(that.data.rightAnswerM)
+            }
+            app.WP('analysis', 'html', res.data.data.analysis, that, 5)
+          } else {
+            app.setToast(that, {content: res.data.message})
+          }
+        }
+      })
+    // }
+    // else {
+    //   app.wxrequest({
+    //     url: useUrl.intelligentTestReportByDetail,
+    //     data: {
+    //       session_key: app.gs(),
+    //       cat_id: catId,
+    //       type_id: typeId,
+    //       answer_id: id
+    //     },
+    //     success (res) {
+    //       wx.hideLoading()
+    //       if (res.data.code === 200) {
+    //         if (typeId * 1 === 6 || typeId * 1 === 7 || typeId === 9) {
+    //           app.WP('timu', 'html', res.data.data.exercise_problems, that, 5)
+    //           res.data.data.exercise_problems = ''
+    //         }
+    //         that.setData({
+    //           info: res.data.data
+    //         })
+    //         if (typeId * 1 === 3) {
+    //           that.setData({
+    //             rightAnswerM: JSON.stringify(res.data.data.questions_lists[0].right_answer).replace(/[\{\}\"]/g, ''),
+    //             userAnswerM: JSON.stringify(res.data.data.questions_lists[0].user_answer).replace(/[\{\}\"]/g, '')
+    //           })
+    //           console.log(that.data.rightAnswerM)
+    //         }
+    //         app.WP('analysis', 'html', res.data.data.analysis, that, 5)
+    //       } else {
+    //         app.setToast(that, {content: res.data.message})
+    //       }
+    //     }
+    //   })
+    // }
+  },
+  // 播放语音文件
+  playMusic () {
+    let that = this
+    this.setData({
+      play: !this.data.play
+    })
+    if (this.data.play) {
+      wx.playBackgroundAudio({
+        dataUrl: that.data.info.exercise_problems,
+        title: '听力音频'
+      })
+    } else {
+      wx.stopBackgroundAudio()
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
+    if (params.from === 'ctb') {
+      this.setData({
+        from: 'ctb',
+        typeId: params.type,
+        title: this.data.timuArr[params.type],
+      })
+      return this.getCtbTimu(params.id, params.type)
+    } else if (params.from === 'zj') {
+      this.setData({
+        from: 'zj',
+        typeId: params.type,
+        title: this.data.timuArr[params.type],
+        all: params.all,
+        userDo: params.choose,
+        wrong: params.error   // 0 正确  1 错误
+      })
+      this.getTimu(params.id, params.timu, params.type)
+    } else {
+      let {catId, typeId} = app.gs('testId')
+      this.setData({
+        typeId,
+        title: this.data.timuArr[typeId],
+        all: params.all,
+        userDo: params.choose,
+        wrong: params.error   // 0 正确  1 错误
+      })
+      this.getTimu(params.id, catId, typeId)
+    }
     // TODO: onLoad
   },
 
@@ -149,6 +326,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload () {
+    wx.stopBackgroundAudio()
     // TODO: onUnload
   },
 

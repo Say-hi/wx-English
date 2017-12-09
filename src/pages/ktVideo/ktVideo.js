@@ -7,17 +7,20 @@ Page({
    * 页面的初始数据
    */
   data: {
+    title: 'ktVideo',
     lists: [],
-    page: 1
+    page: 1,
+    choose: -1
   },
-  // 获取作业列表
-  getLists (page) {
+  // 获取数据
+  getLists (catId, page) {
     let that = this
     app.wxrequest({
-      url: useUrl.getTaskworkLists,
+      url: useUrl.microclassLists,
       data: {
         session_key: app.gs(),
-        page: page
+        cat_id: catId,
+        page
       },
       success (res) {
         wx.hideLoading()
@@ -32,11 +35,39 @@ Page({
       }
     })
   },
+  // 获取视频
+  goDetail (e) {
+    let that = this
+    app.wxrequest({
+      url: useUrl.microclassDetail,
+      data: {
+        session_key: app.gs(),
+        id: e.currentTarget.dataset.id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            choose: e.currentTarget.dataset.index,
+            showSrc: res.data.data.video_url
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
-    this.getLists(1)
+  onLoad (params) {
+    wx.setNavigationBarTitle({
+      title: `${params.title}`
+    })
+    this.setData({
+      cat_id: params.cat_id
+    })
+    this.getLists(params.cat_id, 1)
     // TODO: onLoad
   },
 
@@ -69,7 +100,7 @@ Page({
   },
   onReachBottom () {
     if (this.data.more) {
-      this.getLists(++this.data.page)
+      this.getLists(this.data.cat_id, ++this.data.page)
     }
   },
   /**

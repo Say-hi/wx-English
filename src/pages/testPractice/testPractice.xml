@@ -1,14 +1,17 @@
 <!--智能测试练习-->
-<navigator url="{{ item.id }}" class="wrap bb f30 c3" wx:for="{{ lists }}">
-    <view class="iconfont icon-jiahao">{{ item.t }}</view>
+<view catchtap="goTimu" data-type="{{ item.type_id }}" class="wrap bb f30 c3" wx:for="{{ lists }}">
+    <view class="iconfont icon-jiahao">{{ item.type_name }}</view>
     <view class="content">
         <view class="star">
-            <text wx:for="01234" wx:for-item="starItem" wx:for-index="starIndex" class="iconfont icon-wujiaoxing {{ item.star > starIndex ? 'y' : 'g' }}"></text>
+            <text wx:for="01234" wx:for-item="starItem" wx:for-index="starIndex" class="iconfont icon-wujiaoxing {{ item.degree > starIndex ? 'y' : 'g' }}"></text>
         </view>
         <veiw class="line">
-            <view class="line-f" style=" width: {{ (item.finish / item.all) * 100 }}%"></view>
+            <view class="line-f" style=" width: {{ (item.finish_count / item.total_count) * 100 }}%"></view>
         </veiw>
-        <view class="c-t">{{ item.finish }}/{{ item.all }}</view>
+        <view class="c-t">{{ item.finish_count }}/{{ item.total_count }}</view>
         <view class="iconfont icon-test"></view>
     </view>
-</navigator>
+</view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

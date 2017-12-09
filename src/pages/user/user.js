@@ -35,17 +35,17 @@ Page({
     ]
   },
 // 获取用户信息
-//   getUserInfo () {
-//     // console.log(app.gu())
-//     if (app.gu()) {
-//       // console.log(app.gu())
-//       this.setData({
-//         userInfo: app.gu()
-//       })
-//     } else {
-//       app.gu(this.getUserInfo)
-//     }
-  // },
+  getUserInfo () {
+    // console.log(app.gu())
+    if (app.gu()) {
+      // console.log(app.gu())
+      this.setData({
+        userInfo: app.gu()
+      })
+    } else {
+      app.gu(this.getUserInfo)
+    }
+  },
   // 获取用户信息
   getUser () {
     let that = this
@@ -60,7 +60,7 @@ Page({
           that.data.operation[0].t = res.data.data.grade_name
           that.data.operation[1].t = res.data.data.mechanism_name
           that.setData({
-            userInfo: res.data.data,
+            // userInfos: res.data.data,
             operation: that.data.operation
           })
         } else {
@@ -83,6 +83,7 @@ Page({
       return
     }
     this.getUser()
+    this.getUserInfo()
     // TODO: onLoad
   },
 

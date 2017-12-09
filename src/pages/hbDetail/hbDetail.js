@@ -2,38 +2,6 @@
 /*eslint-disable*/
 const app = getApp()
 const useUrl = require('../../utils/service')
-const backgroundAudioManager = wx.getBackgroundAudioManager()
-// const currentThis = getCurrnetPages()[getCurrnetPages().length - 1]
-backgroundAudioManager.onTimeUpdate(() => {
-  let time = {
-    total: '',
-    passed: ''
-  }
-  time.total = backgroundAudioManager.duration
-  time.passed = backgroundAudioManager.currentTime
-  let barWidth = windowWidth * (time.passed) / time.total
-  getCurrentPages()[getCurrentPages().length - 1].timeUp(time, barWidth)
-})
-// 自然结束播放
-backgroundAudioManager.onEnded(() => {
-  let that = getCurrentPages()[getCurrentPages().length - 1]
-  that.data.time.passed = 0
-  that.setData({
-    bar_width: 0,
-    time: that.data.time,
-    play: false
-  })
-})
-// 人为结束播放
-backgroundAudioManager.onStop(() => {
-  let that = getCurrentPages()[getCurrentPages().length - 1]
-  that.data.time.passed = 0
-  that.setData({
-    bar_width: 0,
-    time: that.data.time,
-    play: false
-  })
-})
 // 创建页面实例对象
 let windowWidth = 375
 wx.getSystemInfo({
@@ -87,15 +55,10 @@ Page({
     } else if(time.passed > time.total){
       time.passed = time.total
     }
-    // console.log("pageX:"+e.touches[0].pageX)
-    // console.log("move:"+touches.move)
-    // console.log('time', time)
-    // console.log("passed time:"+time.passed)
     this.setData({
       touches: touches,
       time: time,
-      bar_width: windowWidth * (time.passed) / time.total,
-      // passed_str:this.getTimeStr(time.passed),
+      bar_width: windowWidth * (time.passed) / time.total
     })
   },
   mytouchend (){
@@ -104,6 +67,9 @@ Page({
       position: that.data.time.passed
     })
     // this.audiopassed()
+  },
+  imgLoad () {
+    console.log(1)
   },
   // 播放状态控制
   play () {
@@ -155,37 +121,25 @@ Page({
       },
       success (res) {
         wx.hideLoading()
-        let str = ''
+        // let str = ''
         if (res.data.code === 200) {
-          if (res.data.data.supin) {
-
-            for (let v of res.data.data.supin) {
-              str += v.supin_word + ' '
-            }
+          if (res.data.data.image) {
+            wx.getImageInfo({
+              src: res.data.data.image,
+              success (ss) {
+                let width = ss.width * 240 / ss.height
+                that.setData({
+                  width
+                })
+              }
+            })
           }
           that.setData({
             info: res.data.data,
-            str,
+            str: res.data.data.supin_str,
             collect: res.data.data.is_college
           })
           that.playMusic(res.data.data.yuyin_url, title)
-          // wx.playBackgroundAudio({
-          //   dataUrl: res.data.data.yuyin_url,
-          //   title,
-          //   success () {
-          //     that.setData({
-          //       play: true
-          //     })
-          //     wx.getBackgroundAudioPlayerState({
-          //       success (res) {
-          //         that.data.time.total = res.duration
-          //         that.setData({
-          //           time: that.data.time
-          //         })
-          //       }
-          //     })
-          //   }
-          // })
         } else {
           app.setToast(that, {content: res.data.message})
         }

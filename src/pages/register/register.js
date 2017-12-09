@@ -182,7 +182,7 @@ Page({
           withCredentials: true,
           lang: 'zh_CN',
           success (res) {
-            wx.setStorageSync('userInfo', res.userInfo)
+            wx.setStorageSync('userInfo', res)
           },
           fail () {
             that.setData({

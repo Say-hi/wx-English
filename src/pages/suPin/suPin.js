@@ -53,6 +53,15 @@ Page({
     this.setData({
       show: !this.data.show
     })
+    if (this.data.show) {
+      wx.setNavigationBarTitle({
+        title: `速拼英语`
+      })
+    } else {
+      wx.setNavigationBarTitle({
+        title: `学科英语`
+      })
+    }
   },
   // 放大
   showBig () {
@@ -92,6 +101,7 @@ Page({
   // 翻译相关操作
   /*eslint-disable*/
   translate (e) {
+    console.log(1)
     let { type } = e.currentTarget.dataset
     this.setData({
       info: [],
@@ -99,17 +109,22 @@ Page({
       cn: ''
     })
     if (type === 'suPin') {
+      if (/^.*[~！@#\$%\^&\*\(\)_+\-=\[\]\{\}\\\|‘’“”；：，\<。\>\/？+].*$/.test(this.data.transText)) {
+        return app.setToast(this, {title: '翻译', content: '请不要输入中文符号'})
+      }
       this.suPinTran(this.data.transText)
     } else if (type === 'translate') {
-      if (/^.*[~!@#\$%\^&\*\(\)_+\-=\[\]\{\}\\\|\'\";:,\<\.\>\/\?+].*$/.test(this.data.transText)) {
-        return app.setToast(this, {title: '翻译', content: '请不要输入特殊符号,仅可输入空格'})
-      }
-      if (/^[\u4e00-\u9fa5\s]+$/i.test(this.data.transText)) { // 全中文
-        this.cnToeu(this.data.transText)
-      } else if (/^[a-zA-Z\s]+$/i.test(this.data.transText)) { // 全英文
-        this.euTocn(this.data.transText)
-      } else {
+      // if (/^.*[~!@#\$%\^&\*\(\)_+\-=\[\]\{\}\\\|\'\";:,\<\.\>\/\?+].*$/.test(this.data.transText)) {
+      //   return app.setToast(this, {title: '翻译', content: '请不要输入特殊符号,仅可输入空格'})
+      // }
+      if (/[\u4e00-\u9fa5]/i.test(this.data.transText) && /[a-zA-Z]/i.test(this.data.transText)) {
         app.setToast(this, {title: '翻译', content: '请输入全中文或全英文内容'})
+      } else if (/[\u4e00-\u9fa5]/i.test(this.data.transText)) { // 全中文
+        console.log(1)
+        this.cnToeu(this.data.transText)
+      } else if (/[a-zA-Z]/i.test(this.data.transText)) { // 全英文
+        console.log(2)
+        this.euTocn(this.data.transText)
       }
     } else if (type === 'read') {
       this.getAudio(this.data.transText)
@@ -118,21 +133,23 @@ Page({
   // 速拼翻译
   suPinTran (words) {
     let that = this
-    if (/[0-9\u4e00-\u9fa5]/.test(words)) {
+    if (/[\u4e00-\u9fa5]/.test(words)) {
       return app.setToast(that, {title: '速拼', content: '请输入英文内容'})
     }
-    if (/^.*[~!@#\$%\^&\*\(\)_+\-=\[\]\{\}\\\|\'\";:,\<\.\>\/\?+].*$/.test(words)) {
-      return app.setToast(that, {title: '速拼', content: '请不要输入特殊符号'})
-    }
+    // if (/^.*[~!@#\$%\^&\*\(\)_+\-=\[\]\{\}\\\|\'\";:,\<\.\>\/\?+].*$/.test(words)) {
+    //   return app.setToast(that, {title: '速拼', content: '请不要输入特殊符号,单词用空格区分'})
+    // }
     app.wxrequest({
       url: useUrl.supinTrans,
       data: {
         session_key: app.gs(),
-        words: words.toLocaleLowerCase()
+        words
       },
       success (res) {
         wx.hideLoading()
         if (res.data.code === 200) {
+          // res.data.data[0].supin_word = 'a' + res.data.data[0].supin_word.slice(1)
+          res.data.data.supin_str = res.data.data.supin_str.replace(/&quot;/g, '"')
           that.setData({
             info: res.data.data
           })

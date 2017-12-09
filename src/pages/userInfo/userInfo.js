@@ -1,6 +1,6 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
-
+const app = getApp()
+const useUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
@@ -13,12 +13,31 @@ Page({
       true_name: '阿斯顿发'
     }
   },
-
+  getInfo () {
+    let that = this
+    app.wxrequest({
+      url: useUrl.userInfo,
+      data: {
+        session_key: app.gs()
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            userInfo: res.data.data
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
     // TODO: onLoad
+    this.getInfo()
   },
 
   /**

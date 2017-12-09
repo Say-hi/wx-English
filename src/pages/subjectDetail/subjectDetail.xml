@@ -6,30 +6,30 @@
 
 <view class="pr">
   <view class="pa memory bb f30 c333 {{ curNav == 3 ? '' : 'hide' }}">
-    <view wx:for="{{ memoryList }}">
+    <view catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.cat_id }}" wx:for="{{ memoryList }}">
       <text class="iconfont icon-book">{{ item.cat_name }}</text>
-      <text catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.cat_id }}" class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
+      <text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
     </view>
   </view>
 
   <view class="pa read bb f30 c333 {{ curNav == 2 ? '' : 'hide' }}">
-    <view wx:for="{{ readList }}">
+    <view  catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.cat_id }}"  wx:for="{{ readList }}">
       <text class="iconfont icon-langdu">{{ item.cat_name }}</text>
-      <text catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.cat_id }}" class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
+      <text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
     </view>
   </view>
 
   <view class="pa talk bb f30 c333 {{ curNav == 1 ? '' : 'hide' }}">
-    <view wx:for="{{ talkList }}">
+    <view catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.cat_id }}"   wx:for="{{ talkList }}">
       <text class="iconfont icon-huatong">{{ item.cat_name }}</text>
-      <text catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.cat_id }}" class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
+      <text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
     </view>
   </view>
 
   <view class="pa listen bb f30 c333 {{ curNav == 0 ? '' : 'hide' }}">
-    <view wx:for="{{ listenList }}">
+    <view catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.cat_id }}"  wx:for="{{ listenList }}">
       <text class="iconfont icon-erji">{{ item.cat_name }}</text>
-      <text catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.cat_id }}" class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
+      <text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
     </view>
   </view>
 </view>

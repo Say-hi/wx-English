@@ -12,83 +12,42 @@ Page({
       {
         title: '版本',
         id: 0,
-        width: 230,
-        height: 206,
-        list: [
-          {
-            src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            t: '乌鸦喝水'
-          },
-          {
-            src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            t: '乌鸦喝水'
-          },
-          {
-            src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            t: '乌鸦喝水'
-          },
-          {
-            src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            t: '乌鸦喝水'
-          }
-        ]
+        width: 221,
+        height: 320,
+        list: []
       },
       {
         title: '年级',
         width: 221,
         height: 263,
         id: 1,
-        list: [
-          {
-            src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            t: '乌鸦喝水'
-          },
-          {
-            src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            t: '乌鸦喝水'
-          },
-          {
-            src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            t: '乌鸦喝水'
-          },
-          {
-            src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            t: '乌鸦喝水'
-          }
-        ]
+        list: []
       },
       {
         title: '难易',
-        width: 347,
-        height: 363,
+        width: 221,
+        height: 263,
         id: 2,
-        list: [
-          {
-            image: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            t: '乌鸦喝水'
-          },
-          {
-            image: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            t: '乌鸦喝水'
-          },
-          {
-            image: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            t: '乌鸦喝水'
-          },
-          {
-            image: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            t: '乌鸦喝水'
-          }
-        ]
+        list: []
       }
     ]
   },
   // 下一步
   goNext (e) {
+    let that = this
+    if (!app.gs()) {
+      app.setToast(that, {content: '您尚未登陆，请登陆后继续操作'})
+      return setTimeout(() => {
+        wx.reLaunch({url: '../login/login'})
+      }, 1500)
+    }
     let type = e.currentTarget.dataset.type * 1
     let id = e.currentTarget.dataset.id
     // 版本
-    let u = type === 0 ? '../testDetail/testDetail' : type === 1 ? '../worldCard/worldCard' : ''
+    let u = type === 0 ? '../testDetail/testDetail' : type === 1 ? '../worldCard/worldCard' : '../testPractice/testPractice'
+    if (e.currentTarget.dataset.iszh * 1 === 1) {
+      u = '../synthetical/synthetical'
+    }
     wx.navigateTo({
       url: `${u}?id=${id}&title=${e.currentTarget.dataset.title}`
     })
@@ -135,12 +94,34 @@ Page({
       }
     })
   },
+  // 获取难易度
+  getEasy () {
+    let that = this
+    app.wxrequest({
+      url: useUrl.intelligentNanyiLists,
+      data: {
+        session_key: app.gs()
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.data.lists[2].list = res.data.data
+          that.setData({
+            lists: that.data.lists
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
     this.getGrade()
     this.getLevel()
+    this.getEasy()
     // TODO: onLoad
   },
 

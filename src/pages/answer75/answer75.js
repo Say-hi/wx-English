@@ -1,26 +1,15 @@
+const app = getApp()
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    arrLabel: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
-    time: '5:00',
+    arrLabel: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+    nextTime: '5:00',
     current: 1,
     all: 20,
-    choose: [],
+    chooseIndex: [],
     showIndex: 0,
-    list: [
-      {
-        src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
-        text: 'askdfhasdhfkjsadhfasdfojasdfjsadlfjsdlajfasdljflsadkjf',
-        arr: ['asdfasdf', 'asdfsadfas', 'asdfasdfas', 'asdfasdfas', 'qwerwqer', '23452345', '12341234213']
-      },
-      {
-        src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
-        text: '123412341234123412342134',
-        arr: ['asdfasdf', 'asdfsadfas', 'asdfasdfas', 'asdfasdfas', 'qwerwqer', '23452345', '12341234213']
-      }
-    ],
     passed_str: '00:00',
     bar_width: 0,
     time_total_str: '04:09',
@@ -82,53 +71,100 @@ Page({
       chooseIndex: -1
     })
   },
+  // // 选择答案
+  // chooseCircle (e) {
+  //   let index = e.currentTarget.dataset.index
+  //   let i = 0
+  //   if (!this.data.choose[this.data.showIndex]) {
+  //     this.data.choose[this.data.showIndex] = []
+  //   }
+  //   this.data.choose[this.data.showIndex][index] = !this.data.choose[this.data.showIndex][index]
+  //   for (let v of this.data.choose[this.data.showIndex]) {
+  //     if (v) i++
+  //   }
+  //   if (i > 5) {
+  //     this.data.choose[this.data.showIndex][index] = !this.data.choose[this.data.showIndex][index]
+  //   }
+  //   this.setData({
+  //     choose: this.data.choose
+  //   })
+  //   // if (!this.data.choose[this.data.showIndex]) {
+  //   //   this.data.choose[this.data.showIndex] = []
+  //   // }
+  //   // let temp = this.data.choose[this.data.showIndex]
+  //   // let temps = this.data.choose[this.data.showIndex]
+  //   // console.log('index', e.currentTarget.dataset.index)
+  //   // temp[e.currentTarget.dataset.index] = !temp[e.currentTarget.dataset.index]
+  //   // let i = 0
+  //   // for (let v of temp) {
+  //   //   if (v) i++
+  //   // }
+  //   // // console.log(i)
+  //   // if (i > 5) {
+  //   //   console.log('temp', temp)
+  //   //   console.log('temps', temps)
+  //   //   console.log(this.data.choose)
+  //   //   this.setData({
+  //   //     choose: this.data.choose
+  //   //   })
+  //   // } else {
+  //   //   this.data.choose[this.data.showIndex] = temp
+  //   //   this.setData({
+  //   //     choose: this.data.choose
+  //   //   })
+  //   // }
+  // },
   // 选择答案
   chooseCircle (e) {
-    let index = e.currentTarget.dataset.index
-    let i = 0
-    if (!this.data.choose[this.data.showIndex]) {
-      this.data.choose[this.data.showIndex] = []
-    }
-    this.data.choose[this.data.showIndex][index] = !this.data.choose[this.data.showIndex][index]
-    for (let v of this.data.choose[this.data.showIndex]) {
-      if (v) i++
-    }
-    if (i > 5) {
-      this.data.choose[this.data.showIndex][index] = !this.data.choose[this.data.showIndex][index]
-    }
+    this.data.chooseIndex[e.currentTarget.dataset.oindex] = e.currentTarget.dataset.index
     this.setData({
-      choose: this.data.choose
+      chooseIndex: this.data.chooseIndex
     })
-    // if (!this.data.choose[this.data.showIndex]) {
-    //   this.data.choose[this.data.showIndex] = []
-    // }
-    // let temp = this.data.choose[this.data.showIndex]
-    // let temps = this.data.choose[this.data.showIndex]
-    // console.log('index', e.currentTarget.dataset.index)
-    // temp[e.currentTarget.dataset.index] = !temp[e.currentTarget.dataset.index]
-    // let i = 0
-    // for (let v of temp) {
-    //   if (v) i++
-    // }
-    // // console.log(i)
-    // if (i > 5) {
-    //   console.log('temp', temp)
-    //   console.log('temps', temps)
-    //   console.log(this.data.choose)
-    //   this.setData({
-    //     choose: this.data.choose
-    //   })
-    // } else {
-    //   this.data.choose[this.data.showIndex] = temp
-    //   this.setData({
-    //     choose: this.data.choose
-    //   })
-    // }
+  },
+  // 获取题目
+  getTi (catId, typeId, id) {
+    app.getTi(catId, typeId, id, this, this.wxp)
+  },
+  // 提交答案
+  upAnswer () {
+    app.upAnswer(this, 'choose75')
+  },
+  wxp () {
+    app.WP('timu', 'html', this.data.info.exercise_problems, this, 5)
+  },
+  // 返回答题卡
+  goCTB () {
+    wx.redirectTo({
+      url: '../examination/examination'
+    })
+  },
+  // 设置倒计时
+  setTime () {
+    app.settime(this)
+  },
+  // 去错题本
+  goWrong () {
+    app.clearTimer()
+    wx.redirectTo({
+      url: '../wrong/wrong'
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
+    if (params.from === 'zj') {
+      this.setData({
+        from: 'zj'
+      })
+      return app.getZjT(this, params.id, params.timu_id, this.wxp)
+    }
+    let {catId, typeId} = wx.getStorageSync('testId')
+    this.setData({
+      catId,
+      typeId
+    })
+    this.getTi(catId, typeId, params.id)
     // TODO: onLoad
   },
 
@@ -160,6 +196,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload () {
+    app.clearTimer()
     // TODO: onUnload
   },
 

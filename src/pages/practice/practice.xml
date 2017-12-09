@@ -1,22 +1,25 @@
 <!--practice.wxml-->
 <view class="container">
   <view class='top'>
-    <text>练习类型：{{'专项智能练习（单项填空）'}}</text>
-    <text>交卷时间{{'2017.08.04 09：47'}}</text>
+    <text>练习类型：{{ from ? '组卷练习':'专项智能练习' }}（{{ typeTitle || info.cat_name }}）</text>
+    <text>{{ info.usetime }}</text>
   </view>
   
   <view class='percent'>
-      <view class='arc'>{{percent}}<text>%</text></view>
-      <canvas style="width: 100%; height: 390rpx;" canvas-id="firstCanvas"></canvas>
+      <!--<view class='arc'>{{percent}}<text>%</text></view>-->
+      <canvas id="can" style="width: 100%; height: 400rpx;" canvas-id="firstcanvas"></canvas>
   </view>
   <view class='content'>
-      <text class='title'>填空题</text>
+      <text class='title'>{{ typeTitle || info.cat_name }}</text>
       <view class='cons'>
-          <text class='con' wx:for="{{items}}">{{item.num}}</text>
+          <text catchtap="goReport" data-type="{{ item.type_id }}" data-timu="{{ item.question_id }}"  data-id="{{ item.answer_id }}" data-error="{{ item.is_answer_error }}" data-index="{{ item.question_no }}" class='con {{ item.is_answer_error == 1 ? "error" : ""  }}' wx:for="{{items}}">{{ item.question_no }}</text>
       </view>
   </view>
   <view class='btns'>
-      <text class='btn'>错题解析</text>
-      <text class='btn'>全部解析</text>
+      <text catchtap="goBack" class='btn'>返回重新选择</text>
+      <!--<text class='btn'>全部解析</text>-->
   </view>
 </view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

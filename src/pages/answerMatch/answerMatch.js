@@ -1,5 +1,6 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
+const app = getApp()
+// const useUrl = require('../../utils/service')
 let timer = null
 // 创建页面实例对象
 Page({
@@ -7,24 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    times: '5:00',
+    arrLabel: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+    nextTime: '5:00',
     current: 1,
     all: 20,
-    Star_time: '2017-09-26 15:43',
-    lists: [
-      {
-        left: ['1、mushroommushroommushroommushroom', '2、Desserts', '3、mushroom', '4、mushroom', '5、mushroom'],
-        right: ['A.甜点', ' B.蘑菇杰', 'C.可口可乐']
-      },
-      {
-        left: ['1、mushroom', '2、Desserts', '3、mushroom'],
-        right: ['A.甜点', ' B.蘑菇杰', 'C.可口可乐']
-      },
-      {
-        left: ['1、mushroom', '2、Desserts', '3、mushroom'],
-        right: ['A.甜点', ' B.蘑菇杰', 'C.可口可乐']
-      }
-    ]
+    Star_time: '2017-09-26 15:43'
   },
   startJS () {
     clearInterval(timer)
@@ -53,24 +41,75 @@ Page({
       })
     }, 200)
   },
-  // 记录开始时间
-  setTime () {
-    // this.setData({
-    //   start_time: (new Date()).getTime()
-    // })
-    wx.setStorageSync('start_time', new Date().getTime())
-  },
   // swiper 切换
   currentChange (e) {
     this.setData({
       current: e.detail.current + 1
     })
   },
+  // 获取题目
+  getTi (catId, typeId, id) {
+    app.getTi(catId, typeId, id, this, this.setArr, 'match')
+  },
+  // 设置array的内容
+  setArr () {
+    let array = this.data.arrLabel.slice(0, this.data.info.questions_lists[0].left.length)
+    array.unshift('选择')
+    this.setData({
+      array
+    })
+  },
+  // 选择答案
+  bindPickerChange (e) {
+    let { value } = e.detail
+    let { index } = e.currentTarget.dataset
+    this.data.chooseIndex[index] = value
+    this.setData({
+      chooseIndex: this.data.chooseIndex
+    })
+  },
+  // 提交答案
+  upAnswer () {
+    for (let v of this.data.chooseIndex) {
+      if (v * 1 === 0) {
+        return app.setToast(this, {content: '请选择答案'})
+      }
+    }
+    app.upAnswer(this, 'match')
+  },
+  // 返回错题本
+  goCTB () {
+    wx.redirectTo({
+      url: '../examination/examination'
+    })
+  },
+  // 设置倒计时
+  setTime () {
+    app.settime(this, 'match')
+  },
+  // 去错题本
+  goWrong () {
+    app.clearTimer()
+    wx.redirectTo({
+      url: '../wrong/wrong'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
-    this.setTime()
+  onLoad (params) {
+    if (params.from === 'zj') {
+      this.setData({
+        from: 'zj'
+      })
+      return app.getZjT(this, params.id, params.timu_id, this.setArr, 'match')
+    }
+    let {catId, typeId} = wx.getStorageSync('testId')
+    this.setData({
+      catId,
+      typeId
+    })
+    this.getTi(catId, typeId, params.id)
     // TODO: onLoad
   },
 
@@ -99,6 +138,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload () {
+    app.clearTimer()
     // TODO: onUnload
   },
 

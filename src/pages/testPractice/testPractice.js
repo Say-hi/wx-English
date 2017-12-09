@@ -1,44 +1,67 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
-
+const app = getApp()
+const useUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    lists: [
-      {
-        t: '听力选择题',
-        star: 3,
-        // width: 25,
-        finish: 12,
-        all: 20,
-        id: 123
-      },
-      {
-        t: '完形天空题',
-        star: 1,
-        // width: 25,
-        finish: 1,
-        all: 20,
-        id: 42133
-      },
-      {
-        t: '完形天空题',
-        star: 1,
-        // width: 25,
-        finish: 20,
-        all: 20,
-        id: 56
-      }
-    ]
+    urlArr: [
+      // '',
+      // '../answerListen/answerListen', // 1.听力选择题
+      // '../answerTranslate/answerTranslate', // 2.中英互译题
+      // '../answerMatch/answerMatch', //  3.连线匹配题
+      // '../answerWrite/answerWrite', // 4.听写题
+      // '../answerPicture/answerPicture', // 5.看图写词
+      // '../answerCloze/answerCloze', // 6.完形填空
+      // '../answerReading/answerReading', // 7.阅读理解
+      // '../answerRational/answerRational', // 8.语法填空
+      // '../answer75/answer75' // 9.阅读理解七选五
+    ],
+    lists: []
   },
-
+  // 获取用户题目列表
+  getList (id) {
+    let that = this
+    app.wxrequest({
+      url: useUrl.intelligentQuestionTypesLists,
+      data: {
+        session_key: app.gs(),
+        cat_id: id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          // console.log(res)
+          that.setData({
+            lists: res.data.data
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
+      }
+    })
+  },
+  // 跳转题目
+  goTimu (e) {
+    let that = this
+    wx.setStorageSync('testId', {typeId: e.currentTarget.dataset.type, catId: that.data.catId})
+    wx.redirectTo({
+      url: `../examination/examination`
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad () {
+  onLoad (params) {
+    wx.setNavigationBarTitle({
+      title: `${params.title}`
+    })
+    this.setData({
+      catId: params.id
+    })
+    this.getList(params.id)
     // TODO: onLoad
   },
 

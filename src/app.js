@@ -3,6 +3,46 @@
 /*eslint-disable*/
 const useUrl = require('./utils/service')
 const wxParse = require('./wxParse/wxParse')
+let timer = ''
+const backgroundAudioManager = wx.getBackgroundAudioManager()
+// const currentThis = getCurrnetPages()[getCurrnetPages().length - 1]
+let windowWidth = 375
+wx.getSystemInfo({
+  success (res) {
+    windowWidth = res.windowWidth - (( 2 * (res.windowWidth * 0.03)).toFixed(2))
+  }
+})
+backgroundAudioManager.onTimeUpdate(() => {
+  let time = {
+    total: '',
+    passed: ''
+  }
+  time.total = backgroundAudioManager.duration
+  time.passed = backgroundAudioManager.currentTime
+  let barWidth = windowWidth * (time.passed) / time.total
+  getCurrentPages()[getCurrentPages().length - 1].timeUp(time, barWidth)
+})
+// 自然结束播放
+backgroundAudioManager.onEnded(() => {
+  let that = getCurrentPages()[getCurrentPages().length - 1]
+  that.data.time.passed = 0
+  that.setData({
+    bar_width: 0,
+    time: that.data.time,
+    play: false
+  })
+})
+// 人为结束播放
+backgroundAudioManager.onStop(() => {
+  let that = getCurrentPages()[getCurrentPages().length - 1]
+  that.data.time.passed = 0
+  that.setData({
+    bar_width: 0,
+    time: that.data.time,
+    play: false
+  })
+})
+
 // const backgroundAudioManager = wx.getBackgroundAudioManager()
 // let windowWidth = 375
 // wx.getSystemInfo({
@@ -81,7 +121,248 @@ const wxParse = require('./wxParse/wxParse')
 App({
   data: {
     suPin: true,
-    name: '英语小程序'
+    name: '英语小程序',
+    typeArr: [
+      '',
+      '../answerListen/answerListen', // 1.听力选择题
+      '../answerTranslate/answerTranslate', // 2.中英互译题
+      '../answerMatch/answerMatch', //  3.连线匹配题
+      '../answerWrite/answerWrite', // 4.听写题
+      '../answerPicture/answerPicture', // 5.看图写词
+      '../answerCloze/answerCloze', // 6.完形填空
+      '../answerReading/answerReading', // 7.阅读理解
+      '../answerRational/answerRational', // 8.语法填空
+      '../answer75/answer75' // 9.阅读理解七选五
+    ]
+  },
+  // 倒计时
+  settime (that, params) {
+    let _that = this
+    let delTime = 300
+    timer = setInterval(() => {
+      if (delTime <= 0) {
+        clearInterval(timer)
+        let answer = {}
+        let s = 1
+        if (params === 'match') {
+          for (let i of that.data.info.questions_lists[0].left) {
+            answer[s] = 'A'
+            s++
+          }
+        } else {
+          for (let i of that.data.info.questions_lists) {
+            answer[s] = 'A'
+            s++
+          }
+        }
+        if (that.data.from) {
+          _that.wxrequest({
+            url: useUrl.postIntelligentTestpaper,
+            data: {
+              session_key: _that.gs(),
+              id: that.data.info.id,
+              timu_id: that.data.info.timu_id,
+              user_answer: JSON.stringify(answer)
+            },
+            success (res) {
+              wx.hideLoading()
+              if (res.data.code === 200) {
+                if (that.data.info.next_timu_id * 1 === 0) {
+                  _that.setToast(that, {content: '没有下一题了,查询结果中'})
+                  return setTimeout(() => {
+                    wx.redirectTo({
+                      url: `../practice/practice?from=zj&id=${that.data.info.id}`
+                    })
+                  }, 1500)
+                }
+                wx.showLoading({
+                  title: '超时自动提交,开始下一题'
+                })
+                setTimeout(() => {
+                  wx.redirectTo({
+                    url: `${_that.data.typeArr[that.data.info.next_type_id]}?timu_id=${that.data.info.next_timu_id}&from=zj&id=${that.data.info.id}`
+                  })
+                }, 1000)
+              } else {
+                _that.setToast(that, {content: res.data.message})
+              }
+            }
+          })
+        } else {
+          _that.wxrequest({
+            url: useUrl.checkIntelligentAnswer,
+            data: {
+              session_key: _that.gs(),
+              id: that.data.info.id,
+              answer: JSON.stringify(answer),
+              answering_time: delTime
+            },
+            success (res) {
+              wx.hideLoading()
+              if (res.data.code === 200) {
+                if (that.data.info.next_id * 1 === 0 ) {
+                  _that.setToast(that, {content: '没有下一题了,查询结果中'})
+                  return setTimeout(() => {
+                    wx.redirectTo({
+                      url: '../practice/practice'
+                    })
+                  }, 1500)
+                }
+                wx.showLoading({
+                  title: '超时自动提交,开始下一题'
+                })
+                setTimeout(() => {
+                  that.getTi(that.data.catId, that.data.typeId, that.data.info.next_id)
+                }, 1000)
+              } else {
+                _that.setToast(that, {content: res.data.message})
+              }
+            }
+          })
+        }
+        return
+      }
+      delTime--
+      that.setData({
+        nextTime: (parseInt(delTime / 60) < 10 ? '0' + parseInt(delTime / 60) : parseInt(delTime / 60)) + ':' + (delTime % 60 < 10 ? '0' + parseInt(delTime % 60) : parseInt(delTime % 60))
+      })
+    }, 1000)
+  },
+  // 提交答案
+  upAnswer (that, match) {
+    let _that = this
+    if (!match) {
+      if (that.data.chooseIndex.length !== that.data.info.questions_lists.length) {
+        return _that.setToast(that, {content: '请选择答案'})
+      }
+    } else {
+      if (match === 'choose75') {
+        if (that.data.chooseIndex.length < 5) {
+          return _that.setToast(that, {content: '最少需要作答5道题目'})
+        }
+      } else if (match === 'picture') {
+        for (let v of that.data.chooseIndex) {
+          if (!v.trim()) return app.setToast(that, {content: '请填写内容'})
+        }
+      } else {
+        if (that.data.chooseIndex.length !== that.data.info.questions_lists[0].left.length) {
+          return _that.setToast(that, {content: '请选择答案'})
+        }
+      }
+    }
+    clearInterval(timer)
+    let answer = {}
+    if (match) {
+      if (match === 'picture') {
+        that.data.chooseIndex.forEach((v, i) => {
+          answer[i + 1] = v.trim()
+        })
+      } else {
+        that.data.chooseIndex.forEach((v, i) => {
+          answer[i + 1] = that.data.arrLabel[v]
+        })
+      }
+    } else {
+      that.data.chooseIndex.forEach((v, i) => {
+        answer[i + 1] = that.data.arrLabel[v]
+      })
+    }
+    console.log(answer)
+    if (that.data.from) {
+      _that.wxrequest({
+        url: useUrl.postIntelligentTestpaper,
+        data: {
+          session_key: _that.gs(),
+          id: that.data.info.id,
+          timu_id: that.data.info.timu_id,
+          user_answer: JSON.stringify(answer)
+        },
+        success (res) {
+          wx.hideLoading()
+          if (res.data.code === 200) {
+            if (that.data.info.next_timu_id * 1 === 0) {
+              _that.setToast(that, {content: '没有下一题了,查询结果中'})
+              return setTimeout(() => {
+                wx.redirectTo({
+                  url: `../practice/practice?from=zj&id=${that.data.info.id}`
+                })
+              }, 1500)
+            }
+            wx.showLoading({
+              title: '开始下一题'
+            })
+            setTimeout(() => {
+              wx.redirectTo({
+                url: `${_that.data.typeArr[that.data.info.next_type_id]}?timu_id=${that.data.info.next_timu_id}&from=zj&id=${that.data.info.id}`
+              })
+            }, 1000)
+          } else {
+            _that.setToast(that, {content: res.data.message})
+          }
+        }
+      })
+    } else {
+      _that.wxrequest({
+        url: useUrl.checkIntelligentAnswer,
+        data: {
+          session_key: _that.gs(),
+          id: that.data.info.id,
+          answer: JSON.stringify(answer),
+          answering_time: Math.floor(((new Date().getTime()) - that.data.startTime) / 1000)
+        },
+        success (res) {
+          wx.hideLoading()
+          if (res.data.code === 200) {
+            if (that.data.info.next_id * 1 === 0) {
+              _that.setToast(that, {content: '没有下一题了,查询结果中'})
+              return setTimeout(() => {
+                wx.redirectTo({
+                  url: '../practice/practice'
+                })
+              }, 1500)
+            }
+            wx.showLoading({
+              title: '开始下一题'
+            })
+            setTimeout(() => {
+              that.getTi(that.data.catId, that.data.typeId, that.data.info.next_id)
+            }, 1000)
+          } else {
+            _that.setToast(that, {content: res.data.message})
+          }
+        }
+      })
+    }
+  },
+  // 获取题目
+  getTi (catId, typeId, id, that, cb, parmas) {
+    let _that = this
+    _that.wxrequest({
+      url: useUrl.intelligentQuestionDetail,
+      data: {
+        session_key: _that.gs(),
+        cat_id: catId,
+        type_id: typeId,
+        id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            info: res.data.data,
+            chooseIndex: [],
+            startTime: new Date().getTime()
+          })
+          if (cb) {
+            cb()
+          }
+          _that.settime(that, parmas)
+          // that.data.startTime = new Date().getTime()
+        } else {
+          _that.setToast(that, {content: res.data.message})
+        }
+      }
+    })
   },
   // 富文本解析
   WP (title, type, data, that, image) {
@@ -148,7 +429,15 @@ App({
       fail: obj.fail || function (err) {
         console.log('未传入fail回调函数,err:' + err.errMsg)
       },
-      complete: obj.complete || function () {}
+      complete: obj.complete || function (res) {
+        if (res.data.code === 401) {
+          setTimeout(() => {
+            wx.reLaunch({
+              url: '../login/login'
+            })
+          }, 1500)
+        }
+      }
     })
   },
   // 用户登陆
@@ -265,8 +554,8 @@ App({
     }
   },
   // 获取缓存session_key
-  gs () {
-    return wx.getStorageSync('session_key')
+  gs (key) {
+    return wx.getStorageSync(key || 'session_key')
   },
   // 设置页面是否加载
   setMore (params, that) {
@@ -300,8 +589,8 @@ App({
     } else {
       let obj = {
         success (res) {
-          console.log(res)
-          wx.setStorageSync('userInfo', res.userInfo)
+          // console.log(res)
+          wx.setStorageSync('userInfo', res)
           if (cb) {
             cb()
           }
@@ -393,31 +682,63 @@ App({
       })
     }, (time || 1500))
   },
+  // 组卷获取题目
+  getZjT (that, id, timu_id, cb, type) {
+    let _that = this
+    _that.wxrequest({
+      url: useUrl.getIntelligentTestpaperDetail,
+      data: {
+        session_key: _that.gs(),
+        id,
+        timu_id
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            info: res.data.data,
+            chooseIndex: [],
+            startTime: new Date().getTime()
+          })
+          _that.settime(that, type)
+          if (cb) {
+            cb()
+          }
+        } else {
+          _that.setToast(that, {content: res.data.message})
+        }
+      }
+    })
+  },
+  // 清除定时器
+  clearTimer () {
+    clearInterval(timer)
+  },
   /**
    * 生命周期函数--监听小程序初始化
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch () {
-    console.log(`
-  ┏┛┻━━━┛┻┓
-  ┃｜｜｜｜｜｜｜┃
-  ┃　　　━　　　┃
-  ┃　┳┛　┗┳　┃
-  ┃　　　　　　　┃
-  ┃　　　┻　　　┃
-  ┃　　　　　　　┃
-  ┗━┓　　　┏━┛
-  　　┃　史　┃
-  　　┃　诗　┃
-  　　┃　之　┃
-  　　┃　宠　┃
-  　　┃　　　┗━━━━━━┓
-  　　┃　　　神兽坐镇　　　┣━━┓
-  　　┃　　　永不宕机　　　┃
-  　　┗┓┓┏━┳┓┏━━━┛
-  　　　┃┫┫　┃┫┫
-  　　　┗┻┛　┗┻┛
-`)
+//     console.log(`
+//   ┏┛┻━━━┛┻┓
+//   ┃｜｜｜｜｜｜｜┃
+//   ┃　　　━　　　┃
+//   ┃　┳┛　┗┳　┃
+//   ┃　　　　　　　┃
+//   ┃　　　┻　　　┃
+//   ┃　　　　　　　┃
+//   ┗━┓　　　┏━┛
+//   　　┃　史　┃
+//   　　┃　诗　┃
+//   　　┃　之　┃
+//   　　┃　宠　┃
+//   　　┃　　　┗━━━━━━┓
+//   　　┃　　　神兽坐镇　　　┣━━┓
+//   　　┃　　　永不宕机　　　┃
+//   　　┗┓┓┏━┳┓┏━━━┛
+//   　　　┃┫┫　┃┫┫
+//   　　　┗┻┛　┗┻┛
+// `)
     // console.log(' ========== Application is launched ========== ')
     // this.wxlogin()
   },

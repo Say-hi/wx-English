@@ -110,9 +110,9 @@ Page({
       success (res) {
         wx.hideLoading()
         if (res.data.code === 200) {
+          app.WP('lists', 'html', res.data.data.problem, that, 5)
           that.setData({
-            info: res.data.data,
-            lists: res.data.data.problem
+            info: res.data.data
           })
           that.playMusic(res.data.data.audio_url, res.data.data.name)
         } else {

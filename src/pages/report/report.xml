@@ -1,43 +1,81 @@
 <!--练习报告-->
-<view class="wrap" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
-  <view class="f30 c3 a-title bb {{ wrong ? 'a-wrong' : 'a-right' }}">
+<import src="../../wxParse/wxParse"></import>
+<view class="wrap">
+  <view class="f30 c3 a-title bb {{ wrong == 1 ? 'a-wrong' : 'a-right' }}">
     <text>{{ title }}</text>
-    <text><text class="red">{{ showIndex + 1 }}</text>/{{ all }}</text>
+    <text wx:if="{{ from != 'ctb' }}"><text class="red">{{ userDo }}</text>/{{ all }}</text>
   </view>
 
   <view class="swiper">
-    <view class="s-text">{{ list[showIndex].text }}</view>
+    <view catchtap="playMusic" wx:if="{{ typeId == 1 || typeId == 4}}" class="tinli iconfont {{ play ? 'icon-zanting' : 'icon-bofang1' }}">{{ play ? '播放中...' : '播放听力音频' }}</view>
+    <view wx:else class="s-text">{{ info.exercise_problems }}</view>
+    <template wx:if="{{ typeId == 6 || typeId == 7 || typeId == 9 }}" is="wxParse" data="{{ wxParseData: timu.nodes }}"></template>
     <!--todo 模板-->
-    <view wx:for="{{ list[showIndex].questionList }}" wx:for-item="question" wx:for-index="qIndex">
-      {{ qIndex + 1 }}.{{ question.q }}
-      <view data-index="{{ aIndex }}" data-outindex="{{ qIndex }}" class="c_choose" wx:for="{{ question.arr }}" wx:for-item="aItem" wx:for-index="aIndex">
-        <view class="circle br {{ userChoose == aIndex ? 'chooseCircle' : '' }} {{ rightChoose == aIndex ? '' : '' }}">{{ arrLabel[aIndex] }}</view><view>{{ aItem }}</view>
+    <view wx:if="{{ typeId != 3 && typeId != 5 }}" wx:for="{{ info.questions_lists }}" wx:for-item="question" wx:for-index="qIndex">
+      {{ qIndex + 1 }}.{{ question.test_timu }}
+      <view data-index="{{ aIndex }}" data-outindex="{{ qIndex }}" class="c_choose" wx:for="{{ question.options }}" wx:for-item="aItem" wx:for-index="aIndex">
+        <view class="circle br {{ question.user_answer == aItem.word ? 'chooseCircleWrong' : '' }} {{ question.right_answer == aItem.word ? 'chooseCircleRight' : '' }}">{{ aItem.word }}</view><view class="flex1">{{ aItem.option }}</view>
+      </view>
+      <view class="tips">
+        正确答案是<text class="t-right">{{ question.right_answer }}</text>, 你的答案是<text class="t-user">{{ question.user_answer || '未作答' }}</text>. 回答<text>{{ question.right_answer == question.user_answer ? '正确' : '错误' }}</text><text wx:if="{{ from != 'zj' }}">，作答用时{{ question.answering_time }}秒</text>。
+      </view>
+      <view wx:if="{{ from != 'zj' }}" class="tips">
+        本题共被作答{{ question.total }}次，正确率为{{ question.accuracy }}%，易错项为{{ question.error_option }}。
+      </view>
+      <!--<template is="wxParse" data="{{ wxParseData: analysis.nodes }}"></template>-->
+      <!--<view class="tips">-->
+        <!--<view class="t-t">翻译</view>-->
+        <!--{{ translateText }}-->
+      <!--</view>-->
+      <!--<view class="tips">-->
+        <!--<view class="t-t">解析</view>-->
+        <!--{{ analysisText }}-->
+      <!--</view>-->
+      <!--<view class="tips">-->
+        <!--<view class="t-t t-t-special">考点</view>-->
+        <!--<view class="t-t-wrap">-->
+          <!--<text class="testItems f30 c3" wx:for="{{ testItems }}" wx:for-item="tItem">{{ tItem }}</text>-->
+        <!--</view>-->
+      <!--</view>-->
+      <!--<view class="tips">-->
+        <!--<view class="t-t">来源</view>-->
+        <!--{{ from }}-->
+      <!--</view>-->
+    </view>
+    <!--看图写词-->
+    <view wx:if="{{ typeId == 5 }}" class="timu" wx:for="{{ info.questions_lists }}">
+      <image mode="aspectFill" class="wimg" lazy-load="true" src="{{ item.test_timu }}"></image>
+      <view class="tips">
+        正确答案是<text class="t-right">{{ item.right_answer }}</text>, 你的答案是<text class="t-user">{{ item.user_answer }}</text>. 回答<text>{{ item.right_answer == item.user_answer ? '正确' : '错误' }}</text><text wx:if="{{ from != 'zj' }}">，作答用时{{ item.answering_time }}秒</text>。
+      </view>
+      <view wx:if="{{ from != 'zj' }}" class="tips">
+        本题共被作答{{ count }}次，正确率为{{ accuracy }}%，易错项为{{ easyWrong }}。
       </view>
     </view>
-  </view>
-
-  <view class="tips">
-    正确答案是<text class="t-right">{{ arrLabel[rightChoose] }}</text>, 你的答案是<text class="t-user">{{ arrLabel[userChoose] }}</text>. 回答<text>{{ rightChoose == userChoose ? '正确' : '错误' }}</text>，作答用时{{ userTime }}秒。
-  </view>
-  <view class="tips">
-    本题共被作答{{ count }}次，正确率为{{ accuracy }}%，易错项为{{ easyWrong }}。
-  </view>
-  <view class="tips">
-    <view class="t-t">翻译</view>
-    {{ translateText }}
-  </view>
-  <view class="tips">
-    <view class="t-t">解析</view>
-    {{ analysisText }}
-  </view>
-  <view class="tips">
-    <view class="t-t t-t-special">考点</view>
-    <view class="t-t-wrap">
-      <text class="testItems f30 c3" wx:for="{{ testItems }}" wx:for-item="tItem">{{ tItem }}</text>
+    <!--连线匹配-->
+    <view wx:if="{{ typeId == 3 && typeId != 5 }}" wx:for="{{ info.questions_lists }}" wx:for-item="question" wx:for-index="qIndex">
+      <view class="s-wrap">
+        <view class="left">
+          <text wx:for="{{ question.left }}" wx:for-item="left">{{ left.option }}</text>
+        </view>
+        <view class="right">
+          <text wx:for="{{ question.right }}" wx:for-item="right">{{ right.option }}</text>
+        </view>
+      </view>
+      <view class="tips">
+        正确答案是<text class="t-right">{{rightAnswerM}}</text>, 你的答案是<text class="t-user">{{ userAnswerM }}</text>. 回答<text>{{ wrong != 1 ? '正确' : '错误' }}</text><text wx:if="{{ from != 'zj' }}">，作答用时{{ question.answering_time }}秒</text>。
+      </view>
+      <view wx:if="{{ from != 'zj' }}" class="tips">
+        本题共被作答{{ count }}次，正确率为{{ accuracy }}%，易错项为{{ easyWrong }}。
+      </view>
+      <!--<template is="wxParse" data="{{ wxParseData: analysis.nodes }}"></template>-->
+      <!--<view class="s-wrap">-->
+        <!--<view wx:for="{{ item.left }}" class="lineInput" wx:for-index="inputIndex">{{ inputIndex + 1 }}. <picker data-index="{{ inputIndex }}" bindchange="bindPickerChange" value="{{chooseIndex[inputIndex] || 0}}" range="{{array}}">-->
+          <!--<view>{{ array[(chooseIndex[inputIndex]) || 0]}}</view>-->
+        <!--</picker>-->
+        <!--</view>-->
+      <!--</view>-->
     </view>
-  </view>
-  <view class="tips">
-    <view class="t-t">来源</view>
-    {{ from }}
+    <template is="wxParse" data="{{ wxParseData: analysis.nodes }}"></template>
   </view>
 </view>

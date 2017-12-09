@@ -1,15 +1,24 @@
 <!--错题本-->
-<view class="wrap" wx:for="{{ wrongList }}">
-  <!--问题-->
-  <view class="w-p">{{ item.problem }}</view>
-  <!--选项-->
-  <view class="w-c" wx:for-index="cIndex" wx:for-item="cItem" wx:for="{{ item.choose }}">
-    <view class="w-c-l br {{ cItem.s ? 'circleChoose' : '' }}">{{ arrLabel[cIndex] }}</view>
-    <view class="w-c-r">{{ cItem.t }}</view>
-  </view>
-  <veiw class="w-b">
-    <view class="w-b-c">错题</view>
-    <view class="w-b-c">{{ item.level }}</view>
-    <view class="w-b-t">{{ item.time }}</view>
-  </veiw>
+<!--<view class="wrap" wx:for="{{ wrongList }}">-->
+  <!--&lt;!&ndash;问题&ndash;&gt;-->
+  <!--<view class="w-p">{{ item.problem }}</view>-->
+  <!--&lt;!&ndash;选项&ndash;&gt;-->
+  <!--<view class="w-c" wx:for-index="cIndex" wx:for-item="cItem" wx:for="{{ item.choose }}">-->
+    <!--<view class="w-c-l br {{ cItem.s ? 'circleChoose' : '' }}">{{ arrLabel[cIndex] }}</view>-->
+    <!--<view class="w-c-r">{{ cItem.t }}</view>-->
+  <!--</view>-->
+  <!--<veiw class="w-b">-->
+    <!--<view class="w-b-c">错题</view>-->
+    <!--<view class="w-b-c">{{ item.level }}</view>-->
+    <!--<view class="w-b-t">{{ item.time }}</view>-->
+  <!--</veiw>-->
+<!--</view>-->
+<view class="pr www" catchtap="goDetail" data-id="{{ item.id }}" data-type="{{ item.type_id }}" wx:key="*1" wx:for="{{ wrongList }}">
+    <text class="f30">{{ item.type_name }}</text>
+    <text class="f24">{{ item.cat_name }} </text>
 </view>
+<view wx:if="{{ wrongList.length == 0 }}" class="tac">非常棒！还没有出现错题~~</view>
+<view class="tac">--- {{ more ? '上拉加载更多' : '没有更多内容了' }} ---</view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

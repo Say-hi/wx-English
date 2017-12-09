@@ -18,75 +18,124 @@ Page({
     interval: 5000,
     duration: 1000,
     notice: '',
-    curNotice: 0,
-    navLists: [
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        type: 'switchTab',
-        url: '../suPin/suPin',
-        t: '速拼英语'
+    curNotice: 0
+    // navLists: [
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     type: 'switchTab',
+    //     url: '../suPin/suPin',
+    //     t: '速拼英语'
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     type: 'navigateTo',
+    //     url: '../hshs/hshs',
+    //     t: '绘声绘色'
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     type: 'navigateTo',
+    //     url: '../inteTest/inteTest',
+    //     t: '智能测试'
+    //   }
+    // ],
+    // fkLists: [
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     type: 'navigateTo',
+    //     url: '../wrong/wrong',
+    //     t: '错题本'
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     type: 'navigateTo',
+    //     url: '../wiki/wiki',
+    //     t: '英语故事听说'
+    //   }
+    // ],
+    // ktLists: [
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     type: 'switchTab',
+    //     url: '../suPin/suPin',
+    //     t: '学科英语'
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     type: 'navigateTo',
+    //     url: '../ktVideo/ktVideo?title=错题精讲&id=2',
+    //     t: '错题精讲'
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     type: 'navigateTo',
+    //     url: '../ktVideo/ktVideo?title=决胜考场&id=3',
+    //     t: '决胜考场'
+    //   }
+    // ],
+    // zlLists: [
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     type: 'navigateTo',
+    //     url: '../dictionary/dictionary',
+    //     t: '词典'
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     type: 'navigateTo',
+    //     url: '../wiki/wiki',
+    //     t: '文化百科'
+    //   }
+    // ]
+  },
+  // 获取首页图片
+  getIndexLists () {
+    let that = this
+    app.wxrequest({
+      url: useUrl.getIndexLists,
+      data: {
+        session_key: app.gs()
       },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        type: 'navigateTo',
-        url: '../hshs/hshs',
-        t: '绘声绘色'
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        type: 'navigateTo',
-        url: '../inteTest/inteTest',
-        t: '智能测试'
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+        // ../ktVideo/ktVideo?title=学科英语&amp;cat_id=1
+          for (let v of res.data.data.ktLists) {
+            // console.log(v)
+            v.url = v.url.replace('&amp;', '&')
+          }
+          // console.log(res.data.data.ktLists)
+          that.setData({
+            navLists: res.data.data.navLists,
+            fkLists: res.data.data.fkLists,
+            ktLists: res.data.data.ktLists,
+            zlLists: res.data.data.zlLists
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
       }
-    ],
-    fkLists: [
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        type: 'navigateTo',
-        url: '',
-        t: '错题本'
+    })
+  },
+  // 获取首页轮播图
+  getSwiper () {
+    let that = this
+    app.wxrequest({
+      url: useUrl.getIndexBannale,
+      data: {
+        session_key: app.gs()
       },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        type: 'navigateTo',
-        url: '',
-        t: '英语故事听说'
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          that.setData({
+            imgUrls: res.data.data
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
       }
-    ],
-    ktLists: [
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        type: 'switchTab',
-        url: '../suPin/suPin',
-        t: '学科英语'
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        type: 'navigateTo',
-        url: '',
-        t: '错题精讲'
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        type: 'navigateTo',
-        url: '',
-        t: '决胜考场'
-      }
-    ],
-    zlLists: [
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        type: 'navigateTo',
-        url: '../dictionary/dictionary',
-        t: '词典'
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        type: 'navigateTo',
-        url: '../wiki/wiki',
-        t: '文化百科'
-      }
-    ]
+    })
   },
   // 获取首页公告
   getGonggaoLists () {
@@ -141,11 +190,14 @@ Page({
       })
     }
   },
+  // 获取文化百科故事的id
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
     this.getGonggaoLists()
+    this.getIndexLists()
+    this.getSwiper()
     // TODO: onLoad
   },
 

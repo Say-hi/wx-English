@@ -1,14 +1,17 @@
 <!--作业详情-->
 <view class="c-w bb">
-  <image mode="aspectFill" src="{{ item.src }}"></image>
+  <image mode="aspectFill" src="../../images/homework.png"></image>
   <view class="c-r">
-    <view class="c-t">{{ item.t }}</view>
-    <view class="c-c">{{ item.type }}　{{ item.day }}　{{ item.time }}</view>
+    <view class="c-t">英语作业</view>
+    <view class="c-c">{{ item.time }}</view>
   </view>
 </view>
 
-<view class="content">{{ item.c }}</view>
+<view class="content">{{ item.content }}</view>
 
-<view class="finish bb">
+<view catchtap="finish" class="finish bb">
   <view>完成作业</view>
 </view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

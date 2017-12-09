@@ -56,7 +56,7 @@
     <view class="h-c">
       <text class="h-c-t">一周绘本推荐</text>
       <view class="h-c-c bb">
-        <image lazy-load="true" catchtap="goHBdetail" data-title="{{ item.title }}" data-id="{{ item.id }}" wx:for="{{ recommend }}" src="{{ item.image }}"></image>
+        <image lazy-load="true" mode="aspectFill" catchtap="goHBdetail" data-title="{{ item.title }}" data-id="{{ item.id }}" wx:for="{{ recommend }}" src="{{ item.image }}"></image>
       </view>
     </view>
 

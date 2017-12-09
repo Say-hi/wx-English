@@ -1,6 +1,6 @@
 // 获取全局应用程序实例对象
-// const app = getApp()
-
+const app = getApp()
+const useUrl = require('../../utils/service')
 // 创建页面实例对象
 Page({
   /**
@@ -8,60 +8,41 @@ Page({
    */
   data: {
     arrLabel: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
-    wrongList: [
-      {
-        problem: 'abcdefghijklmnopqrstuvwxyz',
-        choose: [
-          {
-            t: 'asdfasdf',
-            s: false
-          },
-          {
-            t: 'asdfasdf',
-            s: false
-          },
-          {
-            t: 'asdfasdf',
-            s: false
-          },
-          {
-            t: 'asdfasdf',
-            s: true
-          }
-        ],
-        level: '初级',
-        time: '2017/08/07'
-      },
-      {
-        problem: '5446498465445646546546541654654',
-        choose: [
-          {
-            t: 'asdfasdf',
-            s: true
-          },
-          {
-            t: 'asdfasdf',
-            s: false
-          },
-          {
-            t: 'asdfasdf',
-            s: false
-          },
-          {
-            t: 'asdfasdf',
-            s: false
-          }
-        ],
-        level: '中级',
-        time: '2017/08/07'
-      }
-    ]
+    wrongList: []
   },
-
+  // 获取错题列表
+  getList (page) {
+    let that = this
+    app.wxrequest({
+      url: useUrl.getWrongQuestionLists,
+      data: {
+        session_key: app.gs(),
+        page
+      },
+      success (res) {
+        wx.hideLoading()
+        if (res.data.code === 200) {
+          app.setMore(res.data.data, that)
+          that.setData({
+            wrongList: that.data.wrongList.concat(res.data.data)
+          })
+        } else {
+          app.setToast(that, {content: res.data.message})
+        }
+      }
+    })
+  },
+  // 去错题报告详情
+  goDetail (e) {
+    wx.navigateTo({
+      url: `../report/report?id=${e.currentTarget.dataset.id}&type=${e.currentTarget.dataset.type}&from=ctb`
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad () {
+    this.getList()
     // TODO: onLoad
   },
 

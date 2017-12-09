@@ -5,7 +5,11 @@
 </view>
 
 <view class="circleWrap">
-  <view class="circle br f30 c3 {{ item ? 'finish ': ''}}" data-index="{{ index }}" wx:for="{{ finishArr }}">{{ index }}</view>
+  <view catchtap="goTimu" class="circle br f30 c3 {{ item.is_do ? 'finish ': ''}}" data-id="{{ item.question_id }}" wx:for="{{ finishArr }}">{{ index + 1 }}</view>
 </view>
+<view class="tac">--- 点击题目开始做题 ---</view>
 
-<view class="hand-paper f30 c3">交卷并查看结果</view>
+<view catchtap="goDetail" class="hand-paper f30 c3">查看结果</view>
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>
