@@ -1,15 +1,15 @@
 <!--购买页面-->
-<view class="name f30 c3">真实姓名: {{ user.name }}</view>
-<view class="mobile f30 c3">联系电话: {{ user.mobile }}</view>
-<view class="order f30 c3">订单号: {{ order.number }} <text>{{ order.time }}</text></view>
+<view class="name f30 c3">真实姓名: {{ info.account_name }}</view>
+<view class="mobile f30 c3">联系电话: {{ info.mobile }}</view>
+<view class="order f30 c3">订单号: {{ number }} <text>{{ info.time }}</text></view>
 
 <view class="buy">
-  <image mode="aspectFill" src="{{ order.img }}"></image>
+  <image mode="aspectFill" src="{{ info.image }}"></image>
   <view class="b-c f30">
-    <text class="b-c-t c3">{{ order.title }}</text>
-    <text class="b-c-p">￥{{ order.price }}</text>
+    <text class="b-c-t c3">{{ info.name }}</text>
+    <text class="b-c-p">￥{{ info.money }}</text>
   </view>
-  <view class="iconfont icon-shanchu-copy tac"></view>
+  <!--<view class="iconfont icon-shanchu-copy tac"></view>-->
 </view>
 
 <view class="name f30 c3">选择支付方式</view>
@@ -21,12 +21,11 @@
 <view class="zw"></view>
 
 <view class="pay f30">
-  <text class="p-mm">合计: <text class="p-m">￥{{ money }}</text></text>
+  <text class="p-mm">合计: <text class="p-m">￥{{ info.money }}</text></text>
   <view class="p-confirm" catchtap="pay">确认付款</view>
 </view>
 
-<view wx:if="{{ paySuccess }}" class="mask">
-  <view class="mask-in">
+        <!--错误弹窗-->
+<import src="../template/template"></import>
+<template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>
 
-  </view>
-</view>

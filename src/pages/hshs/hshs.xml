@@ -8,9 +8,12 @@
   <view class="t-c bb">
     <view class="t-c-s bb">
       <view class="t-c-s-w bb">
-        <view catchtap="chooseNavP" data-index="{{ index }}" class="t-c-s-i bb {{ curNavP == index ? 'chooseP' : '' }}" wx:for="{{ showLists }}">
-          <!--<view class="t-c-s-i-t">{{ item.word }}</view>-->
-          <image lazy-load="true" mode="aspectFill" src="{{ item.image }}"></image>
+        <view catchtap="chooseNavP" data-index="{{ index }}" class="t-c-s-i-wrap bb {{ curNavP == index ? 'chooseP' : '' }}" wx:for="{{ showLists }}" wx:key="*97">
+          <!--<view  class="t-c-s-i bb {{ curNavP == index ? 'chooseP' : '' }}" >-->
+          <view class="t-c-s-i-t">{{ item.word }}</view>
+          <view class="t-c-s-i bb">
+            <image lazy-load="true" mode="widthFix" src="{{ item.image }}"></image>
+          </view>
         </view>
         <view class="noMore" wx:if="{{ showLists.length == 0 }}">请添加词卡</view>
       </view>
@@ -23,24 +26,23 @@
   </view>
 
   <swiper class="bb" indicator-dots="true" indicator-color="#bfbfbf" indicator-active-color="#fedb03">
-    <swiper-item class="bb">
-      <view class="s-i bb" catchtap="changeInfo" data-id="{{ item.cat_id }}" wx:for="{{ navListOne }}">
-        <image mode="aspectFill" src="{{ item.cat_icon }}"></image>
-        <view>{{ item.cat_name }}</view>
+    <swiper-item class="bb" wx:for="{{ navListTo }}" wx:if="{{ item.length > 0 }}">
+      <view class="s-i bb" catchtap="changeInfo" data-id="{{ insideItem.cat_id }}" wx:for="{{ item }}" wx:for-item="insideItem">
+        <image mode="aspectFill" src="{{ insideItem.cat_icon }}"></image>
+        <view>{{ insideItem.cat_name }}</view>
       </view>
     </swiper-item>
-    <swiper-item wx:if="{{ navListTwo.length > 0 }}" class="bb">
-      <view catchtap="changeInfo" data-id="{{ item.cat_id }}" class="s-i bb" wx:for="{{ navListTwo }}">
-        <image mode="aspectFill" src="{{ item.cat_icon }}"></image>
-        <view>{{ item.cat_name }}</view>
-      </view>
-    </swiper-item>
+    <!--<swiper-item wx:if="{{ navListTwo.length > 0 }}" class="bb">-->
+      <!--<view catchtap="changeInfo" data-id="{{ item.cat_id }}" class="s-i bb" wx:for="{{ navListTwo }}">-->
+        <!--<image mode="aspectFill" src="{{ item.cat_icon }}"></image>-->
+        <!--<view>{{ item.cat_name }}</view>-->
+      <!--</view>-->
+    <!--</swiper-item>-->
   </swiper>
 
   <view class="card bb">
     <view catchtap="addToShow" data-index="{{ index }}" class="t-c-s-i bb" wx:for="{{ cardLists }}">
-      <!--<view class="t-c-s-i-t">{{ item.word }}</view>-->
-      <image lazy-load="true" mode="aspectFill" src="{{ item.image }}"></image>
+      <image lazy-load="true" mode="widthFix" src="{{ item.image }}"></image>
     </view>
   </view>
   <view catchtap="getMore" class="tac">--- {{ more ? '点击加载更多' : '没有更多内容了' }} ---</view>

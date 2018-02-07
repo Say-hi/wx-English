@@ -94,70 +94,70 @@ Page({
       //   id: 123
       // }
     ],
-    navListOne: [
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        t: '动物',
-        id: 123
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        t: '食物',
-        id: 123
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        t: '工具',
-        id: 123
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        t: '身体',
-        id: 123
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        t: '衣服',
-        id: 123
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        t: '交通工具',
-        id: 123
-      }
-    ],
-    navListTwo: [
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        t: '工具',
-        id: 123
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        t: '工具',
-        id: 123
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        t: '工具',
-        id: 123
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        t: '工具',
-        id: 123
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        t: '工具',
-        id: 123
-      },
-      {
-        src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        t: '交通工具',
-        id: 123
-      }
-    ],
+    // navListOne: [
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     t: '动物',
+    //     id: 123
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     t: '食物',
+    //     id: 123
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     t: '工具',
+    //     id: 123
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     t: '身体',
+    //     id: 123
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     t: '衣服',
+    //     id: 123
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     t: '交通工具',
+    //     id: 123
+    //   }
+    // ],
+    // navListTwo: [
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     t: '工具',
+    //     id: 123
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     t: '工具',
+    //     id: 123
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     t: '工具',
+    //     id: 123
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     t: '工具',
+    //     id: 123
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     t: '工具',
+    //     id: 123
+    //   },
+    //   {
+    //     src: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    //     t: '交通工具',
+    //     id: 123
+    //   }
+    // ],
     recommend: [
       'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
       'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
@@ -275,6 +275,9 @@ Page({
     // this.setData({
     //   more: true
     // })
+    this.setData({
+      cardLists: []
+    })
     this.changeInfos(e, 1)
   },
   changeInfos (e, page) {
@@ -341,10 +344,19 @@ Page({
       success (res) {
         wx.hideLoading()
         if (res.data.code === 200) {
+          let j = 1
+          let navListTo = []
+          for (let [i] of res.data.data.entries()) {
+            if (i === 0 || i === 5 || i === 10 || i === 15 || i === 20 || i === 25 || i === 30 || i === 35 || i === 40 || i === 45) {
+              navListTo.push(res.data.data.slice(i, 5 * j))
+              j++
+            }
+          }
           that.setData({
             cikaid: res.data.data[0].cat_id || 0,
-            navListOne: res.data.data.slice(0, 6),
-            navListTwo: res.data.data.slice(6)
+            navListTo
+            // navListOne: res.data.data.slice(0, 6),
+            // navListTwo: res.data.data.slice(6)
           })
           let e = {
             currentTarget: {
@@ -446,6 +458,9 @@ Page({
    */
   onUnload () {
     // TODO: onUnload
+    this.setData({
+      showLists: []
+    })
   },
   onReachBottom () {
     this.getMore()

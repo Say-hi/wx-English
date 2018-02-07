@@ -6,30 +6,30 @@
 
 <view class="pr">
   <view class="pa memory bb f30 c333 {{ curNav == 3 ? '' : 'hide' }}">
-    <view catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.cat_id }}" wx:for="{{ memoryList }}">
+    <view catchtap="goDetail" data-index="{{ index }}" data-status="{{ listenList.is_buy }}" data-id="{{ item.cat_id }}" wx:for="{{ memoryList.lists }}">
       <text class="iconfont icon-book">{{ item.cat_name }}</text>
-      <text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
+      <text class="m-r iconfont {{ memoryList.is_buy == 1 || index == 0 ? 'icon-bofang' : 'icon-suo' }}"></text>
     </view>
   </view>
 
   <view class="pa read bb f30 c333 {{ curNav == 2 ? '' : 'hide' }}">
-    <view  catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.cat_id }}"  wx:for="{{ readList }}">
+    <view  catchtap="goDetail" data-index="{{ index }}" data-status="{{ listenList.is_buy }}" data-id="{{ item.cat_id }}"  wx:for="{{ readList.lists }}">
       <text class="iconfont icon-langdu">{{ item.cat_name }}</text>
-      <text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
+      <text class="m-r iconfont {{ readList.is_buy == 1 || index == 0 ? 'icon-bofang' : 'icon-suo' }}"></text>
     </view>
   </view>
 
   <view class="pa talk bb f30 c333 {{ curNav == 1 ? '' : 'hide' }}">
-    <view catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.cat_id }}"   wx:for="{{ talkList }}">
+    <view catchtap="goDetail" data-index="{{ index }}" data-status="{{ listenList.is_buy }}" data-id="{{ item.cat_id }}"   wx:for="{{ talkList.lists }}">
       <text class="iconfont icon-huatong">{{ item.cat_name }}</text>
-      <text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
+      <text class="m-r iconfont {{ talkList.is_buy == 1 || index == 0 ? 'icon-bofang' : 'icon-suo' }}"></text>
     </view>
   </view>
 
   <view class="pa listen bb f30 c333 {{ curNav == 0 ? '' : 'hide' }}">
-    <view catchtap="goDetail" data-status="{{ item.status }}" data-id="{{ item.cat_id }}"  wx:for="{{ listenList }}">
+    <view catchtap="goDetail" data-index="{{ index }}" data-status="{{ listenList.is_buy }}" data-id="{{ item.cat_id }}"  wx:for="{{ listenList.lists }}">
       <text class="iconfont icon-erji">{{ item.cat_name }}</text>
-      <text class="m-r iconfont {{ item.status == 1 ? 'icon-bofang' : 'icon-suo' }}"></text>
+      <text class="m-r iconfont {{ listenList.is_buy == 1 || index == 0 ? 'icon-bofang' : 'icon-suo' }}"></text>
     </view>
   </view>
 </view>

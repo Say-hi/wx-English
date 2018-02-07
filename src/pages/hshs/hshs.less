@@ -26,26 +26,48 @@
       display: flex;
       align-items: center;
       //justify-content: space-between;
+      .t-c-s-i-wrap {
+        width: 160rpx;
+        //width: 160rpx;
+        //max-height: 98rpx;
+        //padding: 20rpx 0 19rpx 0;
+        background-color: transparent;
+        //border-radius: 8rpx;
+        text-align: center;
+        transition: all 0.5s;
+        //box-shadow: -2rpx -2rpx 6rpx 2rpx #d7ba03;
+        margin: 0 5rpx;
+      }
       .t-c-s-i  {
-        width: 140rpx;
-        height: 180rpx;
+        width: 160rpx;
+        max-height: 98rpx;
         //padding: 20rpx 0 19rpx 0;
         background-color: #fff;
         border-radius: 8rpx;
         text-align: center;
-        transition: all 0.5s;
+        //transition: all 0.5s;
         box-shadow: -2rpx -2rpx 6rpx 2rpx #d7ba03;
-        margin: 0 15rpx;
-        .t-c-s-i-t {
-          line-height: 60rpx;
-        }
+        //margin: 0 10rpx;
+        overflow: hidden;
+        //position: relative;
+
         image {
           width: inherit;
-          height: inherit;
+          //height: inherit;
         }
       }
+      .t-c-s-i-t {
+        //line-height: 60rpx;
+        //position: absolute;
+        //top: 0;
+        //left: 50%;
+        font-size: 24rpx;
+        text-align: center;
+        margin-bottom: 10rpx;
+        //transform: translate(-50%, -20rpx);
+      }
       .chooseP {
-        transform: scale(1.1);
+        transform: scale(1.3);
       }
       .noMore {
         width: 100%;
@@ -57,13 +79,16 @@
     .t-c-b {
       width: 100%;
       margin-top: 42rpx;
-      line-height: 43rpx;
-      height: 43rpx;
+      line-height: 70rpx;
+      height: 70rpx;
       border-radius: 43rpx;
       background-color: #ffed81;
       text-align: center;
       text {
         margin: 0 30rpx;
+      }
+      .iconfont {
+        font-size: 60rpx;
       }
     }
   }
@@ -104,21 +129,23 @@ swiper {
   background-color: #f6f6f6;
   .t-c-s-i  {
     margin-top: 40rpx;
-    width: 155rpx;
-    height: 198rpx;
+    //width: 155rpx;
+    width: 48%;
+    max-height: 200rpx;
+    //height: 198rpx;
     //padding: 20rpx 0 19rpx 0;
     background-color: #fff;
     border-radius: 8rpx;
     text-align: center;
     transition: all 0.5s;
     box-shadow: -2rpx -2rpx 6rpx 2rpx #d9dad9;
-    .t-c-s-i-t {
-      line-height: 60rpx;
-      //margin-top: 40rpx;
-    }
+    overflow: hidden;
+    //.t-c-s-i-t {
+    //  line-height: 60rpx;
+    //  //margin-top: 40rpx;
+    //}
     image {
-      width: inherit;
-      height: inherit;
+      width: 100%;
     }
   }
 }

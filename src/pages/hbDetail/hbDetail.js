@@ -35,7 +35,7 @@ Page({
   },
   // 播放控制相关
   mytouchstart (e){
-    console.log(e.touches[0].pageX)
+    // console.log(e.touches[0].pageX)
     this.setData({
       touches: {
         startPos: e.touches[0].pageX,
@@ -43,7 +43,7 @@ Page({
         move:0
       }
     })
-    console.log("startPos:"+e.touches[0].pageX)
+    // console.log("startPos:"+e.touches[0].pageX)
   },
   mytouchmove (e){
     var touches = this.data.touches
@@ -193,6 +193,7 @@ Page({
     let that = this
     if (!this.data.show) {
       if (!this.data.ZH) {
+        console.log(that.data.info.content.toString())
         app.wxrequest({
           url: useUrl.baiduTransapiByEnToZh,
           data: {

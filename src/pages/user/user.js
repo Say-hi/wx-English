@@ -20,10 +20,10 @@ Page({
         c: '作业',
         url: '../homeWork/homeWork'
       },
-      {
-        c: '作业群',
-        url: '../homeWorkGroup/homeWorkGroup'
-      },
+      // {
+      //   c: '作业群',
+      //   url: '../homeWorkGroup/homeWorkGroup'
+      // },
       {
         c: '我的收藏',
         url: '../myCollect/myCollect'

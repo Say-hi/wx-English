@@ -2,6 +2,7 @@
 //  速拼英语小程序页面分布
   "pages": [
     "pages/login/login", // 登陆页面 ---
+    "pages/hshs/hshs", // 绘声绘色 ---
     "pages/wrong/wrong", // 错题本
     "pages/synthetical/synthetical", // 综合试卷
     "pages/syntheticalTest/syntheticalTest", // 综合试卷测试
@@ -17,7 +18,6 @@
     "pages/subjectDetail/subjectDetail", // 科目详情 ---
     "pages/subjectDetailList/subjectDetailList", // 科目详情列表 ---
     "pages/hbDetail/hbDetail", // 节日绘本专题详情 ---
-    "pages/hshs/hshs", // 绘声绘色 ---
     "pages/hbListsD/hbListsD", // 节日绘本专题进一步 ---
     "pages/hbLists/hbLists", // 节日绘本专题 ---
     "pages/register/register", // 注册页面 ---

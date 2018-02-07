@@ -133,9 +133,9 @@ Page({
   // 速拼翻译
   suPinTran (words) {
     let that = this
-    if (/[\u4e00-\u9fa5]/.test(words)) {
-      return app.setToast(that, {title: '速拼', content: '请输入英文内容'})
-    }
+    // if (/[\u4e00-\u9fa5]/.test(words)) {
+    //   return app.setToast(that, {title: '速拼', content: '请输入英文内容'})
+    // }
     // if (/^.*[~!@#\$%\^&\*\(\)_+\-=\[\]\{\}\\\|\'\";:,\<\.\>\/\?+].*$/.test(words)) {
     //   return app.setToast(that, {title: '速拼', content: '请不要输入特殊符号,单词用空格区分'})
     // }

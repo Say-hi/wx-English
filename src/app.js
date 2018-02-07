@@ -9,7 +9,8 @@ const backgroundAudioManager = wx.getBackgroundAudioManager()
 let windowWidth = 375
 wx.getSystemInfo({
   success (res) {
-    windowWidth = res.windowWidth - (( 2 * (res.windowWidth * 0.03)).toFixed(2))
+    windowWidth = res.windowWidth - ((2 * (res.windowWidth * 0.03)).toFixed(2))
+    // console.log(windowWidth)
   }
 })
 backgroundAudioManager.onTimeUpdate(() => {
@@ -19,17 +20,20 @@ backgroundAudioManager.onTimeUpdate(() => {
   }
   time.total = backgroundAudioManager.duration
   time.passed = backgroundAudioManager.currentTime
+  // let barWidth = 750 * (time.passed) / time.total
   let barWidth = windowWidth * (time.passed) / time.total
+  // console.log(barWidth)
   getCurrentPages()[getCurrentPages().length - 1].timeUp(time, barWidth)
 })
 // 自然结束播放
 backgroundAudioManager.onEnded(() => {
   let that = getCurrentPages()[getCurrentPages().length - 1]
   that.data.time.passed = 0
+  console.log('finish')
   that.setData({
+    play: false,
     bar_width: 0,
-    time: that.data.time,
-    play: false
+    time: that.data.time
   })
 })
 // 人为结束播放
@@ -37,9 +41,9 @@ backgroundAudioManager.onStop(() => {
   let that = getCurrentPages()[getCurrentPages().length - 1]
   that.data.time.passed = 0
   that.setData({
+    play: false,
     bar_width: 0,
-    time: that.data.time,
-    play: false
+    time: that.data.time
   })
 })
 

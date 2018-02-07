@@ -13,29 +13,13 @@ Page({
     memoryList: [],
     readList: [],
     talkList: [],
-    listenList: [
-      // {
-      //   t: '听一听1',
-      //   id: 123,
-      //   status: 1
-      // },
-      // {
-      //   t: '听一听2',
-      //   id: 123,
-      //   status: 0
-      // },
-      // {
-      //   t: '听一听3',
-      //   id: 123,
-      //   status: 0
-      // }
-    ]
+    listenList: []
   },
   // 跳转详情
   goDetail (e) {
     // console.log(e.currentTarget.dataset.status)
     // if (e.currentTarget.dataset.status * 1 === 0) {
-    if (e.currentTarget.dataset.status * 1 === 0 || !e.currentTarget.dataset.status) {
+    if ((e.currentTarget.dataset.status * 1 === 0 || !e.currentTarget.dataset.status) && e.currentTarget.dataset.index * 1 !== 0) {
       // console.log(1)
       // 购买弹窗
       this.setData({
@@ -81,16 +65,17 @@ Page({
       curNav: e.currentTarget.dataset.index,
       goLeft: e.currentTarget.dataset.index * 25
     })
-    this.getLists(e.currentTarget.dataset.index * 1 + 1)
+    this.getLists(e.currentTarget.dataset.index * 1 + 1, this.data.grade_id)
   },
   // 获取顶部栏的对应数据
-  getLists (type) {
+  getLists (type, id) {
     let that = this
     if ((type === 1 && this.data.listenList.length >= 1) || (type === 2 && this.data.talkList.length >= 1) || (type === 3 && this.data.readList.length >= 1) || (type === 4 && this.data.memoryList.length >= 1)) return
     app.wxrequest({
       url: useUrl.subjectenglishCategoryLists,
       data: {
         session_key: app.gs(),
+        sg_id: id,
         type
       },
       success (res) {
@@ -123,14 +108,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad (params) {
+  onLoad (options) {
     wx.setNavigationBarTitle({
-      title: params.title
+      title: options.title
     })
     this.setData({
-      grade_id: params.grade_id
+      grade_id: options.grade_id
     })
-    this.getLists(1)
+    this.getLists(1, options.grade_id)
     // TODO: onLoad
   },
 
@@ -145,6 +130,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow () {
+    this.getLists(1, this.data.grade_id)
     // TODO: onShow
   },
 

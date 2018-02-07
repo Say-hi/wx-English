@@ -63,6 +63,8 @@ let serviceUrl = {
   wrongQuestionDetail: baseDomain + '/api/intelligent/wrongQuestionDetail',
   getTaskworkLists: baseDomain + '/api/user/getTaskworkLists',
   taskworkDetail: baseDomain + '/api/user/taskworkDetail',
-  userCompleteTaskwork: baseDomain + '/api/user/userCompleteTaskwork'
+  userCompleteTaskwork: baseDomain + '/api/user/userCompleteTaskwork',
+  buySubjectenglish: baseDomain + '/api/subjectenglish/buySubjectenglish',
+  buySubjectenglishPage: baseDomain + '/api/subjectenglish/buySubjectenglishPage'
 }
 module.exports = serviceUrl

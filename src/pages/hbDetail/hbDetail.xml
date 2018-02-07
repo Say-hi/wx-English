@@ -6,8 +6,8 @@
 <view class="control_button">
   <!--<text class="time">{{passed_str}}</text>-->
   <view class="progress_bar">
-    <view class="passed_time" style="width:{{bar_width}}px"></view>
-    <view catchtap="play" bindtouchmove="mytouchmove" bindtouchstart="mytouchstart" bindtouchend="mytouchend" class="point iconfont {{ play ? 'icon-zanting' : 'icon-bofang1' }}"></view>
+    <view class="passed_time" style="width:{{bar_width || 0}}px"></view>
+    <view catchtap="play" bindtouchmove="mytouchmove" bindtouchstart="mytouchstart" bindtouchend="mytouchend" class="point iconfont {{ !play ? 'icon-bofang1':'icon-zanting'  }}"></view>
   </view>
   <!--<text class="time">{{time_total_str}}</text>-->
 </view>
