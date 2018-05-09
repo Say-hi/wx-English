@@ -1,18 +1,20 @@
 <!--节日绘本详情-->
-<scroll-view scroll-x="true" class="top sp">
-  <image class="topImg" lazy-load="true" bindload="imgLoad" style="width: {{width}}px" src="{{ info.image }}"></image>
-</scroll-view>
+<view class="top-wrap">
+  <scroll-view scroll-x="true" class="top sp">
+    <image class="topImg" lazy-load="true" bindload="imgLoad" style="width: {{width}}px" src="{{ info.image }}"></image>
+  </scroll-view>
 
-<view class="control_button">
-  <!--<text class="time">{{passed_str}}</text>-->
-  <view class="progress_bar">
-    <view class="passed_time" style="width:{{bar_width || 0}}px"></view>
-    <view catchtap="play" bindtouchmove="mytouchmove" bindtouchstart="mytouchstart" bindtouchend="mytouchend" class="point iconfont {{ !play ? 'icon-bofang1':'icon-zanting'  }}"></view>
+  <view class="control_button">
+    <!--<text class="time">{{passed_str}}</text>-->
+    <view class="progress_bar">
+      <view class="passed_time" style="width:{{bar_width || 0}}px"></view>
+      <view catchtap="play" bindtouchmove="mytouchmove" bindtouchstart="mytouchstart" bindtouchend="mytouchend" class="point iconfont {{ !play ? 'icon-bofang1':'icon-zanting'  }}"></view>
+    </view>
+    <!--<text class="time">{{time_total_str}}</text>-->
   </view>
-  <!--<text class="time">{{time_total_str}}</text>-->
 </view>
 
-<view class="t bb">
+<view class="t bb sdf">
   {{ info.content }}
 </view>
 
@@ -22,7 +24,7 @@
 <view class="bf"></view>
 
 <view class="bo">
-  <view catchtap="userCollect" data-id="{{ info.id }}" class="{{ collect ? 'collect' : '' }} iconfont icon-dianzan f30 c3">{{ collect ? '已收藏' : '收藏' }}</view>
+  <view catchtap="userCollect" data-id="{{ info.id }}" class="{{ collect ? 'collect' : '' }} iconfont icon-dianzan f30 c3 main-color">{{ collect ? '已收藏' : '收藏' }}</view>
   <view catchtap="showZh" class="f30 c3">中文解释</view>
 </view>
 

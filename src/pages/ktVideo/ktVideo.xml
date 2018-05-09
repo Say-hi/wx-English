@@ -2,7 +2,7 @@
 <import src="../template/template"></import>
 <template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>
 
-<video autoplay="true" class="videoShow" wx:if="{{ showSrc }}" src="{{ showSrc }}"></video>
+<video autoplay="true" class="videoShow" style="height: {{ videoHeight }}px" wx:if="{{ showSrc }}" src="{{ showSrc }}"></video>
 
 <view class="nav bb">
   <view catchtap="goDetail" data-index="{{ index }}" data-title="{{ item.name }}" data-id="{{ item.id }}" class="n-w bb {{ choose == index ? 'choose':'' }}" wx:for="{{ lists }}">

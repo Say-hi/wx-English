@@ -1,11 +1,11 @@
 <!--文化百科对应视频详情-->
-<video objectFit="cover" class="w-video" src="{{ info.info.video_url }}"></video>
+<video objectFit="cover" style="height: {{ videoHeight }}px" class="w-video" src="{{ info.info.video_url }}"></video>
 <view class="v-w">
   <text class="v-title f30 c3">{{ info.info.name }}</text><text>{{ info.info.content }}</text>
 </view>
 
 <view class="w-list">
-  <view catchtap="getReload" data-id="{{ item.id }}" class="w-l-w f30 c3 pr" wx:for="{{ info.lists }}" wx:for-item="list">
+  <view catchtap="getReload" data-id="{{ list.id }}" class="w-l-w f30 c3 pr" wx:for="{{ info.lists }}" wx:for-item="list">
     <image src="{{ list.image }}"></image>
     <view class="pa tac br w-p iconfont icon-bofang1"></view>
     <text>{{ list.name }}</text>

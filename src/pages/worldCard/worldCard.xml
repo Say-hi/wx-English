@@ -1,11 +1,12 @@
 <!--单词卡-->
-<view class="card bb" wx:for="{{ cardList }}" wx:for-item="item" wx:for-index="index">
-  <view class="world f30 c3">{{ item.word }}</view>
+<view class="card bb" wx:for="{{ cardList }}" catchtap="supin" data-index="{{ index }}" wx:for-item="item" wx:for-index="index">
+  <view wx:if="{{ currentIndex != index }}" class="world f30 c3">{{ item.word }}</view>
+  <view wx:else class="world f30 c3 aaaSuperEnglishNew">{{ item.supin_word }}</view>
   <view class="explain f30 c3" wx:for-item="eItem" wx:for="{{ item.content }}">
     {{ eItem }}
   </view>
 </view>
-
+<view catchtap="getNextUp" class="next f30 c3">上一组</view>
 <view catchtap="getNext" class="next f30 c3">下一组</view>
         <!--错误弹窗-->
 <import src="../template/template"></import>

@@ -1,15 +1,17 @@
 <!--说一说详情-->
 <import src="../../wxParse/wxParse"></import>
-<view class="v-w">
-  <video id="myVideo" class="pr" src="{{ src }}" objectFit="{{ objectFit }}">
-    <!--<cover-image catchtap="videoControl" data-type="last" class="v-c-i pa v-c-i-l" src="../../images/last.png"></cover-image>-->
-    <!--<cover-image catchtap="videoControl" data-type="next" class="v-c-i pa v-c-i-n" src="../../images/next.png"></cover-image>-->
-  </video>
+<view id="v-w" class="v-w bb" style="height: {{ videoHeight }}px">
+  <video id="myVideo" style="height: 100%;" src="{{ src }}" objectFit="{{ objectFit }}"></video>
 </view>
-<view class="v-b f30 c3 bb">
-  <template is="wxParse" data="{{ wxParseData: article.nodes }}"></template>
-  <!--<view class="bb">{{ info.content }}</view>-->
-</view>
+<!--<view class="v-b f30 c3 bb">-->
+  <!--<template is="wxParse" data="{{ wxParseData: article.nodes }}"></template>-->
+        <!--&lt;!&ndash;<view class="bb">{{ info.content }}</view>&ndash;&gt;-->
+      <!--</view>-->
+<scroll-view scroll-y="true" style="height: {{ bHeight }}px;">
+  <view style="height: {{ bHeight }}px; padding:0 20rpx;">
+    <template is="wxParse" data="{{ wxParseData: article.nodes }}"></template>
+  </view>
+</scroll-view>
 <!--<view class="v-b f30 c3 bb {{ time ? 'show-color' : '' }}" data-time="{{ item.time }}" catchtap="goTime" wx:for="{{ videoContentList }}">-->
   <!--<view class="bb">{{ item.en }}</view>-->
   <!--<view class="bb">{{ item.cn }}</view>-->

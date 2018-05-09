@@ -7,13 +7,13 @@
   </view>
 
   <view class="f30 c3 a-title bb">
-    <text>阅读理解七选五</text>
-    <text wx:if="{{ !from }}"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
+    <text class="a-t-title">阅读理解七选五</text>
+    <text wx:if="{{ !from }}" class="a-t-b-title"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
   </view>
 
   <view class="swiper">
     <template is="wxParse" data="{{ wxParseData: timu.nodes }}"></template>
-    <view wx:for="{{ info.questions_lists }}" wx:for-item="question" wx:for-index="qIndex">
+    <view style="margin-top:20rpx;" wx:for="{{ info.questions_lists }}" wx:for-item="question" wx:for-index="qIndex">
       {{ qIndex + 1 }}.{{ question.test_timu }}
       <view data-index="{{ aIndex }}" data-oindex="{{ qIndex }}" data-showindex="{{ showIndex }}" catchtap="chooseCircle" class="c_choose" wx:for="{{ question.options }}" wx:for-item="aItem" wx:for-index="aIndex">
         <view class="circle br {{ chooseIndex[qIndex] == aIndex ? 'chooseCircle' : '' }}">{{ arrLabel[aIndex] }}</view><view class="flex1">{{ aItem.option }}</view>

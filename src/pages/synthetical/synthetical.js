@@ -59,6 +59,8 @@ Page({
   // 跳转答题卡
   goNext (e) {
     wx.setStorageSync('zjId', e.currentTarget.dataset.id)
+    console.log(e.currentTarget.dataset.type)
+    console.log(this.data.typeArr[e.currentTarget.dataset.type])
     let url = `${this.data.typeArr[e.currentTarget.dataset.type]}?timu_id=${e.currentTarget.dataset.timu}&id=${e.currentTarget.dataset.id}&title=${e.currentTarget.dataset.title}&from=zj&type=${e.currentTarget.dataset.type}`
     wx.redirectTo({
       url
@@ -98,7 +100,12 @@ Page({
   onHide () {
     // TODO: onHide
   },
-
+  onShareAppMessage () {
+    return {
+      title: '您的好友向您分享了精彩内容，快来看一看吧',
+      path: '/pages/login/login'
+    }
+  },
   /**
    * 生命周期函数--监听页面卸载
    */

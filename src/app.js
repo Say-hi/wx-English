@@ -6,13 +6,16 @@ const wxParse = require('./wxParse/wxParse')
 let timer = ''
 const backgroundAudioManager = wx.getBackgroundAudioManager()
 // const currentThis = getCurrnetPages()[getCurrnetPages().length - 1]
-let windowWidth = 375
-wx.getSystemInfo({
-  success (res) {
-    windowWidth = res.windowWidth - ((2 * (res.windowWidth * 0.03)).toFixed(2))
-    // console.log(windowWidth)
-  }
-})
+let windowWidth = wx.getSystemInfoSync().windowWidth - ((2 * (wx.getSystemInfoSync().windowWidth * 0.03)).toFixed(2))
+// let ss =
+// console.log('ss', ss)
+// wx.getSystemInfo({
+//   success (res) {
+//     windowWidth = res.windowWidth - ((2 * (res.windowWidth * 0.03)).toFixed(2))
+//     // console.log(windowWidth)
+//     console.log('windowWidthin', windowWidth)
+//   }
+// })
 backgroundAudioManager.onTimeUpdate(() => {
   let time = {
     total: '',
@@ -21,15 +24,15 @@ backgroundAudioManager.onTimeUpdate(() => {
   time.total = backgroundAudioManager.duration
   time.passed = backgroundAudioManager.currentTime
   // let barWidth = 750 * (time.passed) / time.total
-  let barWidth = windowWidth * (time.passed) / time.total
+  // console.log('windowWidth', windowWidth)
+  let barWidth = windowWidth * (time.passed / time.total)
   // console.log(barWidth)
-  getCurrentPages()[getCurrentPages().length - 1].timeUp(time, barWidth)
+  getCurrentPages()[getCurrentPages().length - 1].timeUp(time, barWidth, windowWidth)
 })
 // 自然结束播放
 backgroundAudioManager.onEnded(() => {
   let that = getCurrentPages()[getCurrentPages().length - 1]
   that.data.time.passed = 0
-  console.log('finish')
   that.setData({
     play: false,
     bar_width: 0,
@@ -260,6 +263,10 @@ App({
       if (match === 'picture') {
         that.data.chooseIndex.forEach((v, i) => {
           answer[i + 1] = v.trim()
+        })
+      } else if (match === 'match') {
+        that.data.chooseIndex.forEach((v, i) => {
+          answer[i + 1] = that.data.arrLabel[v - 1]
         })
       } else {
         that.data.chooseIndex.forEach((v, i) => {

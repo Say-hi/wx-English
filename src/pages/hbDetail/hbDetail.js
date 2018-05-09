@@ -3,12 +3,12 @@
 const app = getApp()
 const useUrl = require('../../utils/service')
 // 创建页面实例对象
-let windowWidth = 375
-wx.getSystemInfo({
-  success (res) {
-    windowWidth = res.windowWidth - (( 2 * (res.windowWidth * 0.03)).toFixed(2))
-  }
-})
+let windowWidth = wx.getSystemInfoSync().windowWidth - ((2 * (wx.getSystemInfoSync().windowWidth * 0.03)).toFixed(2))
+// wx.getSystemInfo({
+//   success (res) {
+//     windowWidth = res.windowWidth - (( 2 * (res.windowWidth * 0.03)).toFixed(2))
+//   }
+// })
 
 Page({
   /**
@@ -139,7 +139,7 @@ Page({
             str: res.data.data.supin_str,
             collect: res.data.data.is_college
           })
-          that.playMusic(res.data.data.yuyin_url, title)
+          // that.playMusic(res.data.data.yuyin_url, title)
         } else {
           app.setToast(that, {content: res.data.message})
         }
@@ -176,7 +176,14 @@ Page({
     })
   },
   // 时间变动
-  timeUp (time, barWidth) {
+  timeUp (time, barWidths) {
+    let barWidth = windowWidth * (time.passed / time.total)
+    // todo 需要处理苹果安卓， 安卓需要下方判断
+    if (!barWidth && this.data.brand !== 'iPhone') {
+      this.setData({
+        play: false
+      })
+    }
     this.setData({
       time,
       bar_width: barWidth
@@ -221,13 +228,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad (params) {
-    // params.id = 1
-    // params.title = 'Test'
     wx.setNavigationBarTitle({
       title: `${params.title}详情`
     })
     this.setData({
-      id: params.id
+      id: params.id,
+      brand: wx.getSystemInfoSync().brand
     })
     this.getInfo(params.id, params.title)
     // TODO: onLoad
@@ -261,7 +267,12 @@ Page({
     // TODO: onUnload
     wx.stopBackgroundAudio()
   },
-
+  onShareAppMessage () {
+    return {
+      title: '您的好友向您分享了精彩内容，快来看一看吧',
+      path: '/pages/login/login'
+    }
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

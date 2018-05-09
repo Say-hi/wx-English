@@ -3,7 +3,13 @@ page {
   width: 100%;
   box-sizing: border-box;
 }
-
+.top-wrap {
+  background-color: #fff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
 .top {
   width: 100%;
   border-radius: 10rpx;
@@ -46,7 +52,7 @@ page {
     align-items: stretch;
     .passed_time {
       width: 10%;
-      background-color: #fff100;
+      background-color: #98E165;
     }
     @p: 57rpx;
     .point{
@@ -55,7 +61,7 @@ page {
       line-height: @p;
       margin: 30rpx 0;
       border-radius: 50%;
-      background-color: #fff100;
+      background-color: #98E165;
       position:relative;
       top: -50rpx;
       text-align: center;
@@ -67,12 +73,15 @@ page {
 .t {
   margin-top: 40rpx;
   padding: 22rpx;
-  font-size: 28rpx;
+  font-size: 34rpx;
   color: #666;
   background-color: #f6f6f6;
   border-radius: 10rpx;
   line-height: 40rpx;
   word-wrap: break-word;
+}
+.sdf {
+  margin-top: 540rpx;
 }
 
 .bf {
@@ -100,8 +109,8 @@ page {
     color: #999;
   }
   view:nth-child(2) {
-    border-top: 1rpx solid #fedb03;
-    background: #fedb03;
+    border-top: 1rpx solid #98E165;
+    background: #98E165;
   }
   .collect::before {
     color: #f00;

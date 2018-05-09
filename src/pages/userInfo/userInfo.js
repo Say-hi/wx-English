@@ -60,7 +60,12 @@ Page({
   onHide () {
     // TODO: onHide
   },
-
+  onShareAppMessage () {
+    return {
+      title: '您的好友向您分享了精彩内容，快来看一看吧',
+      path: '/pages/login/login'
+    }
+  },
   /**
    * 生命周期函数--监听页面卸载
    */

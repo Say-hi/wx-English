@@ -1,7 +1,8 @@
 /**
  * Created by Administrator on 2017/6/2.
  */
-let baseDomain = 'http://supin.lanzhangxiu.cn'
+// let baseDomain = 'http://supin.lanzhangxiu.cn'
+let baseDomain = 'https://supin.fineway99.com'
 let serviceUrl = {
   register: baseDomain + '/api/public/register',
   login: baseDomain + '/api/public/login',

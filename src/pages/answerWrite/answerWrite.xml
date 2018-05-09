@@ -5,8 +5,8 @@
 </view>
 
 <view class="f30 c3 a-title bb">
-  <text>听写题</text>
-  <text wx:if="{{ !from }}"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
+  <text class="a-t-title">听写题</text>
+  <text wx:if="{{ !from }}" class="a-t-b-title"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
 </view>
 
 <!--<swiper bindchange="currentChange">-->

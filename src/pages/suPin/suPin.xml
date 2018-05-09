@@ -13,16 +13,16 @@
 <view wx:if="{{ show }}" class="supin bb">
     <textarea wx:if="{{ !maskShow}}" maxlength="-1" bindinput="inputValue" data-type="translate" class="textIn bb" placeholder="请输入要速拼的内容"></textarea>
     <view class="s-nav bb">
-        <view catchtap="translate" data-type="suPin">速拼</view>
-        <view catchtap="translate" data-type="translate">翻译</view>
-        <view catchtap="translate" data-type="read">朗读</view>
+        <view class="main-color" catchtap="translate" data-type="suPin">速拼</view>
+        <view class="main-color" catchtap="translate" data-type="translate">翻译</view>
+        <view class="main-color" catchtap="translate" data-type="read">朗读</view>
     </view>
     <view class="s-show bb">
         <image lazy-load="true" src="../../images/sp-bg.png"></image>
         <scroll-view class="s-c bb" scroll-y="true">
             <!--<view>-->
                 <!--<text wx:for="{{ info }}" class="aaaSuperEnglishNew">{{ item.supin_word }}　</text><text class="aaaSuperEnglishNew">[{{ item.supin_yinbiao }}]</text>-->
-                <text class="aaaSuperEnglishNew">{{ info.supin_str }}　</text>
+                <text wx:if="{{ info.supin_str }}" class="aaaSuperEnglishNew">{{ info.supin_str }}　</text>
             <!--</view>-->
             <view class="word">{{ eu }}</view>
             <view class="word">{{ cn }}</view>
@@ -43,8 +43,8 @@
     </view>
 </view>
 
-<view catchtap="showSp" class="viewTop br">速拼</view>
-<view wx:if="{{ show }}" catchtap="showBig" class="viewTop br iconfont icon-quanping big"></view>
+<view catchtap="showSp" class="viewTop br main-color">速拼</view>
+<view wx:if="{{ show }}" catchtap="showBig" class="viewTop br iconfont icon-quanping big main-color"></view>
         <!--错误弹窗-->
 <import src="../template/template"></import>
 <template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

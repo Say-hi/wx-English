@@ -101,7 +101,7 @@ Page({
   // 翻译相关操作
   /*eslint-disable*/
   translate (e) {
-    console.log(1)
+    // console.log(1)
     let { type } = e.currentTarget.dataset
     this.setData({
       info: [],
@@ -109,9 +109,9 @@ Page({
       cn: ''
     })
     if (type === 'suPin') {
-      if (/^.*[~！@#\$%\^&\*\(\)_+\-=\[\]\{\}\\\|‘’“”；：，\<。\>\/？+].*$/.test(this.data.transText)) {
-        return app.setToast(this, {title: '翻译', content: '请不要输入中文符号'})
-      }
+      // if (/^.*[~！@#\$%\^&\*\(\)_+\-=\[\]\{\}\\\|‘’“”；：，\<。\>\/？+].*$/.test(this.data.transText)) {
+      //   return app.setToast(this, {title: '翻译', content: '请不要输入中文符号'})
+      // }
       this.suPinTran(this.data.transText)
     } else if (type === 'translate') {
       // if (/^.*[~!@#\$%\^&\*\(\)_+\-=\[\]\{\}\\\|\'\";:,\<\.\>\/\?+].*$/.test(this.data.transText)) {
@@ -266,7 +266,12 @@ Page({
   onUnload () {
     // TODO: onUnload
   },
-
+  onShareAppMessage () {
+    return {
+      title: '您的好友向您分享了精彩内容，快来看一看吧',
+      path: '/pages/login/login'
+    }
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

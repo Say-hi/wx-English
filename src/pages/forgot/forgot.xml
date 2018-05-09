@@ -9,7 +9,7 @@
   <button class="{{ numberDisabled ? 'grow' : '' }} pa" disabled="{{ numberDisabled }}" catchtap="getNumber">{{ showText }}</button>
 </view>
 <veiw class="nosame">{{ (pwd2.length > 0 && pwd.length > 0 && pwd2 != pwd) ? '* 密码不一致，请重新输入' : '' }}</veiw>
-<view class="c3" catchtap="goNext">下一步</view>
+<view class="c3 main-color" catchtap="goNext">下一步</view>
 <!--错误弹窗-->
 <import src="../template/template"></import>
 <template wx:if="{{ toast.show }}" is="showToast" data="{{ ...toast }}"></template>

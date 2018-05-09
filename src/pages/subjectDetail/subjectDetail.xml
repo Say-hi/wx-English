@@ -1,7 +1,7 @@
 <!--科目详情-->
 <view class="s-nav">
   <view wx:for="{{ navList }}" catchtap="chooseNav" data-index="{{ index }}" class="f30 c3 {{ curNav == index ? 'choose' : '' }}">{{ item }}</view>
-  <view style="left: {{ goLeft }}%" class="b-line bb"></view>
+  <view style="left: {{ goLeft }}%" class="b-line bb main-color"></view>
 </view>
 
 <view class="pr">

@@ -4,8 +4,8 @@
   <view catchtap="goWrong" class="at iconfont icon-cuotiben">错题本</view>
 </view>
 <view class="f30 c3 a-title">
-  <text>连线匹配题</text>
-  <text wx:if="{{ !from }}"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
+  <text class="a-t-title">连线匹配题</text>
+  <text wx:if="{{ !from }}" class="a-t-b-title"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
 </view>
 <!--<swiper bindchange="currentChange">-->
   <view class="timu" wx:for="{{ info.questions_lists }}">

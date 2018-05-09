@@ -6,7 +6,7 @@
 
 <view wx:if="{{ curNav == 1 }}">
   <view class="t-c bb">
-    <view class="t-c-s bb">
+    <view class="t-c-s bb main-color">
       <view class="t-c-s-w bb">
         <view catchtap="chooseNavP" data-index="{{ index }}" class="t-c-s-i-wrap bb {{ curNavP == index ? 'chooseP' : '' }}" wx:for="{{ showLists }}" wx:key="*97">
           <!--<view  class="t-c-s-i bb {{ curNavP == index ? 'chooseP' : '' }}" >-->
@@ -18,14 +18,14 @@
         <view class="noMore" wx:if="{{ showLists.length == 0 }}">请添加词卡</view>
       </view>
       <!--用户操作-->
-      <view class="t-c-b">
+      <view class="t-c-b main-color">
         <text catchtap="delShowItem" class="iconfont icon-shanchu-copy"></text>
         <text catchtap="playAudio" class="iconfont icon-bofang"></text>
       </view>
     </view>
   </view>
 
-  <swiper class="bb" indicator-dots="true" indicator-color="#bfbfbf" indicator-active-color="#fedb03">
+  <swiper class="bb" indicator-dots="true" indicator-color="#f6f6f6" indicator-active-color="#98E165">
     <swiper-item class="bb" wx:for="{{ navListTo }}" wx:if="{{ item.length > 0 }}">
       <view class="s-i bb" catchtap="changeInfo" data-id="{{ insideItem.cat_id }}" wx:for="{{ item }}" wx:for-item="insideItem">
         <image mode="aspectFill" src="{{ insideItem.cat_icon }}"></image>
@@ -49,15 +49,15 @@
 </view>
 
 <view wx:else>
-  <view catchtap="onIn" class="search bb {{ onIn ? 'onIn' : '' }}">
-    <text class="iconfont icon-search"></text>
-    <input confirm-type="search" bindinput="inputValue"  placeholder="绘本搜索"/>
-  </view>
+  <!--<view catchtap="onIn" class="search bb {{ onIn ? 'onIn' : '' }}">-->
+    <!--<text class="iconfont icon-search"></text>-->
+    <!--<input confirm-type="search" bindinput="inputValue"  placeholder="绘本搜索"/>-->
+  <!--</view>-->
 
   <view class="h-w">
     <view class="h-c">
       <text class="h-c-t">一周绘本推荐</text>
-      <view class="h-c-c bb">
+      <view class="h-c-c bb main-color">
         <image lazy-load="true" mode="aspectFill" catchtap="goHBdetail" data-title="{{ item.title }}" data-id="{{ item.id }}" wx:for="{{ recommend }}" src="{{ item.image }}"></image>
       </view>
     </view>

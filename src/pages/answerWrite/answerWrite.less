@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: #fedb03;
+  background-color: #98E165;
   padding: 10rpx 60rpx;
   padding-top: 0rpx;
   .at {
@@ -20,9 +20,23 @@
   display: flex;
   padding: 20rpx;
   padding-left: 0;
+  line-height: 50rpx;
   margin-left: 20rpx;
+  position: relative;
   justify-content: space-between;
   border-bottom: 1rpx solid #eee;
+  .a-t-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .a-t-b-title {
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    transform: translate(0%, -50%);
+  }
 }
 
 .timu {
@@ -40,15 +54,15 @@
     .circle {
       width: 50rpx;
       line-height: 50rpx;
-      color: #fedb03;
+      color: #98E165;
       font-size: 24rpx;
       text-align: center;
-      border: 2rpx solid #fedb03;
+      border: 2rpx solid #98E165;
       margin-right: 20rpx;
     }
     .chooseCircle {
       color: #000;
-      background-color: #fedb03;
+      background-color: #98E165;
     }
   }
   .inAs {
@@ -93,7 +107,7 @@
     align-items: stretch;
     .passed_time {
       width: 10%;
-      background-color: #fff100;
+      background-color: #98E165;
     }
     @p: 57rpx;
     .point{
@@ -102,7 +116,7 @@
       line-height: @p;
       margin: 30rpx 0;
       border-radius: 50%;
-      background-color: #fff100;
+      background-color: #98E165;
       position:relative;
       top: -50rpx;
       text-align: center;

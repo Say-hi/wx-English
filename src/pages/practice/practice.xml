@@ -1,8 +1,8 @@
 <!--practice.wxml-->
 <view class="container">
   <view class='top'>
-    <text>练习类型：{{ from ? '组卷练习':'专项智能练习' }}（{{ typeTitle || info.cat_name }}）</text>
-    <text>{{ info.usetime }}</text>
+    <text>练习类型：{{ from ? info.title :'专项智能练习' }}（{{ typeTitle || info.cat_name }}）</text>
+    <!--<text>用时{{ info.usetime }}</text>-->
   </view>
   
   <view class='percent'>

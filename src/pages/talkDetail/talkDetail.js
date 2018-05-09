@@ -2,6 +2,8 @@
 const app = getApp()
 const useUrl = require('../../utils/service')
 let videoContext = wx.createVideoContext('myVideo')
+let height = wx.getSystemInfoSync().windowHeight
+let width = wx.getSystemInfoSync().windowWidth
 // const wxParse = require('../../wxParse/wxParse')
 // let seek = -1
 // 创建页面实例对象
@@ -62,7 +64,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad (params) {
+    // let that = this
+    this.setData({
+      videoHeight: width * 250 / 375,
+      bHeight: height - (width * 250 / 375)
+    })
+    // console.log('width', width)
+    // console.log('height', height)
+    // console.log('videoHeight', width * 250 / 375)
+    // wx.createSelectorQuery().select('#v-w').fields({
+    //   size: true
+    // }, function (res) {
+    //   // console.log('wsdf',res.height)
+    //   that.setData({
+    //     bHeight: height - res.height
+    //   })
+    // }).exec()
     this.getList(params.id)
+    // this.getList(10)
     // TODO: onLoad
   },
 
@@ -99,5 +118,11 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onShareAppMessage () {
+    return {
+      title: '您的好友向您分享了精彩内容，快来看一看吧',
+      path: '/pages/login/login'
+    }
   }
 })

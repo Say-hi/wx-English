@@ -1,17 +1,19 @@
 <!--背一背详情-->
 <import src="../../wxParse/wxParse"></import>
-<template is="wxParse" data="{{ wxParseData: article.nodes }}"></template>
+<view class="bb l-b">
+  <template is="wxParse" data="{{ wxParseData: article.nodes }}"></template>
+</view>
 
 <view class="world f30 c3 {{ mask ? 'gob' : '' }}">
-  <text class="{{ curChoose == index ? 'choose' : '' }}" catchtap="show" data-index="{{ index }}" wx:for="{{ worldList }}">{{ item }}</text>
+  <text class="{{ curChoose == index ? 'choose main-color' : '' }}" catchtap="show" data-index="{{ index }}" wx:for="{{ worldList }}">{{ item }}</text>
 </view>
 
 <view hidden="{{ !mask }}" class="mask">
   <view class="mask-in">
     <view catchtap="close" class="m-close br">×</view>
-    <textarea class="bb" placeholder="请输入要速拼的内容" value="{{ spInValue }}"></textarea>
-    <view catchtap="goTranslate" class="spBtn c3">速拼</view>
-    <textarea disabled="true" class="m-c bb" placeholder="显示速拼的内容" value="{{ showContent }}"></textarea>
+    <textarea class="bb f30" placeholder="请输入要速拼的内容" value="{{ spInValue }}"></textarea>
+    <view catchtap="goTranslate" class="spBtn c3 main-color">速拼</view>
+    <view disabled="true" class="m-c bb aaaSuperEnglishNew f30">{{ showContent || '显示速拼的内容' }}</view>
   </view>
 </view>
         <!--错误弹窗-->

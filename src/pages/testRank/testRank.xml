@@ -1,7 +1,7 @@
 <!--测试得分排行榜-->
 <view catchtap="goDetail" data-id="{{ item.testpaper_id }}" class="wrap" wx:for="{{ lists }}">
   <view class="l">
-    <image wx:if="{{ index <= 2 }}" src="{{ index == 0 ? '../../images/1.png' : index == 1 ? '../../images/2.png' : index == 2 ? '../../images/3.png' : ''  }}"></image> {{ index <= 2 ? '' : index }}
+    <image wx:if="{{ index <= 2 }}" src="{{ index == 0 ? '../../images/1.png' : index == 1 ? '../../images/2.png' : index == 2 ? '../../images/3.png' : ''  }}"></image> <text>{{ index > 3 ? index : '' }}</text>
   </view>
   <view class="c">
     正确{{ item.success_smalltimu_num }}　刷题{{ item.total_smalltimu_num }}

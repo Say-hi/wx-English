@@ -57,7 +57,7 @@ Page({
   translate (words) {
     let that = this
     app.wxrequest({
-      url: useUrl.baiduTransapiByEnToZh,
+      url: useUrl.supinTrans,
       data: {
         session_key: app.gs(),
         words
@@ -66,7 +66,7 @@ Page({
         wx.hideLoading()
         if (res.data.code === 200) {
           that.setData({
-            showContent: res.data.data.trans_words
+            showContent: res.data.data.supin_str
           })
           // console.log(res)
         } else {
@@ -116,5 +116,11 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onShareAppMessage () {
+    return {
+      title: '您的好友向您分享了精彩内容，快来看一看吧',
+      path: '/pages/login/login'
+    }
   }
 })

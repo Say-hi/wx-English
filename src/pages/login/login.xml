@@ -16,7 +16,7 @@
     <navigator open-type="navigate" url="../register/register">注册</navigator>
     <navigator open-type="navigate" url="../forgot/forgot">忘记密码</navigator>
   </view>
-  <view catchtap="login" data-type="user" class="pr pr-l">
+  <view catchtap="login" data-type="user" class="pr pr-l main-color">
     登录
   </view>
   <view catchtap="login" data-type="tourist" class="pr pr-t">试用通道</view>

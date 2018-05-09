@@ -6,12 +6,12 @@
   </view>
 
   <view class="f30 c3 a-title bb">
-    <text>中英互译题</text>
-    <text wx:if="{{ !from }}"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
+    <text class="a-t-title">中英互译题</text>
+    <text wx:if="{{ !from }}" class="a-t-b-title"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
   </view>
 
   <view class="timu">
-    <block wx:for="{{ info.questions_lists }}" wx:for-item="chooseItem" wx:for-index="timuIndex">
+    <block style="margin-top:20rpx;" wx:for="{{ info.questions_lists }}" wx:for-item="chooseItem" wx:for-index="timuIndex">
       <view class="s-text">{{ chooseItem.test_timu }}</view>
       <view data-index="{{ aIndex }}" data-timu="{{ timuIndex }}" catchtap="chooseCircle" class="c_choose" wx:for="{{ chooseItem.options }}" wx:for-item="aItem" wx:for-index="aIndex">
         <view class="circle br {{ chooseIndex[timuIndex] == aIndex ? 'chooseCircle' : '' }}">{{ arrLabel[aIndex] }}</view><view class="flex1">{{ aItem.option }}</view>

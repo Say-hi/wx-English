@@ -2,6 +2,7 @@
 //  速拼英语小程序页面分布
   "pages": [
     "pages/login/login", // 登陆页面 ---
+    "pages/talkDetail/talkDetail", // 说一说详情 ---
     "pages/hshs/hshs", // 绘声绘色 ---
     "pages/wrong/wrong", // 错题本
     "pages/synthetical/synthetical", // 综合试卷
@@ -33,7 +34,7 @@
     "pages/listenDetail/listenDetail", // 听一听详情 ---
     "pages/memoryDetail/memoryDetail", // 背一背详情 ---
     "pages/readDetail/readDetail", // 读一读详情 ---
-    "pages/talkDetail/talkDetail", // 说一说详情 ---
+
     "pages/buy/buy", // 购买
     "pages/dictionary/dictionary", // 词典 ---
     "pages/wiki/wiki", // 文化百科 ---
@@ -59,7 +60,8 @@
   "window": {
     // 类型：HexColor；默认值：#000000
     // 导航栏背景颜色，如"#000000"
-    "navigationBarBackgroundColor": "#fedb03",
+    "navigationBarBackgroundColor": "#98E165",
+//    "navigationBarBackgroundColor": "#fedb03",
     // 类型：String；默认值：white
     // 导航栏标题颜色，仅支持 black/white
     "navigationBarTextStyle": "black",
@@ -68,7 +70,7 @@
     "navigationBarTitleText": "英语小程序",
     // 类型：HexColor；默认值：#ffffff
     // 窗口的背景色
-    "backgroundColor": "#fedb03",
+    "backgroundColor": "#98E165",
     // 类型：String；默认值：dark
     // 下拉背景字体、loading 图的样式，仅支持 dark/light
     "backgroundTextStyle": "light",
@@ -81,7 +83,7 @@
     "color": "#333333",
     "selectedColor": "#ff0000",
     "borderStyle": "white",
-    "backgroundColor": "#fedb03",
+    "backgroundColor": "#98E165",
     "list": [
       {
         "text": "首页",

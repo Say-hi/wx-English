@@ -4,14 +4,14 @@
   <view catchtap="goWrong" class="at iconfont icon-cuotiben">错题本</view>
 </view>
 <view class="f30 c3 a-title">
-  <text>看图写词</text>
-  <text wx:if="{{ !from }}"><text class="red">{{ current }}</text>/{{ all }}</text>
+  <text class="a-t-title">看图写词</text>
+  <text wx:if="{{ !from }}" class="a-t-b-title"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
 </view>
 <!--<swiper bindchange="currentChange">-->
   <view class="timu" wx:for="{{ info.questions_lists }}">
     <image mode="aspectFill" lazy-load="true" src="{{ item.test_timu }}"></image>
     <view class="timu-b">
-      <input class="bd1" bindinput="inputValue" data-index="{{ index }}" />
+      <input placeholder="点击此处写下答案" class="bd1 bb" bindinput="inputValue" data-index="{{ index }}" />
     </view>
   </view>
 <!--<button catchtap="startJS">开始计时</button>-->

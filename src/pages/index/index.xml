@@ -1,5 +1,5 @@
 <!--首页-->
-<swiper indicator-active-color="#fedb03" indicator-color="#ffffff"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+<swiper indicator-active-color="#98E165" indicator-color="#ffffff"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{imgUrls}}">
         <swiper-item>
             <image catchtap="goImageUrl" data-index="{{ index }}" mode="aspectFill" src="{{item.thumb}}" class="slideImage" />

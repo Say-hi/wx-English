@@ -6,11 +6,11 @@
   </view>
 
   <view class="f30 c3 a-title bb">
-    <text>语法填空</text>
-    <text wx:if="{{ !from }}"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
+    <text class="a-t-title">语法填空</text>
+    <text wx:if="{{ !from }}" class="a-t-b-title"><text class="red">{{ info.user_total }}</text>/{{ info.total }}</text>
   </view>
 
-  <view class="swiper" wx:for="{{ info.questions_lists }}" wx:for-item="timu" wx:for-index="timuIndex">
+  <view style="margin-top:20rpx;" class="swiper" wx:for="{{ info.questions_lists }}" wx:for-item="timu" wx:for-index="timuIndex">
     <view class="s-text">{{ timu.test_timu }}</view>
     <view data-index="{{ aIndex }}" data-oindex="{{ timuIndex }}" catchtap="chooseCircle" class="c_choose" wx:for="{{ timu.options }}" wx:for-item="aItem" wx:for-index="aIndex">
       <view class="circle br {{ chooseIndex[timuIndex] == aIndex ? 'chooseCircle' : '' }}">{{ arrLabel[aIndex] }}</view>

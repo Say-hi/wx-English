@@ -1,4 +1,4 @@
-<view class="user-top tac">
+<view class="user-top tac main-color">
   <image class="br" src="{{ userInfo.userInfo.avatarUrl }}"></image>
   <view>{{ userInfo.userInfo.nickName }}</view>
   <view>{{ userInfo.userInfo.province }}·{{ userInfo.userInfo.city }}</view>

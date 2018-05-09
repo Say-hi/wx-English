@@ -1,10 +1,10 @@
 <view class="card bb">
   <view class="t-c-s-i bb" wx:for="{{ cardLists }}">
-    <view class="t-c-s-i-t">{{ item.word }}</view>
-    <image lazy-load="true" mode="aspectFill" src="{{ item.image }}"></image>
+    <view class="t-c-s-i-t aaaSuperEnglishNew">{{ item.supin_word }}</view>
+    <image catchtap="show" data-url="{{ item.image }}" lazy-load="true" mode="widthFix" src="{{ item.image }}"></image>
   </view>
 </view>
-
+<view catchtap="getNextUp" class="tac f30 c3 btn-b">上一组</view>
 <view class="tac f30 c3 btn-b" catchtap="getNext">下一组</view>
         <!--错误弹窗-->
 <import src="../template/template"></import>

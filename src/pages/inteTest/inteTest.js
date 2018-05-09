@@ -10,21 +10,21 @@ Page({
     title: 'inteTest',
     lists: [
       {
-        title: '版本',
+        title: '年级同步词卡',
         id: 0,
         width: 221,
         height: 320,
         list: []
       },
       {
-        title: '年级',
+        title: '同步词汇表',
         width: 221,
         height: 263,
         id: 1,
         list: []
       },
       {
-        title: '难易',
+        title: '专项测试',
         width: 221,
         height: 263,
         id: 2,
@@ -152,7 +152,12 @@ Page({
   onUnload () {
     // TODO: onUnload
   },
-
+  onShareAppMessage () {
+    return {
+      title: '您的好友向您分享了精彩内容，快来看一看吧',
+      path: '/pages/login/login'
+    }
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

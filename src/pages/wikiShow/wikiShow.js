@@ -1,6 +1,8 @@
 // 获取全局应用程序实例对象
 const app = getApp()
 const useUrl = require('../../utils/service')
+// let height = wx.getSystemInfoSync().windowHeight
+let width = wx.getSystemInfoSync().windowWidth
 // 创建页面实例对象
 Page({
   /**
@@ -40,6 +42,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad (params) {
+    this.setData({
+      videoHeight: width * 250 / 375
+    })
     this.getInfo(params.id)
     // TODO: onLoad
   },
@@ -71,7 +76,12 @@ Page({
   onUnload () {
     // TODO: onUnload
   },
-
+  onShareAppMessage () {
+    return {
+      title: '您的好友向您分享了精彩内容，快来看一看吧',
+      path: '/pages/login/login'
+    }
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

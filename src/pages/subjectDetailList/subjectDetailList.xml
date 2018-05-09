@@ -1,6 +1,6 @@
 <view class="memory bb f30 c333 ">
-  <view wx:for="{{ memoryList }}" data-id="{{ item.id }}" catchtap="goDetail">
-    <text class="iconfont {{ listArr[show] }}">{{ item.name }}</text>
+  <view class="m-wrap" wx:for="{{ memoryList }}" data-id="{{ item.id }}" catchtap="goDetail">
+    <text class="m-c"><text class="iconfont {{ listArr[show] }}"></text>{{ item.name }}</text>
     <text class="m-r iconfont icon-bofang"></text>
   </view>
 </view>

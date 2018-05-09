@@ -26,7 +26,7 @@
 <input bindinput="inputValue" data-type="pwd" type="password" class="r-i" placeholder-class="plc" placeholder="输入密码"/>
 <input bindinput="inputValue" data-type="pwd2" type="password" class="r-i" placeholder-class="plc" placeholder="确认密码"/>
 <veiw class="nosame">{{ (pwd2.length > 0 && pwd.length > 0 && pwd2 != pwd) ? '* 密码不一致，请重新输入' : '' }}</veiw>
-<view class="c3" catchtap="goNext">注　册</view>
+<view class="c3 main-color" catchtap="goNext">注　册</view>
 <navigator open-type="navigateBack" url="../login/login" class="r-l">已有账号，快速登录</navigator>
 <button class="again" wx:if="{{ needLogin }}" bindgetuserinfo="get" open-type="getUserInfo">授权获取微信资料</button>
 <!--错误弹窗-->

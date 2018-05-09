@@ -100,9 +100,11 @@ Page({
         wx.hideLoading()
         if (res.data.code === 200) {
         // ../ktVideo/ktVideo?title=学科英语&amp;cat_id=1
-          for (let v of res.data.data.ktLists) {
-            // console.log(v)
-            v.url = v.url.replace('&amp;', '&')
+          if (res.data.data.ktLists) {
+            for (let v of res.data.data.ktLists) {
+              // console.log(v)
+              v.url = v.url.replace('&amp;', '&')
+            }
           }
           // console.log(res.data.data.ktLists)
           that.setData({
@@ -234,6 +236,12 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onShareAppMessage () {
+    return {
+      title: '您的好友向您分享了精彩内容，快来看一看吧',
+      path: '/pages/login/login'
+    }
   },
   // 触底加载更多
   onReachBottom () {

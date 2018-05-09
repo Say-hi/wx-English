@@ -74,5 +74,11 @@ Page({
    */
   onPullDownRefresh () {
     // TODO: onPullDownRefresh
+  },
+  onShareAppMessage () {
+    return {
+      title: '您的好友向您分享了精彩内容，快来看一看吧',
+      path: '/pages/login/login'
+    }
   }
 })

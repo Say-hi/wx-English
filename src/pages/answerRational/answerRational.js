@@ -162,7 +162,12 @@ Page({
     app.clearTimer()
     // TODO: onUnload
   },
-
+  onShareAppMessage () {
+    return {
+      title: '您的好友向您分享了精彩内容，快来看一看吧',
+      path: '/pages/login/login'
+    }
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

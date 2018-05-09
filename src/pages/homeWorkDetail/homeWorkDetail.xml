@@ -10,7 +10,7 @@
 <view class="content">{{ item.content }}</view>
 
 <view catchtap="finish" class="finish bb">
-  <view>完成作业</view>
+  <view class="main-color">完成作业</view>
 </view>
         <!--错误弹窗-->
 <import src="../template/template"></import>
